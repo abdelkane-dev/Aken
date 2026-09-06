@@ -67,6 +67,30 @@
     }, 4000);
   }
 
+  function logActivity(action, detail) {
+    state.activityLog.unshift({
+      id: "act_" + Date.now(), action: action, detail: detail || "",
+      date: new Date().toISOString(),
+      user: state.currentUser ? state.currentUser.name : "Admin"
+    });
+    if (state.activityLog.length > 50) state.activityLog = state.activityLog.slice(0, 50);
+  }
+
+  function renderActivityLog() {
+    var el = document.getElementById("dashboard-activity-log");
+    if (!el) return;
+    if (state.activityLog.length === 0) {
+      el.innerHTML = '<p style="color:var(--admin-text-dim);padding:16px;font-size:0.85rem">Aucune activité récente.</p>';
+      return;
+    }
+    var icons = {lead_new:"📥",lead_status:"🔄",lead_delete:"🗑",project_new:"🚀",note_new:"📝",note_delete:"🗑",link_new:"🔗",key_create:"🔑",password_change:"🔐",import:"📥"};
+    var items = state.activityLog.slice(0, 12);
+    el.innerHTML = items.map(function(a) {
+      return '<div class="activity-item"><span class="activity-icon">' + (icons[a.action]||"•") + '</span><div class="activity-content"><span class="activity-text">' + a.detail + '</span><span class="activity-meta">' + (a.user||"Admin") + " · " + formatDate(a.date) + '</span></div></div>';
+    }).join("");
+  }
+
+
   // --------------------------------------------------------------------------
   // 2. DONNÉES PAR DÉFAUT & PERSISTANCE (localStorage)
   // --------------------------------------------------------------------------
@@ -172,6 +196,8 @@
     } else {
       try { state.collabKeys = JSON.parse(storedKeys); } catch (e) { state.collabKeys = []; }
     }
+    var storedAct = localStorage.getItem("aken_admin_activity");
+    if (storedAct) { try { state.activityLog = JSON.parse(storedAct); } catch (e) { state.activityLog = []; } }
   }
 
   function persistAll() {
@@ -180,6 +206,7 @@
     localStorage.setItem("aken_admin_notes", JSON.stringify(state.notes));
     localStorage.setItem("aken_admin_links", JSON.stringify(state.sharedLinks));
     localStorage.setItem("aken_admin_collab_keys", JSON.stringify(state.collabKeys));
+    localStorage.setItem("aken_admin_activity", JSON.stringify(state.activityLog || []));
     updateBadges();
   }
 
@@ -346,6 +373,7 @@
         bindLeadActionButtons(recentContainer);
       }
     }
+    renderActivityLog();
   }
 
   // --------------------------------------------------------------------------
@@ -414,10 +442,12 @@
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-id");
         if (confirm("Confirmer la suppression de cette demande ?")) {
+          var dl = state.leads.find(function(l){return l.id===id;});
           state.leads = state.leads.filter(function (l) { return l.id !== id; });
           persistAll();
           renderInbox();
           renderDashboard();
+          logActivity("lead_delete", "Demande de " + (dl?dl.name:"Client") + " supprimee");
         }
       });
     });
@@ -514,6 +544,7 @@
         persistAll();
         renderInbox();
         renderDashboard();
+        logActivity("lead_status", "Statut de " + (lead.name||"Client") + " mis a jour");
         closeModal();
       });
     }
@@ -707,6 +738,7 @@
     textarea.value = "";
     persistAll();
     renderNotes();
+    logActivity("note_new", "Note ajoutee");
   }
 
   function renderSharedLinks() {
@@ -989,6 +1021,7 @@
     renderNotes();
     renderSharedLinks();
     renderCollabKeys();
+    renderActivityLog();
     updateBadges();
   }
 

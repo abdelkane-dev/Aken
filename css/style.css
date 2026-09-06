@@ -627,7 +627,7 @@ body.nav-open .nav-drawer-backdrop,
 
 .impact-strip-inner {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   align-items: stretch;
 }
@@ -902,7 +902,7 @@ body.nav-open .nav-drawer-backdrop,
 /* ---------- EXPERTISE ---------- */
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -1049,10 +1049,10 @@ body.nav-open .nav-drawer-backdrop,
   color: var(--ink);
 }
 
-/* ---------- TARIFS (4 Colonnes Progressives) ---------- */
+/* ---------- TARIFS (6 Offres — 3 Colonnes) ---------- */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   align-items: stretch;
 }

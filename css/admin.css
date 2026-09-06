@@ -1189,6 +1189,60 @@ body.admin-body {
 }
 
 /* ==========================================================================
+   ACTIVITY LOG
+   ========================================================================== */
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--admin-radius-sm);
+  border-left: 2px solid var(--admin-border);
+  transition: background 0.15s;
+}
+
+.activity-item:first-child {
+  border-left-color: var(--admin-teal);
+  background: rgba(0, 240, 255, 0.03);
+}
+
+.activity-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-text {
+  font-size: 0.88rem;
+  color: var(--admin-text);
+  line-height: 1.3;
+}
+
+.activity-meta {
+  font-size: 0.72rem;
+  color: var(--admin-text-dim);
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (MOBILE & TABLETTE)
    ========================================================================== */
 @media (max-width: 1024px) {

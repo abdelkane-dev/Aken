@@ -1189,6 +1189,42 @@ body.admin-body {
 }
 
 /* ==========================================================================
+   DASHBOARD CHARTS
+   ========================================================================== */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.chart-card {
+  padding: 20px !important;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+.chart-container-sm {
+  height: 200px;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .charts-row { grid-template-columns: 1fr 1fr; }
+  .charts-row .chart-card:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .charts-row { grid-template-columns: 1fr; }
+  .chart-container { height: 180px; }
+}
+
+/* ==========================================================================
    ACTIVITY LOG
    ========================================================================== */
 .activity-log {

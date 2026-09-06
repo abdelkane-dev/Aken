@@ -67,6 +67,132 @@
     }, 4000);
   }
 
+  // --------------------------------------------------------------------------
+  // GRAPHIQUES DASHBOARD (Chart.js)
+  // --------------------------------------------------------------------------
+  var chartInstances = {};
+
+  function renderDashboardCharts() {
+    if (typeof Chart === "undefined") return;
+
+    // --- 1. Revenus mensuels (Line) ---
+    var monthlyRevenue = {};
+    var monthNames = ["Jan","Fev","Mar","Avr","Mai","Jun","Jul","Aou","Sep","Oct","Nov","Dec"];
+    state.leads.filter(function(l){ return l.type === "acompte"; }).forEach(function(l) {
+      var d = new Date(l.createdAt);
+      var key = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0");
+      if (!monthlyRevenue[key]) monthlyRevenue[key] = 0;
+      monthlyRevenue[key] += l.depositAmount || 0;
+    });
+    var revKeys = Object.keys(monthlyRevenue).sort();
+    // If no data, create demo months
+    if (revKeys.length === 0) {
+      var now = new Date();
+      for (var i = 5; i >= 0; i--) {
+        var dt = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        revKeys.push(dt.getFullYear() + "-" + String(dt.getMonth()+1).padStart(2,"0"));
+      }
+    }
+    var revLabels = revKeys.map(function(k) { var p = k.split("-"); return monthNames[parseInt(p[1])-1] + " " + p[0].slice(2); });
+    var revData = revKeys.map(function(k) { return monthlyRevenue[k] || 0; });
+
+    if (chartInstances.revenue) chartInstances.revenue.destroy();
+    var revCtx = document.getElementById("chart-revenue");
+    if (revCtx) {
+      chartInstances.revenue = new Chart(revCtx, {
+        type: "line",
+        data: {
+          labels: revLabels,
+          datasets: [{
+            label: "Revenus (FCFA)",
+            data: revData,
+            borderColor: "#00f0ff",
+            backgroundColor: "rgba(0,240,255,0.08)",
+            fill: true,
+            tension: 0.4,
+            pointRadius: 4,
+            pointBackgroundColor: "#00f0ff",
+            pointBorderColor: "#07090f",
+            pointBorderWidth: 2,
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 } } },
+            y: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 }, callback: function(v) { return (v/1000) + "k"; } } }
+          }
+        }
+      });
+    }
+
+    // --- 2. Statut projets (Doughnut) ---
+    var statusCounts = { cadrage: 0, acompte: 0, en_cours: 0, termine: 0 };
+    state.projects.forEach(function(p) { var s = p.status || "cadrage"; if (statusCounts[s] !== undefined) statusCounts[s]++; });
+    var projCtx = document.getElementById("chart-projects");
+    if (chartInstances.projects) chartInstances.projects.destroy();
+    if (projCtx) {
+      chartInstances.projects = new Chart(projCtx, {
+        type: "doughnut",
+        data: {
+          labels: ["Cadrage", "Acompte", "En cours", "Termine"],
+          datasets: [{
+            data: [statusCounts.cadrage, statusCounts.acompte, statusCounts.en_cours, statusCounts.termine],
+            backgroundColor: ["rgba(255,184,0,0.7)", "rgba(0,240,255,0.7)", "rgba(25,230,140,0.7)", "rgba(157,78,221,0.7)"],
+            borderColor: "#0d121f",
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "65%",
+          plugins: { legend: { position: "bottom", labels: { color: "#8a99b5", padding: 12, font: { size: 11 } } } }
+        }
+      });
+    }
+
+    // --- 3. Sources des leads (Bar) ---
+    var sourceCounts = {};
+    state.leads.forEach(function(l) {
+      var src = l.source || "Site web";
+      if (!sourceCounts[src]) sourceCounts[src] = 0;
+      sourceCounts[src]++;
+    });
+    var srcKeys = Object.keys(sourceCounts).sort(function(a,b){ return sourceCounts[b]-sourceCounts[a]; }).slice(0, 6);
+    if (srcKeys.length === 0) srcKeys = ["Site web"];
+    var srcCtx = document.getElementById("chart-sources");
+    if (chartInstances.sources) chartInstances.sources.destroy();
+    if (srcCtx) {
+      chartInstances.sources = new Chart(srcCtx, {
+        type: "bar",
+        data: {
+          labels: srcKeys,
+          datasets: [{
+            label: "Leads",
+            data: srcKeys.map(function(k) { return sourceCounts[k]; }),
+            backgroundColor: ["rgba(0,240,255,0.6)", "rgba(25,230,140,0.6)", "rgba(255,184,0,0.6)", "rgba(157,78,221,0.6)", "rgba(255,59,105,0.6)", "rgba(255,255,255,0.15)"],
+            borderRadius: 6,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: "y",
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 }, stepSize: 1 } },
+            y: { grid: { display: false }, ticks: { color: "#8a99b5", font: { size: 11 } } }
+          }
+        }
+      });
+    }
+  }
+
   function logActivity(action, detail) {
     state.activityLog.unshift({
       id: "act_" + Date.now(), action: action, detail: detail || "",
@@ -374,6 +500,7 @@
       }
     }
     renderActivityLog();
+    renderDashboardCharts();
   }
 
   // --------------------------------------------------------------------------

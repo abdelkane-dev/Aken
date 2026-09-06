@@ -1,11 +1,12 @@
-// Aken — Service Worker v7.0 (force cache refresh)
-const CACHE_NAME = 'aken-v7';
+// Aken — Service Worker v8.0 (Vercel deployment & fresh assets)
+const CACHE_NAME = 'aken-v8';
 
 const APP_SHELL = [
   '/',
   '/index.html',
   '/css/style.css',
   '/css/animations.css',
+  '/css/blog.css',
   '/js/main.js',
   '/js/i18n.js',
   '/js/payment.js',
@@ -14,6 +15,7 @@ const APP_SHELL = [
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
+  '/assets/og-cover.png',
   '/lang/fr.json',
   '/lang/en.json'
 ];

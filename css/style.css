@@ -711,8 +711,6 @@ body.nav-open .nav-drawer-backdrop,
   gap: 32px;
 }
 
-.calc-step {}
-
 .calc-step-title {
   display: flex;
   align-items: center;

@@ -1,0 +1,5 @@
+.vscode/
+.freebuff/
+server/
+dev-server.js
+*.log

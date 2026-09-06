@@ -1,3 +1,12 @@
+# Dépendances & OS
 node_modules/
 .DS_Store
-assets/logo_backup_with_kdev.png
+Thumbs.db
+
+# Fichiers d'environnement & éditeurs
+.env
+.env.*
+.vscode/
+.idea/
+.freebuff/
+*.log

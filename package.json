@@ -2,7 +2,6 @@
   "name": "aken-portfolio",
   "version": "2.0.0",
   "description": "Aken — Solutions Digitales, Création de Sites Web & Applications Mobiles. Bamako, Mali.",
-  "main": "server/index.js",
   "scripts": {
     "build": "echo 'Static site ready'",
     "start": "node dev-server.js",

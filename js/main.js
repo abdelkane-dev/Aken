@@ -42,6 +42,10 @@
 
   function openNav() {
     if (header) header.classList.add("nav-open");
+    document.body.classList.add("nav-open");
+    var mainNav = document.getElementById("main-nav");
+    if (mainNav) mainNav.classList.add("open");
+    if (navBackdrop) navBackdrop.classList.add("open");
     if (navToggle) {
       navToggle.setAttribute("aria-expanded", "true");
       navToggle.setAttribute("aria-label", "Fermer le menu");
@@ -51,6 +55,10 @@
 
   function closeNav() {
     if (header) header.classList.remove("nav-open");
+    document.body.classList.remove("nav-open");
+    var mainNav = document.getElementById("main-nav");
+    if (mainNav) mainNav.classList.remove("open");
+    if (navBackdrop) navBackdrop.classList.remove("open");
     if (navToggle) {
       navToggle.setAttribute("aria-expanded", "false");
       navToggle.setAttribute("aria-label", "Ouvrir le menu");

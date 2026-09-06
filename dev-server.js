@@ -52,7 +52,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(`🚀 Portfolio KDEV en ligne localement !`);
+  console.log('🚀 Portfolio Aken en ligne localement !');
   console.log(`👉 Ouvrez votre navigateur sur : http://localhost:${PORT}`);
   console.log(`======================================================\n`);
 });

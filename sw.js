@@ -1,5 +1,5 @@
-// Aken — Service Worker v3.0 (force cache refresh)
-const CACHE_NAME = 'aken-v3';
+// Aken — Service Worker v5.0 (force cache refresh)
+const CACHE_NAME = 'aken-v5';
 
 const APP_SHELL = [
   '/',
@@ -42,19 +42,7 @@ self.addEventListener('fetch', function(event) {
   if (event.request.method !== 'GET') return;
   if (url.origin !== location.origin) return;
 
-  // Network-first for HTML and JSON (always fresh)
-  if (url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname.endsWith('.json')) {
-    event.respondWith(networkFirst(event.request));
-    return;
-  }
-
-  // Cache-first for static assets (CSS, JS, images)
-  if (/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/.test(url.pathname)) {
-    event.respondWith(cacheFirst(event.request));
-    return;
-  }
-
-  // Default: network-first
+  // Network-first for everything to ensure instant updates with offline support
   event.respondWith(networkFirst(event.request));
 });
 

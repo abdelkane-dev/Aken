@@ -31,22 +31,14 @@
 <header class="site-header" id="entete">
   <div class="wrap header-inner">
     <div class="header-left">
-      <a href="index.html" class="logo" aria-label="Retour à l'accueil">
+      <a href="index.html" class="logo" aria-label="Aken - Retour à l'accueil">
         <img src="assets/logo.png" alt="Aken" class="logo-mark">
+        <span class="logo-title">Aken</span>
       </a>
     </div>
 
-    <!-- Backdrop d'assombrissement pour le tiroir latéral mobile -->
-    <div class="nav-drawer-backdrop" id="nav-backdrop"></div>
-
-    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
-      <div class="nav-drawer-header">
-        <div class="logo">
-          <img src="assets/logo.png" alt="Aken" class="logo-mark">
-        </div>
-        <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">&times;</button>
-      </div>
-
+    <!-- Navigation Desktop (écrans > 992px) -->
+    <nav class="desktop-nav" aria-label="Navigation principale">
       <div class="nav-links-list">
         <a href="index.html#apropos" data-aken-text="nav.apropos">À propos</a>
         <a href="index.html#expertise" data-aken-text="nav.expertise">Expertise</a>
@@ -56,19 +48,10 @@
         <a href="index.html#temoignages" data-aken-text="nav.temoignages">Avis</a>
         <a href="index.html#faq" data-aken-text="nav.faq">FAQ</a>
       </div>
-
-      <div class="nav-drawer-footer">
-        <div class="nav-drawer-actions">
-          <button id="drawer-lang-toggle" class="theme-toggle" aria-label="Switch language">EN</button>
-          <button id="drawer-theme-toggle" class="theme-toggle" aria-label="Changer de thème">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-          </button>
-        </div>
-        <a href="index.html#devis" class="btn btn-small btn-primary" data-aken-text="nav.cta_header" style="width:100%;justify-content:center;">Demander un devis</a>
-      </div>
     </nav>
 
     <div class="header-actions">
+      <a href="index.html#devis" class="btn btn-small btn-primary header-cta" data-aken-text="nav.cta_header">Demander un devis</a>
       <button id="lang-toggle" class="theme-toggle" aria-label="Switch language" style="font-weight:700;font-size:0.85rem;">EN</button>
       <button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème" title="Changer de thème">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
@@ -79,6 +62,38 @@
     </div>
   </div>
 </header>
+
+<!-- Tiroir latéral mobile -->
+<div class="nav-drawer-backdrop" id="nav-backdrop"></div>
+<nav class="main-nav mobile-drawer" id="main-nav" aria-label="Navigation mobile">
+  <div class="nav-drawer-header">
+    <a href="index.html" class="logo" aria-label="Aken">
+      <img src="assets/logo.png" alt="Aken" class="logo-mark" style="height:32px;">
+      <span class="logo-title" style="font-size:1.25rem;">Aken</span>
+    </a>
+    <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">&times;</button>
+  </div>
+
+  <div class="nav-links-list">
+    <a href="index.html#apropos" data-aken-text="nav.apropos">À propos</a>
+    <a href="index.html#expertise" data-aken-text="nav.expertise">Expertise</a>
+    <a href="index.html#offres" data-aken-text="nav.offres">Offres</a>
+    <a href="index.html#projets" data-aken-text="nav.projets">Projets</a>
+    <a href="blog.html" data-aken-text="nav.blog" style="color: var(--teal); font-weight: 600;">Blog</a>
+    <a href="index.html#temoignages" data-aken-text="nav.temoignages">Avis</a>
+    <a href="index.html#faq" data-aken-text="nav.faq">FAQ</a>
+  </div>
+
+  <div class="nav-drawer-footer">
+    <div class="nav-drawer-actions">
+      <button id="drawer-lang-toggle" class="theme-toggle" aria-label="Switch language">EN</button>
+      <button id="drawer-theme-toggle" class="theme-toggle" aria-label="Changer de thème">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+    </div>
+    <a href="index.html#devis" class="btn btn-small btn-primary" data-aken-text="nav.cta_header" style="width:100%;justify-content:center;">Demander un devis</a>
+  </div>
+</nav>
 
 <main id="contenu">
   <div class="wrap">

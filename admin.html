@@ -47,7 +47,7 @@
         </button>
       </form>
 
-      <div class="lockscreen-hint">
+      <div class="lockscreen-hint" id="lockscreen-hint">
         🔐 Mot de passe maître initial par défaut : <code>aken2026</code> (modifiable dans les paramètres).
       </div>
     </div>
@@ -201,7 +201,7 @@
                 <button class="btn-action-light" onclick="document.querySelector('[data-tab=tools]').click();">
                   <span>📄 Générer un devis / facture PDF</span>
                 </button>
-                <button class="btn-action-light" id="btn-export-backup">
+                <button class="btn-action-light" id="btn-export-shortcut" onclick="document.querySelector('[data-tab=permissions]').click();">
                   <span>💾 Sauvegarder les données (Export JSON)</span>
                 </button>
               </div>
@@ -460,7 +460,7 @@
                 Exportez l'intégralité de vos leads, projets, notes et contacts sous forme de fichier JSON sécurisé.
               </p>
               <div style="display:flex;gap:16px;flex-wrap:wrap;">
-                <button class="btn-action-primary" id="btn-export-backup" onclick="exportBackup();">
+                <button class="btn-action-primary" id="btn-export-backup">
                   💾 Télécharger la sauvegarde complète (.JSON)
                 </button>
                 <label class="btn-action-light" style="cursor:pointer;display:inline-flex;align-items:center;">
@@ -484,6 +484,88 @@
       <button class="modal-close-x" id="admin-modal-close" aria-label="Fermer">&times;</button>
       <h3 id="admin-modal-title" style="margin-bottom:18px;font-size:1.2rem;color:#fff;">Détails</h3>
       <div id="admin-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3b. TOAST NOTIFICATIONS
+       ===================================================================== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- =====================================================================
+       3c. MODALE : NOUVEAU PROJET (Kanban)
+       ===================================================================== -->
+  <div class="admin-modal-overlay hidden" id="new-project-modal">
+    <div class="admin-modal-box" style="max-width:520px;">
+      <button class="modal-close-x" id="new-project-modal-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin-bottom:18px;font-size:1.2rem;color:#fff;">🚀 Nouveau Projet Client</h3>
+      <form id="new-project-form">
+        <div class="form-group-admin">
+          <label>Titre du projet <span style="color:var(--admin-rose);">*</span></label>
+          <input type="text" id="np-title" class="form-control-admin" required placeholder="Ex: Site vitrine pour Traoré Import-Export">
+        </div>
+        <div class="form-group-admin">
+          <label>Nom du client <span style="color:var(--admin-rose);">*</span></label>
+          <input type="text" id="np-client" class="form-control-admin" required placeholder="Ex: Mamadou Traoré">
+        </div>
+        <div class="form-group-admin">
+          <label>Téléphone</label>
+          <input type="text" id="np-phone" class="form-control-admin" placeholder="+223 76 00 00 00">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group-admin">
+            <label>Montant total (FCFA) <span style="color:var(--admin-rose);">*</span></label>
+            <input type="number" id="np-total" class="form-control-admin" value="75000" step="5000" min="0" required>
+          </div>
+          <div class="form-group-admin">
+            <label>Acompte versé (FCFA)</label>
+            <input type="number" id="np-paid" class="form-control-admin" value="0" step="1000" min="0">
+          </div>
+        </div>
+        <div class="form-group-admin">
+          <label>Notes / Détails</label>
+          <textarea id="np-notes" class="form-control-admin" rows="2" placeholder="Contexte, exigences, etc."></textarea>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <button type="button" class="btn-action-light" id="np-cancel" style="flex:1;">Annuler</button>
+          <button type="submit" class="btn-action-primary" style="flex:1;">Créer le projet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3d. MODALE : AJOUTER UN LIEN PARTAGÉ
+       ===================================================================== -->
+  <div class="admin-modal-overlay hidden" id="add-link-modal">
+    <div class="admin-modal-box" style="max-width:480px;">
+      <button class="modal-close-x" id="add-link-modal-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin-bottom:18px;font-size:1.2rem;color:#fff;">🔗 Ajouter un lien partagé</h3>
+      <form id="add-link-form">
+        <div class="form-group-admin">
+          <label>Titre <span style="color:var(--admin-rose);">*</span></label>
+          <input type="text" id="al-title" class="form-control-admin" required placeholder="Ex: Maquettes Figma v2">
+        </div>
+        <div class="form-group-admin">
+          <label>URL complète <span style="color:var(--admin-rose);">*</span></label>
+          <input type="url" id="al-url" class="form-control-admin" required placeholder="https://figma.com/...">
+        </div>
+        <div class="form-group-admin">
+          <label>Catégorie</label>
+          <select id="al-category" class="form-control-admin">
+            <option value="Figma">Figma</option>
+            <option value="GitHub">GitHub</option>
+            <option value="Drive">Drive</option>
+            <option value="Client">Client</option>
+            <option value="Support">Support</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <button type="button" class="btn-action-light" id="al-cancel" style="flex:1;">Annuler</button>
+          <button type="submit" class="btn-action-primary" style="flex:1;">Ajouter le lien</button>
+        </div>
+      </form>
     </div>
   </div>
 

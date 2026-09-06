@@ -42,6 +42,31 @@
     return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
   }
 
+  function escapeHtml(text) {
+    var div = document.createElement("div");
+    div.appendChild(document.createTextNode(text || ""));
+    return div.innerHTML;
+  }
+
+  // --------------------------------------------------------------------------
+  // SYSTÈME DE TOAST NOTIFICATIONS
+  // --------------------------------------------------------------------------
+  var TOAST_ICONS = { success: "✅", error: "❌", info: "ℹ️", warning: "⚠️" };
+
+  function showToast(message, type) {
+    type = type || "info";
+    var container = document.getElementById("toast-container");
+    if (!container) return;
+    var toast = document.createElement("div");
+    toast.className = "toast toast-" + type;
+    toast.innerHTML = '<span class="toast-icon">' + (TOAST_ICONS[type] || "") + '</span><span class="toast-message">' + message + '</span>';
+    container.appendChild(toast);
+    setTimeout(function () {
+      toast.classList.add("toast-out");
+      setTimeout(function () { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+    }, 4000);
+  }
+
   // --------------------------------------------------------------------------
   // 2. DONNÉES PAR DÉFAUT & PERSISTANCE (localStorage)
   // --------------------------------------------------------------------------
@@ -514,7 +539,7 @@
         renderProjects();
         renderDashboard();
         closeModal();
-        alert("✅ Projet créé avec succès ! Consultez l'onglet 'Suivi des Projets'.");
+        showToast("Projet créé avec succès ! Consultez l'onglet Suivi des Projets.", "success");
       });
     }
   }
@@ -600,26 +625,47 @@
   }
 
   function handleNewProjectPrompt() {
-    var title = prompt("Titre ou description du projet :");
-    if (!title) return;
-    var client = prompt("Nom du client et téléphone :");
-    if (!client) return;
-    var totalStr = prompt("Montant total estimé en FCFA (ex: 140000) :", "75000");
-    var total = parseInt(totalStr, 10) || 75000;
+    var modal = document.getElementById("new-project-modal");
+    if (!modal) return;
+    var form = document.getElementById("new-project-form");
+    if (form) form.reset();
+    modal.classList.remove("hidden");
+    var titleInput = document.getElementById("np-title");
+    if (titleInput) titleInput.focus();
+  }
+
+  function handleNewProjectSubmit(e) {
+    e.preventDefault();
+    var title = document.getElementById("np-title").value.trim();
+    var client = document.getElementById("np-client").value.trim();
+    var phone = document.getElementById("np-phone").value.trim();
+    var total = parseInt(document.getElementById("np-total").value, 10) || 75000;
+    var paid = parseInt(document.getElementById("np-paid").value, 10) || 0;
+    var notes = document.getElementById("np-notes").value.trim();
+
+    if (!title || !client) {
+      showToast("Le titre et le nom du client sont obligatoires.", "error");
+      return;
+    }
 
     state.projects.unshift({
       id: "proj_" + Date.now(),
       title: title,
-      client: client,
+      client: client + (phone ? " (" + phone + ")" : ""),
+      phone: phone,
       total: total,
-      paid: Math.round(total * 0.3),
-      status: "cadrage",
-      progress: 15,
+      paid: paid,
+      status: paid > 0 ? "acompte" : "cadrage",
+      progress: paid > 0 ? 30 : 10,
+      notes: notes || "Projet créé depuis le portail admin",
       updatedAt: new Date().toISOString()
     });
     persistAll();
     renderProjects();
     renderDashboard();
+    var modal = document.getElementById("new-project-modal");
+    if (modal) modal.classList.add("hidden");
+    showToast("Projet \" + title + \" créé avec succès !", "success");
   }
 
   // --------------------------------------------------------------------------
@@ -637,6 +683,7 @@
     container.innerHTML = state.notes.map(function (note) {
       return [
         '<div class="note-item">',
+        '  <button class="note-delete-btn btn-del-note" data-id="' + note.id + '" title="Supprimer cette note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>',
         '  <div class="note-header">',
         '    <span>✍️ ' + (note.author || "Admin") + '</span>',
         '    <span>' + formatDate(note.date) + '</span>',
@@ -697,20 +744,37 @@
   }
 
   function handleAddLink() {
-    var title = prompt("Titre du document ou de la ressource :");
-    if (!title) return;
-    var url = prompt("Lien complet (URL) :");
-    if (!url) return;
-    var cat = prompt("Catégorie (Figma, GitHub, Drive, Client) :", "Drive");
+    var modal = document.getElementById("add-link-modal");
+    if (!modal) return;
+    var form = document.getElementById("add-link-form");
+    if (form) form.reset();
+    modal.classList.remove("hidden");
+    var titleInput = document.getElementById("al-title");
+    if (titleInput) titleInput.focus();
+  }
+
+  function handleAddLinkSubmit(e) {
+    e.preventDefault();
+    var title = document.getElementById("al-title").value.trim();
+    var url = document.getElementById("al-url").value.trim();
+    var category = document.getElementById("al-category").value;
+
+    if (!title || !url) {
+      showToast("Le titre et l'URL sont obligatoires.", "error");
+      return;
+    }
 
     state.sharedLinks.unshift({
       id: "link_" + Date.now(),
       title: title,
       url: url,
-      category: cat || "Autre"
+      category: category || "Autre"
     });
     persistAll();
     renderSharedLinks();
+    var modal = document.getElementById("add-link-modal");
+    if (modal) modal.classList.add("hidden");
+    showToast("Lien \" + title + \" ajouté avec succès !", "success");
   }
 
   // --------------------------------------------------------------------------
@@ -844,7 +908,7 @@
     nameInput.value = "";
     persistAll();
     renderCollabKeys();
-    alert("✅ Clé collaborateur générée avec succès :\n\nCode d'accès : " + randomCode + "\n\nPartagez ce code avec le collaborateur pour lui donner accès.");
+    showToast("Clé générée : " + randomCode + " — Partagez-la avec le collaborateur.", "success");
   }
 
   async function handleChangeMasterPassword(e) {
@@ -854,12 +918,12 @@
     if (!newPwd || !confirmPwd) return;
 
     if (newPwd.value.length < 6) {
-      alert("Le mot de passe doit comporter au moins 6 caractères.");
+      showToast("Le mot de passe doit comporter au moins 6 caractères.", "error");
       return;
     }
 
     if (newPwd.value !== confirmPwd.value) {
-      alert("Les deux mots de passe ne correspondent pas.");
+      showToast("Les deux mots de passe ne correspondent pas.", "error");
       return;
     }
 
@@ -867,7 +931,10 @@
     localStorage.setItem("aken_admin_master_hash", hashed);
     newPwd.value = "";
     confirmPwd.value = "";
-    alert("✅ Mot de passe maître Super Admin mis à jour avec succès !");
+    showToast("Mot de passe maître mis à jour avec succès !", "success");
+    // Masquer l'indice du mot de passe par défaut
+    var hintEl = document.getElementById("lockscreen-hint");
+    if (hintEl) hintEl.style.display = "none";
   }
 
   // --------------------------------------------------------------------------
@@ -904,9 +971,9 @@
         if (data.collabKeys) state.collabKeys = data.collabKeys;
         persistAll();
         renderAllViews();
-        alert("✅ Sauvegarde restaurée avec succès !");
+        showToast("Sauvegarde restaurée avec succès !", "success");
       } catch (err) {
-        alert("❌ Erreur lors de la lecture du fichier de sauvegarde.");
+        showToast("Erreur lors de la lecture du fichier de sauvegarde.", "error");
       }
     };
     reader.readAsText(file);
@@ -1014,7 +1081,7 @@
       });
     }
 
-    // Fermeture modale
+    // Fermeture modale (lead detail)
     var modalClose = document.getElementById("admin-modal-close");
     if (modalClose) modalClose.addEventListener("click", closeModal);
 
@@ -1024,6 +1091,50 @@
         if (e.target === modalOverlay) closeModal();
       });
     }
+
+    // Fermeture modale nouveau projet
+    var npClose = document.getElementById("new-project-modal-close");
+    if (npClose) npClose.addEventListener("click", function () {
+      document.getElementById("new-project-modal").classList.add("hidden");
+    });
+    var npCancel = document.getElementById("np-cancel");
+    if (npCancel) npCancel.addEventListener("click", function () {
+      document.getElementById("new-project-modal").classList.add("hidden");
+    });
+    var npForm = document.getElementById("new-project-form");
+    if (npForm) npForm.addEventListener("submit", handleNewProjectSubmit);
+    var npOverlay = document.getElementById("new-project-modal");
+    if (npOverlay) {
+      npOverlay.addEventListener("click", function (e) {
+        if (e.target === npOverlay) npOverlay.classList.add("hidden");
+      });
+    }
+
+    // Fermeture modale ajout lien
+    var alClose = document.getElementById("add-link-modal-close");
+    if (alClose) alClose.addEventListener("click", function () {
+      document.getElementById("add-link-modal").classList.add("hidden");
+    });
+    var alCancel = document.getElementById("al-cancel");
+    if (alCancel) alCancel.addEventListener("click", function () {
+      document.getElementById("add-link-modal").classList.add("hidden");
+    });
+    var alForm = document.getElementById("add-link-form");
+    if (alForm) alForm.addEventListener("submit", handleAddLinkSubmit);
+    var alOverlay = document.getElementById("add-link-modal");
+    if (alOverlay) {
+      alOverlay.addEventListener("click", function (e) {
+        if (e.target === alOverlay) alOverlay.classList.add("hidden");
+      });
+    }
+
+    // Touche Escape pour fermer toutes les modales
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" || e.keyCode === 27) {
+        var modals = document.querySelectorAll(".admin-modal-overlay:not(.hidden)");
+        modals.forEach(function (m) { m.classList.add("hidden"); });
+      }
+    });
   }
 
   // Démarrage

@@ -1,5 +1,5 @@
-// Aken — Service Worker v5.0 (force cache refresh)
-const CACHE_NAME = 'aken-v5';
+// Aken — Service Worker v7.0 (force cache refresh)
+const CACHE_NAME = 'aken-v7';
 
 const APP_SHELL = [
   '/',

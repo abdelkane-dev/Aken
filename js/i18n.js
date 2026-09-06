@@ -35,7 +35,24 @@
       }
     }
     if (typeof val === "string") {
-      el.textContent = val;
+      var svg = el.querySelector("svg");
+      if (svg) {
+        // If element has an svg icon, preserve it and update text only
+        var textNode = null;
+        for (var n = 0; n < el.childNodes.length; n++) {
+          if (el.childNodes[n].nodeType === Node.TEXT_NODE && el.childNodes[n].textContent.trim().length > 0) {
+            textNode = el.childNodes[n];
+            break;
+          }
+        }
+        if (textNode) {
+          textNode.textContent = " " + val;
+        } else {
+          el.appendChild(document.createTextNode(" " + val));
+        }
+      } else {
+        el.textContent = val;
+      }
     }
   }
 

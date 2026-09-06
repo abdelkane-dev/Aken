@@ -1,8 +1,10 @@
 {
   "nav": {
+    "accueil": "Home",
     "apropos": "About",
     "expertise": "Expertise",
     "offres": "Services",
+    "tarifs": "Pricing",
     "projets": "Projects",
     "blog": "Blog",
     "temoignages": "Reviews",

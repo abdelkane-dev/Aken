@@ -1350,7 +1350,7 @@ body.nav-open .nav-drawer-backdrop,
   .nav-toggle { display: flex !important; }
   .header-cta { display: none !important; }
 
-  /* === OFF-CANVAS DRAWER — Dark luxury, elegant with icons === */
+  /* === OFF-CANVAS DRAWER — Adapts to light/dark mode === */
   .mobile-drawer,
   .main-nav {
     display: flex !important;
@@ -1362,9 +1362,8 @@ body.nav-open .nav-drawer-backdrop,
     width: min(320px, 86vw) !important;
     height: 100vh !important;
     height: 100dvh !important;
-    background: #090e1a !important;
-    background: linear-gradient(180deg, #0d1322 0%, #070a14 100%) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: var(--paper) !important;
+    border-left: 1px solid var(--border) !important;
     z-index: 999999 !important;
     flex-direction: column !important;
     gap: 0 !important;
@@ -1374,6 +1373,12 @@ body.nav-open .nav-drawer-backdrop,
     transform: translateX(105%) !important;
     visibility: hidden !important;
     transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.36s ease !important;
+    box-shadow: -16px 0 60px rgba(0, 0, 0, 0.25) !important;
+  }
+  [data-theme="dark"] .mobile-drawer,
+  [data-theme="dark"] .main-nav {
+    background: linear-gradient(180deg, #0d1322 0%, #070a14 100%) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: -16px 0 60px rgba(0, 0, 0, 0.8) !important;
   }
   body.nav-open .mobile-drawer,
@@ -1393,20 +1398,20 @@ body.nav-open .nav-drawer-backdrop,
     align-items: center !important;
     justify-content: space-between !important;
     padding: 22px 24px 18px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    border-bottom: 1px solid var(--border) !important;
   }
   .nav-drawer-title {
     font-family: var(--display-font);
     font-size: 1.05rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--ink);
     letter-spacing: 0.01em;
   }
 
   .nav-drawer-close {
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    color: rgba(255,255,255,0.8) !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--ink-soft) !important;
     font-size: 1.3rem !important;
     cursor: pointer;
     line-height: 1;
@@ -1417,11 +1422,11 @@ body.nav-open .nav-drawer-backdrop,
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
   .nav-drawer-close:hover {
-    background: rgba(255,255,255,0.15) !important;
-    color: #fff !important;
+    border-color: var(--teal) !important;
+    color: var(--teal) !important;
   }
 
   /* Nav links with icons */
@@ -1439,7 +1444,7 @@ body.nav-open .nav-drawer-backdrop,
     padding: 14px 24px !important;
     font-size: 1rem !important;
     font-weight: 500 !important;
-    color: rgba(255,255,255,0.78) !important;
+    color: var(--ink-soft) !important;
     text-decoration: none !important;
     transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease !important;
     border-bottom: none !important;
@@ -1458,17 +1463,18 @@ body.nav-open .nav-drawer-backdrop,
     transition: transform 0.2s ease;
   }
   .main-nav .nav-links-list a:hover {
-    background: rgba(255,255,255,0.06) !important;
-    color: #fff !important;
+    background: color-mix(in srgb, var(--teal) 8%, transparent) !important;
+    color: var(--ink) !important;
     padding-left: 28px !important;
   }
   .main-nav .nav-links-list a:hover::before {
     transform: translateY(-50%) scaleY(1);
   }
   .nav-icon {
-    opacity: 0.65;
+    opacity: 0.55;
     flex-shrink: 0;
-    transition: opacity 0.2s ease;
+    stroke: var(--ink-soft);
+    transition: opacity 0.2s ease, stroke 0.2s ease;
   }
   .main-nav .nav-links-list a:hover .nav-icon {
     opacity: 1;
@@ -1481,19 +1487,19 @@ body.nav-open .nav-drawer-backdrop,
     flex-direction: column !important;
     gap: 12px !important;
     padding: 20px 24px !important;
-    border-top: 1px solid rgba(255,255,255,0.08) !important;
+    border-top: 1px solid var(--border) !important;
   }
   .main-nav .nav-drawer-actions {
     display: flex !important;
     gap: 10px !important;
   }
   .main-nav .nav-drawer-actions .theme-toggle {
-    border-color: rgba(255,255,255,0.2) !important;
-    color: rgba(255,255,255,0.75) !important;
+    border-color: var(--border) !important;
+    color: var(--ink-soft) !important;
   }
   .main-nav .nav-drawer-actions .theme-toggle:hover {
     border-color: var(--teal) !important;
-    color: #fff !important;
+    color: var(--teal) !important;
   }
   .main-nav .nav-drawer-footer .btn {
     background: var(--teal) !important;

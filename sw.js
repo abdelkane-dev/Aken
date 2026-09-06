@@ -43,6 +43,7 @@ self.addEventListener('fetch', function(event) {
   var url = new URL(event.request.url);
   if (event.request.method !== 'GET') return;
   if (url.origin !== location.origin) return;
+  if (url.pathname.startsWith('/admin')) return; // Toujours réseau direct pour l'espace admin
 
   // Network-first for everything to ensure instant updates with offline support
   event.respondWith(networkFirst(event.request));

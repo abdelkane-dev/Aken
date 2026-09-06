@@ -579,6 +579,32 @@
           waMsg += "✅ Acompte Réglé (30%) : " + amounts.depositAmount.toLocaleString("fr-FR") + " FCFA\n\n";
           waMsg += "Merci de me confirmer la bonne réception et le planning de démarrage !";
 
+          // Enregistrement lead dans le panneau d'administration Aken
+          try {
+            var leads = JSON.parse(localStorage.getItem("aken_admin_leads") || "[]");
+            leads.unshift({
+              id: "deposit_" + Date.now(),
+              createdAt: new Date().toISOString(),
+              type: "acompte",
+              status: "acompte_recu",
+              name: state.clientName,
+              phone: state.clientPhone,
+              email: state.clientEmail || "",
+              company: state.clientCompany || "",
+              projectType: state.projectType,
+              projectName: projInfo.name,
+              projectTitle: state.projectTitle || "",
+              paymentMethod: state.paymentMethod,
+              totalAmount: amounts.netTotal,
+              depositAmount: amounts.depositAmount,
+              balanceDue: amounts.balanceDue,
+              source: "Modal Acompte 30%"
+            });
+            localStorage.setItem("aken_admin_leads", JSON.stringify(leads));
+          } catch (e) {
+            console.warn("Erreur sauvegarde acompte admin:", e);
+          }
+
           var waLink = overlay.querySelector("#success-whatsapp-link");
           if (waLink) {
             waLink.href = "https://wa.me/22393789916?text=" + encodeURIComponent(waMsg);

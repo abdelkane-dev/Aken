@@ -106,11 +106,37 @@
   /* ═══════════════════════════════════════════
      4. FORMULAIRES
      ═══════════════════════════════════════════ */
+  function saveLead(data) {
+    try {
+      var leads = JSON.parse(localStorage.getItem("aken_admin_leads") || "[]");
+      data.id = "lead_" + Date.now();
+      data.createdAt = new Date().toISOString();
+      data.status = "nouveau"; // nouveau, contacte, devis_envoye, acompte_recu, archive
+      leads.unshift(data);
+      localStorage.setItem("aken_admin_leads", JSON.stringify(leads));
+    } catch (err) {
+      console.warn("Erreur stockage lead admin:", err);
+    }
+  }
+
   var form = document.getElementById("contact-form");
   var status = document.getElementById("form-status");
   if (form && status) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      var nom = (document.getElementById("nom") || {}).value || "";
+      var email = (document.getElementById("email") || {}).value || "";
+      var message = (document.getElementById("message") || {}).value || "";
+
+      saveLead({
+        type: "contact",
+        name: nom,
+        email: email,
+        phone: "",
+        message: message,
+        source: "Formulaire de contact principal"
+      });
+
       status.textContent = "✅ Message envoyé ! Je vous réponds sous 24h.";
       form.reset();
     });
@@ -121,6 +147,14 @@
   if (leadForm && leadStatus) {
     leadForm.addEventListener("submit", function (e) {
       e.preventDefault();
+      var leadEmail = (leadForm.querySelector("input[type='email']") || {}).value || "";
+      saveLead({
+        type: "guide",
+        name: "Prospect Guide",
+        email: leadEmail,
+        message: "Téléchargement du guide digital Aken",
+        source: "Pop-up ou formulaire guide"
+      });
       leadStatus.textContent = "✅ Guide envoyé ! Vérifiez votre boîte mail.";
       leadForm.reset();
     });

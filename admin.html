@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aken — Espace d'Administration & Gestion</title>
+  <!-- Protection stricte : Aucune indexation par les moteurs de recherche -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Polices Google Fonts identiques au site principal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- =====================================================================
+       1. LOCKSCREEN SÉCURISÉ (Authentification Admin & Collaborateur)
+       ===================================================================== -->
+  <div class="admin-lockscreen" id="admin-lockscreen">
+    <div class="lockscreen-card">
+      <div class="lockscreen-logo">
+        <img src="assets/logo.png" alt="Aken Logo">
+        <span>Aken Admin</span>
+      </div>
+      <div>
+        <span class="lockscreen-badge">Espace Sécurisé</span>
+      </div>
+      <h2>Accès Réservé</h2>
+      <p>Connectez-vous avec votre mot de passe maître Super Admin ou votre code collaborateur autorisé.</p>
+
+      <form class="lockscreen-form" id="lockscreen-form">
+        <label for="lockscreen-password">Code d'accès ou mot de passe</label>
+        <div class="lockscreen-input-wrap">
+          <input type="password" id="lockscreen-password" required autocomplete="current-password" placeholder="Saisissez votre code...">
+          <button type="button" class="toggle-pwd-btn" id="toggle-pwd" aria-label="Afficher le mot de passe">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="lockscreen-error" id="lockscreen-error"></div>
+        <button type="submit" class="lockscreen-btn">
+          <span>Déverrouiller l'Espace</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div class="lockscreen-hint">
+        🔐 Mot de passe maître initial par défaut : <code>aken2026</code> (modifiable dans les paramètres).
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. APPLICATION ADMIN PRINCIPALE
+       ===================================================================== -->
+  <div class="admin-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.png" alt="Aken">
+        <div>
+          <div class="brand-title">Aken</div>
+          <div class="brand-role">Portail Équipe</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Tableau de bord</span>
+        </button>
+
+        <button class="nav-item" data-tab="inbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Boîte de Réception</span>
+          <span class="nav-badge" id="inbox-badge" style="display:none;">0</span>
+        </button>
+
+        <button class="nav-item" data-tab="pipeline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Suivi Projets</span>
+        </button>
+
+        <button class="nav-item" data-tab="tools">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Échange &amp; Outils</span>
+        </button>
+
+        <button class="nav-item" data-tab="permissions">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Clés &amp; Sécurité</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-card">
+          <div class="user-avatar" id="admin-user-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="admin-user-name">Abdelkane</div>
+            <div class="user-level" id="admin-user-level">Super Admin</div>
+          </div>
+        </div>
+        <button class="btn-logout" id="btn-logout">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ZONE DE TRAVAIL CENTRALE -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-mobile" id="sidebar-toggle-mobile" aria-label="Menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-headline">
+            <h1 id="current-page-title">Tableau de bord &amp; Activité</h1>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="/" target="_blank" class="btn-action-light" title="Voir le site en ligne">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Voir le site</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="admin-content-area">
+
+        <!-- ===============================================================
+             VUE 1 : DASHBOARD (VUE D'ENSEMBLE)
+             =============================================================== -->
+        <section class="admin-view active" id="view-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-pill teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <span class="stat-label">Demandes à traiter</span>
+              <span class="stat-number" id="stat-new-leads">0</span>
+              <span class="stat-sub">Leads et acomptes en attente</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <span class="stat-label">Acomptes Reçus (Est.)</span>
+              <span class="stat-number" id="stat-total-revenue">0 FCFA</span>
+              <span class="stat-sub">Règlements Wave &amp; Orange Money</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <span class="stat-label">Projets Actifs</span>
+              <span class="stat-number" id="stat-active-projects">0</span>
+              <span class="stat-sub">En cadrage ou développement</span>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span class="stat-label">Total Contacts Entrants</span>
+              <span class="stat-number" id="stat-total-leads">0</span>
+              <span class="stat-sub">Depuis le lancement</span>
+            </div>
+          </div>
+
+          <div class="dashboard-split">
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Dernières demandes reçues
+                </h3>
+              </div>
+              <div id="dashboard-recent-leads" class="leads-list">
+                <!-- Rendu dynamique via js -->
+              </div>
+            </div>
+
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                  Raccourcis rapides
+                </h3>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <button class="btn-action-primary" id="btn-quick-new-proj" onclick="document.querySelector('[data-tab=pipeline]').click();">
+                  <span>🚀 Créer un nouveau projet</span>
+                </button>
+                <button class="btn-action-light" onclick="document.querySelector('[data-tab=tools]').click();">
+                  <span>📄 Générer un devis / facture PDF</span>
+                </button>
+                <button class="btn-action-light" id="btn-export-backup">
+                  <span>💾 Sauvegarder les données (Export JSON)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 2 : BOÎTE DE RÉCEPTION (LEADS & CONTACTS)
+             =============================================================== -->
+        <section class="admin-view" id="view-inbox">
+          <div class="inbox-toolbar">
+            <div class="inbox-filters">
+              <button class="filter-chip active" data-filter="all">Tous les messages</button>
+              <button class="filter-chip" data-filter="nouveau">Nouveaux</button>
+              <button class="filter-chip" data-filter="acompte">Acomptes validés</button>
+              <button class="filter-chip" data-filter="contact">Formulaires contact</button>
+              <button class="filter-chip" data-filter="archive">Archivés</button>
+            </div>
+            <div class="search-input-wrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="inbox-search" placeholder="Rechercher (nom, tél, mot-clé)...">
+            </div>
+          </div>
+
+          <div class="leads-list" id="inbox-leads-container">
+            <!-- Liste dynamique des leads -->
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 3 : PIPELINE PROJETS (KANBAN)
+             =============================================================== -->
+        <section class="admin-view" id="view-pipeline">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <p style="color:var(--admin-text-muted);font-size:0.9rem;">Suivi pas-à-pas des projets clients Aken en cours de réalisation.</p>
+            <button class="btn-action-primary" id="btn-new-project">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Nouveau Projet</span>
+            </button>
+          </div>
+
+          <div class="pipeline-board">
+            <!-- Colonne 1 : Cadrage -->
+            <div class="pipeline-col">
+              <div class="pipeline-col-header">
+                <span class="col-title">📌 Cadrage &amp; Devis</span>
+                <span class="col-count" id="count-cadrage">0</span>
+              </div>
+              <div class="col-cards" id="col-cards-cadrage"></div>
+            </div>
+
+            <!-- Colonne 2 : Acompte Réglé -->
+            <div class="pipeline-col">
+              <div class="pipeline-col-header">
+                <span class="col-title" style="color:var(--admin-teal);">💵 Acompte Réglé (30%)</span>
+                <span class="col-count" id="count-acompte">0</span>
+              </div>
+              <div class="col-cards" id="col-cards-acompte"></div>
+            </div>
+
+            <!-- Colonne 3 : En développement -->
+            <div class="pipeline-col">
+              <div class="pipeline-col-header">
+                <span class="col-title" style="color:var(--admin-mint);">⚙️ En Développement</span>
+                <span class="col-count" id="count-en_cours">0</span>
+              </div>
+              <div class="col-cards" id="col-cards-en_cours"></div>
+            </div>
+
+            <!-- Colonne 4 : Livré & Terminé -->
+            <div class="pipeline-col">
+              <div class="pipeline-col-header">
+                <span class="col-title">✅ Livré &amp; Soldé</span>
+                <span class="col-count" id="count-termine">0</span>
+              </div>
+              <div class="col-cards" id="col-cards-termine"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 4 : ÉCHANGE & OUTILS (NOTES, LIENS, FACTURATION)
+             =============================================================== -->
+        <section class="admin-view" id="view-tools">
+          <div class="tools-grid">
+            <!-- BLOC-NOTES PARTAGÉ -->
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  Journal &amp; Notes d'équipe
+                </h3>
+              </div>
+              <div class="notes-container">
+                <div class="note-input-wrap">
+                  <textarea id="new-note-input" placeholder="Ajouter une consigne, une note sur un client, ou un mémo d'équipe..."></textarea>
+                  <button class="btn-action-primary" id="btn-add-note" style="align-self:flex-end;">Publier la note</button>
+                </div>
+                <div class="notes-history" id="notes-history">
+                  <!-- Rendu dynamique des notes -->
+                </div>
+              </div>
+            </div>
+
+            <!-- LIENS PARTAGÉS ET OUTILS DE PRODUCTION -->
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  Liens &amp; Documents Partagés
+                </h3>
+                <button class="btn-action-light" id="btn-add-link" style="font-size:0.75rem;padding:4px 10px;">+ Ajouter</button>
+              </div>
+              <div class="shared-links-list" id="shared-links-list">
+                <!-- Rendu dynamique des liens -->
+              </div>
+
+              <!-- GÉNÉRATEUR DE DEVIS / FACTURE -->
+              <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--admin-border);">
+                <div class="section-title-row">
+                  <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Générateur de Devis / Facture Aken
+                  </h3>
+                </div>
+                <form id="quote-generator-form">
+                  <div class="form-group-admin">
+                    <label>Nom du client :</label>
+                    <input type="text" id="quote-client-name" class="form-control-admin" required placeholder="Ex: Oumar Konaté">
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div class="form-group-admin">
+                      <label>Téléphone :</label>
+                      <input type="text" id="quote-client-phone" class="form-control-admin" placeholder="+223 70 00 00 00">
+                    </div>
+                    <div class="form-group-admin">
+                      <label>Entreprise :</label>
+                      <input type="text" id="quote-client-company" class="form-control-admin" placeholder="Ex: Konaté Services SARL">
+                    </div>
+                  </div>
+                  <div class="form-group-admin">
+                    <label>Prestation :</label>
+                    <select id="quote-project-type" class="form-control-admin">
+                      <option value="Site Vitrine Professionnel">Site Vitrine Professionnel</option>
+                      <option value="Boutique en Ligne / E-commerce">Boutique en Ligne / E-commerce</option>
+                      <option value="Application Mobile (Android &amp; iOS)">Application Mobile (Android &amp; iOS)</option>
+                      <option value="Système de Gestion Sur-Mesure">Système de Gestion Sur-Mesure</option>
+                    </select>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div class="form-group-admin">
+                      <label>Montant Total (FCFA) :</label>
+                      <input type="number" id="quote-amount" class="form-control-admin" value="75000" step="5000">
+                    </div>
+                    <div class="form-group-admin">
+                      <label>Acompte (%) :</label>
+                      <select id="quote-deposit-rate" class="form-control-admin">
+                        <option value="30" selected>30% (Standard Aken)</option>
+                        <option value="50">50%</option>
+                        <option value="100">100% (Complet)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-action-primary" style="width:100%;margin-top:10px;">
+                    🖨️ Générer et Imprimer le Devis Officiel
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 5 : PERMISSIONS & SÉCURITÉ
+             =============================================================== -->
+        <section class="admin-view" id="view-permissions">
+          <div class="permissions-grid">
+            <!-- MODIFICATION MOT DE PASSE MAÎTRE -->
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Mot de passe Super Admin
+                </h3>
+              </div>
+              <p style="color:var(--admin-text-muted);font-size:0.85rem;margin-bottom:16px;">
+                Ce mot de passe confère un contrôle total sur l'ensemble de l'espace admin et des permissions.
+              </p>
+              <form id="form-change-master-password">
+                <div class="form-group-admin">
+                  <label>Nouveau mot de passe maître :</label>
+                  <input type="password" id="new-master-password" class="form-control-admin" required minlength="6" placeholder="Minimum 6 caractères">
+                </div>
+                <div class="form-group-admin">
+                  <label>Confirmer le mot de passe :</label>
+                  <input type="password" id="confirm-master-password" class="form-control-admin" required minlength="6" placeholder="Confirmez">
+                </div>
+                <button type="submit" class="btn-action-primary">Enregistrer le nouveau mot de passe</button>
+              </form>
+            </div>
+
+            <!-- GESTION DES CLÉS COLLABORATEURS -->
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><path d="M21 2l-2 2m-2-2l2 2"/><path d="M15.5 7.5l3 3L7 22H3v-4L14.5 6.5z"/></svg>
+                  Clés d'accès Collaborateurs
+                </h3>
+              </div>
+              <p style="color:var(--admin-text-muted);font-size:0.85rem;margin-bottom:16px;">
+                Générez des codes d'accès uniques pour vos développeurs, designers ou commerciaux.
+              </p>
+
+              <form id="form-create-collab-key">
+                <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+                  <div class="form-group-admin">
+                    <label>Nom ou Fonction :</label>
+                    <input type="text" id="collab-name-input" class="form-control-admin" required placeholder="Ex: Seydou (Développeur)">
+                  </div>
+                  <div class="form-group-admin">
+                    <label>Rôle :</label>
+                    <select id="collab-role-input" class="form-control-admin">
+                      <option value="collaborateur" selected>Collaborateur</option>
+                      <option value="super_admin">Admin Délégué</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" class="btn-action-primary" style="margin-bottom:16px;">+ Générer un code d'accès</button>
+              </form>
+
+              <table class="collab-keys-table">
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Code d'accès</th>
+                    <th>Rôle</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="collab-keys-tbody">
+                  <!-- Rendu dynamique -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- SAUVEGARDE & IMPORTATION -->
+            <div class="admin-card-section" style="grid-column:1 / -1;">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-purple)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Sauvegarde &amp; Restauration des Données
+                </h3>
+              </div>
+              <p style="color:var(--admin-text-muted);font-size:0.85rem;margin-bottom:16px;">
+                Exportez l'intégralité de vos leads, projets, notes et contacts sous forme de fichier JSON sécurisé.
+              </p>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <button class="btn-action-primary" id="btn-export-backup" onclick="exportBackup();">
+                  💾 Télécharger la sauvegarde complète (.JSON)
+                </button>
+                <label class="btn-action-light" style="cursor:pointer;display:inline-flex;align-items:center;">
+                  📥 Restaurer une sauvegarde (.JSON)
+                  <input type="file" id="import-backup-file" accept=".json" style="display:none;">
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3. MODALE UNIVERSELLE (DÉTAILS LEAD & GESTION)
+       ===================================================================== -->
+  <div class="admin-modal-overlay hidden" id="admin-modal">
+    <div class="admin-modal-box">
+      <button class="modal-close-x" id="admin-modal-close" aria-label="Fermer">&times;</button>
+      <h3 id="admin-modal-title" style="margin-bottom:18px;font-size:1.2rem;color:#fff;">Détails</h3>
+      <div id="admin-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/admin.js" defer></script>
+</body>
+</html>

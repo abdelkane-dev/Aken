@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vous êtes hors ligne — Aken</title>
+<style>
+:root { --ink: #F0E6D2; --paper: #14131A; --teal: #4FC3BB; --ochre: #D9A441; }
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; padding: 24px; text-align: center;
+}
+.container { max-width: 420px; }
+.icon { font-size: 4rem; margin-bottom: 24px; animation: pulse 2s ease-in-out infinite; }
+h1 { font-size: 1.6rem; margin-bottom: 12px; }
+p { color: #C9BC9C; margin-bottom: 24px; line-height: 1.6; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 10px; font-weight: 600;
+  text-decoration: none; border: 2px solid var(--teal); color: var(--teal);
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--teal); color: var(--paper); }
+.btn-wa { background: #25D366; border-color: #25D366; color: #fff; }
+.btn-wa:hover { background: #1DA851; border-color: #1DA851; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/><path d="M4.93 19.07l3.54-3.54"/><path d="M19.07 4.93l-3.54 3.54"/></svg></div>
+  <h1>Vous êtes hors ligne</h1>
+  <p>Pas de connexion internet détectée. Vérifiez votre réseau et réessayez, ou contactez-nous directement sur WhatsApp.</p>
+  <a href="/" class="btn">↻ Réessayer</a>
+  <br><br>
+  <a href="https://wa.me/22393789916?text=Bonjour%20Aken%2C%20j%27ai%20un%20projet." class="btn btn-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+</body>
+</html>

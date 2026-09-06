@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "apropos": "À propos",
+    "expertise": "Expertise",
+    "offres": "Offres",
+    "projets": "Projets",
+    "blog": "Blog",
+    "temoignages": "Avis",
+    "faq": "FAQ",
+    "cta_header": "Demander un devis gratuit"
+  },
+  "hero": {
+    "eyebrow": "Bamako, Mali — Disponible pour projets & opportunités",
+    "title": "Des solutions digitales <span class=\"accent\">sur-mesure</span> pour développer votre activité et booster vos ventes.",
+    "title_accent": "sur-mesure",
+    "lead": "Besoin d'un site vitrine, d'une boutique en ligne pour vendre sur internet, d'une application mobile ou d'un outil pour automatiser votre gestion ? Aken conçoit des solutions simples, rapides et sécurisées, avec paiements Wave et Orange Money intégrés.",
+    "cta_primary": "Calculer mon devis gratuit →",
+    "cta_secondary": "Voir nos réalisations"
+  },
+  "impact": {
+    "projets": "Projets livrés",
+    "utilisateurs": "Utilisateurs sur nos plateformes",
+    "satisfaction": "Satisfaction client",
+    "experience": "Années d'expérience"
+  },
+  "devis": {
+    "eyebrow": "Estimation gratuite",
+    "title": "Estimez le budget de votre projet en 2 minutes",
+    "subtitle": "Cochez vos besoins et obtenez une estimation instantanée. Pas de surprise, pas d'engagement.",
+    "result_title": "Votre estimation",
+    "result_desc": "Basée sur vos choix — le prix final est déterminé après échange.",
+    "from": "À partir de",
+    "currency": "FCFA",
+    "whatsapp": "Envoyer via WhatsApp",
+    "detailed": "Demander un devis détaillé"
+  },
+  "apropos": {
+    "eyebrow": "À propos",
+    "title": "Des solutions concrètes et rentables pour votre business"
+  },
+  "expertise": {
+    "eyebrow": "Services",
+    "title": "Tout ce qu'il vous faut pour digitaliser et développer votre activité"
+  },
+  "offres": {
+    "eyebrow": "Offres",
+    "title": "Trois façons de travailler ensemble",
+    "guarantee_title": "Garantie de satisfaction — 30 jours de suivi technique inclus"
+  },
+  "projets": {
+    "eyebrow": "Études de cas",
+    "title": "Des projets réels, des résultats mesurables"
+  },
+  "temoignages": {
+    "eyebrow": "Avis clients",
+    "title": "Ce que disent nos clients"
+  },
+  "comment": {
+    "eyebrow": "Processus",
+    "title": "Notre processus de travail"
+  },
+  "tech": {
+    "eyebrow": "Technologies",
+    "title": "Notre stack technique"
+  },
+  "tarifs": {
+    "eyebrow": "Tarifs",
+    "title": "Des offres claires, adaptées à vos besoins"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Un projet ? Une opportunité ?"
+  },
+  "faq": {
+    "eyebrow": "Questions fréquentes",
+    "title": "Questions fréquentes"
+  },
+  "parcours": {
+    "eyebrow": "Parcours",
+    "title": "Notre parcours"
+  },
+  "rdv": {
+    "eyebrow": "Réserver un appel",
+    "title": "Échangeons sur votre projet en 15 minutes"
+  },
+  "ressource": {
+    "eyebrow": "Ressource gratuite"
+  },
+  "footer": {
+    "copyright": "Aken — Solutions digitales sur-mesure pour votre entreprise. Bamako, Mali."
+  },
+  "whatsapp": {
+    "label": "Contactez-nous sur WhatsApp"
+  },
+  "sticky": {
+    "devis": "Demander un devis",
+    "whatsapp": "WhatsApp"
+  }
+}

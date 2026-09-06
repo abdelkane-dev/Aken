@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog &amp; Insights — Aken | Solutions Digitales, Web &amp; Applications Mobiles</title>
+<meta name="description" content="Analyses, guides et retours d'expérience sur la digitalisation d'entreprises, la création de sites web et applications mobiles par Aken.">
+<meta property="og:title" content="Blog &amp; Insights — Aken">
+<meta property="og:description" content="Expertise technologique, transformation digitale et développement de solutions web & mobiles au Mali et à l'international.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-cover.png">
+<link rel="canonical" href="https://www.aken.dev/blog.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/blog.css">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#26335C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aken">
+<link rel="apple-touch-icon" href="assets/logo.png">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header" id="entete">
+  <div class="wrap header-inner">
+    <div class="header-left">
+      <a href="index.html" class="logo" aria-label="Retour à l'accueil">
+        <img src="assets/logo.png" alt="Aken" class="logo-mark">
+      </a>
+    </div>
+
+    <!-- Backdrop d'assombrissement pour le tiroir latéral mobile -->
+    <div class="nav-drawer-backdrop" id="nav-backdrop"></div>
+
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <div class="nav-drawer-header">
+        <div class="logo">
+          <img src="assets/logo.png" alt="Aken" class="logo-mark">
+        </div>
+        <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">&times;</button>
+      </div>
+
+      <div class="nav-links-list">
+        <a href="index.html#apropos" data-aken-text="nav.apropos">À propos</a>
+        <a href="index.html#expertise" data-aken-text="nav.expertise">Expertise</a>
+        <a href="index.html#offres" data-aken-text="nav.offres">Offres</a>
+        <a href="index.html#projets" data-aken-text="nav.projets">Projets</a>
+        <a href="blog.html" data-aken-text="nav.blog" style="color: var(--teal); font-weight: 600;">Blog</a>
+        <a href="index.html#temoignages" data-aken-text="nav.temoignages">Avis</a>
+        <a href="index.html#faq" data-aken-text="nav.faq">FAQ</a>
+      </div>
+
+      <div class="nav-drawer-footer">
+        <div class="nav-drawer-actions">
+          <button id="drawer-lang-toggle" class="theme-toggle" aria-label="Switch language">EN</button>
+          <button id="drawer-theme-toggle" class="theme-toggle" aria-label="Changer de thème">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          </button>
+        </div>
+        <a href="index.html#devis" class="btn btn-small btn-primary" data-aken-text="nav.cta_header" style="width:100%;justify-content:center;">Demander un devis</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <button id="lang-toggle" class="theme-toggle" aria-label="Switch language" style="font-weight:700;font-size:0.85rem;">EN</button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème" title="Changer de thème">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+  <div class="wrap">
+    <div class="blog-header">
+      <p class="eyebrow" data-aken-text="nav.blog">Blog</p>
+      <h1>Articles sur le développement logiciel au Mali</h1>
+      <p>Conseils, tutoriels et retours d'expérience pour les entrepreneurs et développeurs du Mali.</p>
+    </div>
+
+    <div class="blog-filters">
+      <button class="blog-filter active" data-filter="all">Tous</button>
+      <button class="blog-filter" data-filter="Entrepreneurs">Entrepreneurs</button>
+      <button class="blog-filter" data-filter="Technique">Technique</button>
+      <button class="blog-filter" data-filter="Études de cas">Études de cas</button>
+      <button class="blog-filter" data-filter="Infrastructure">Infrastructure</button>
+      <button class="blog-filter" data-filter="Sécurité">Sécurité</button>
+      <button class="blog-filter" data-filter="Data">Data</button>
+    </div>
+
+    <div class="blog-grid" id="blog-grid"></div>
+    <div class="blog-pagination" id="blog-pagination"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span id="year"></span> <span data-aken-text="footer.copyright">Aken — Solutions digitales, création de sites web &amp; applications mobiles. Bamako, Mali.</span></p>
+    <div class="footer-social" aria-label="Réseaux sociaux">
+      <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="https://wa.me/22393789916" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+      </a>
+    </div>
+    <a href="index.html" class="back-to-top">← Retour au site</a>
+  </div>
+</footer>
+
+<!-- Boutons Flottants (Devis + WhatsApp) -->
+<div class="floating-actions" id="floating-actions">
+  <a href="index.html#devis" class="float-btn devis-float" aria-label="Demander un devis" id="devis-float" title="Demander un devis">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span class="float-tooltip">Devis</span>
+  </a>
+
+  <a href="https://wa.me/22393789916" class="float-btn whatsapp-float" target="_blank" rel="noopener" aria-label="Me contacter sur WhatsApp" id="whatsapp-float" title="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+    <span class="float-tooltip">WhatsApp</span>
+  </a>
+</div>
+
+<script src="js/main.js" defer></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/blog.js" defer></script>
+<script src="js/sw-register.js" defer></script>
+</body>
+</html>

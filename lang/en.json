@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "apropos": "About",
+    "expertise": "Expertise",
+    "offres": "Services",
+    "projets": "Projects",
+    "blog": "Blog",
+    "temoignages": "Reviews",
+    "faq": "FAQ",
+    "cta_header": "Get a free quote"
+  },
+  "hero": {
+    "eyebrow": "Bamako, Mali — Available for projects & opportunities",
+    "title": "Custom digital solutions <span class=\"accent\">tailored to your business</span> to accelerate growth and boost sales.",
+    "title_accent": "custom",
+    "lead": "Need a showcase website, an online store to sell products, a mobile app, or tools to automate operations? Aken builds fast, secure solutions with direct Wave & Orange Money payment integrations.",
+    "cta_primary": "Calculate my free quote →",
+    "cta_secondary": "See our work"
+  },
+  "impact": {
+    "projets": "Projects delivered",
+    "utilisateurs": "Users on our platforms",
+    "satisfaction": "Client satisfaction",
+    "experience": "Years of experience"
+  },
+  "devis": {
+    "eyebrow": "Free estimate",
+    "title": "Estimate your project budget in 2 minutes",
+    "subtitle": "Check your needs and get an instant estimate. No surprises, no commitment.",
+    "result_title": "Your estimate",
+    "result_desc": "Based on your choices — final price determined after discussion.",
+    "from": "Starting from",
+    "currency": "FCFA",
+    "whatsapp": "Send via WhatsApp",
+    "detailed": "Request a detailed quote"
+  },
+  "apropos": {
+    "eyebrow": "About",
+    "title": "Practical, profitable digital solutions for your business"
+  },
+  "expertise": {
+    "eyebrow": "Services",
+    "title": "Everything you need to digitize and scale your business"
+  },
+  "offres": {
+    "eyebrow": "Services",
+    "title": "Three ways to work together",
+    "guarantee_title": "Satisfaction guarantee — 30 days of technical support included"
+  },
+  "projets": {
+    "eyebrow": "Case Studies",
+    "title": "Real projects, measurable results"
+  },
+  "temoignages": {
+    "eyebrow": "Client Reviews",
+    "title": "What our clients say"
+  },
+  "comment": {
+    "eyebrow": "Process",
+    "title": "Our work process"
+  },
+  "tech": {
+    "eyebrow": "Technologies",
+    "title": "Our tech stack"
+  },
+  "tarifs": {
+    "eyebrow": "Pricing",
+    "title": "Clear offers, adapted to your needs"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "A project? An opportunity?"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Asked Questions"
+  },
+  "parcours": {
+    "eyebrow": "Journey",
+    "title": "Our journey"
+  },
+  "rdv": {
+    "eyebrow": "Book a Call",
+    "title": "Let's discuss your project in 15 minutes"
+  },
+  "ressource": {
+    "eyebrow": "Free Resource"
+  },
+  "footer": {
+    "copyright": "Aken — Custom digital solutions for your business. Bamako, Mali."
+  },
+  "whatsapp": {
+    "label": "Contact us on WhatsApp"
+  },
+  "sticky": {
+    "devis": "Get a Quote",
+    "whatsapp": "WhatsApp"
+  }
+}

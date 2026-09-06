@@ -7,8 +7,8 @@
   "use strict";
 
   // Configuration par défaut (hachage SHA-256 pour aken2026)
-  // sha256("aken2026") = "c460ca4a9611f8b4d0eb3f12461df6ee9d2d0fca8705a61678fa6cb776bfaea1"
-  var DEFAULT_ADMIN_HASH = "c460ca4a9611f8b4d0eb3f12461df6ee9d2d0fca8705a61678fa6cb776bfaea1";
+  // sha256("aken2026") = "837c4bc9360d85f8888f27d2d59cb4c8c27dae05adfb1e964ac85f7a58e56a79"
+  var DEFAULT_ADMIN_HASH = "837c4bc9360d85f8888f27d2d59cb4c8c27dae05adfb1e964ac85f7a58e56a79";
 
   var state = {
     currentUser: null, // { role: "super_admin" | "collaborateur", name: string }

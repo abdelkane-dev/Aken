@@ -19,7 +19,8 @@
     projects: [],
     notes: [],
     sharedLinks: [],
-    collabKeys: []
+    collabKeys: [],
+    activityLog: []
   };
 
   // --------------------------------------------------------------------------
@@ -322,6 +323,7 @@
     } else {
       try { state.collabKeys = JSON.parse(storedKeys); } catch (e) { state.collabKeys = []; }
     }
+    state.activityLog = [];
     var storedAct = localStorage.getItem("aken_admin_activity");
     if (storedAct) { try { state.activityLog = JSON.parse(storedAct); } catch (e) { state.activityLog = []; } }
   }
@@ -1347,7 +1349,7 @@ var origRenderDashboard2=renderDashboard;
 renderDashboard=function(){var oN=parseInt(document.getElementById("stat-new-leads")?.textContent||"0",10);var oP=parseInt(document.getElementById("stat-active-projects")?.textContent||"0",10);var oL=parseInt(document.getElementById("stat-total-leads")?.textContent||"0",10);origRenderDashboard2();var nN=state.leads.filter(function(l){return l.status==="nouveau"||l.status==="acompte_recu";}).length;var nP=state.projects.filter(function(p){return p.status!=="termine";}).length;var nL=state.leads.length;animateCounter(document.getElementById("stat-new-leads"),nN);animateCounter(document.getElementById("stat-active-projects"),nP);animateCounter(document.getElementById("stat-total-leads"),nL);if(oN!==nN||oP!==nP||oL!==nL){document.querySelectorAll(".stat-card").forEach(function(card){card.classList.remove("pulse");void card.offsetWidth;card.classList.add("pulse");});}};
 
 // INIT: Wire up all new features
-function initNewFeatures(){var cmdInput=document.getElementById("cmd-palette-input");if(cmdInput){cmdInput.addEventListener("input",function(){cmdPalette.render(cmdInput.value);});cmdInput.addEventListener("keydown",function(e){if(e.key==="Escape")cmdPalette.close();if(e.key==="ArrowDown"){e.preventDefault();cmdPalette.navigate(1);}if(e.key==="ArrowUp"){e.preventDefault();cmdPalette.navigate(-1);}if(e.key==="Enter"){e.preventDefault();cmdPalette.execute();}});}document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="k"){e.preventDefault();if(cmdPalette.isOpen)cmdPalette.close();else cmdPalette.open();}});var fab=document.getElementById("fab-quick");if(fab)fab.addEventListener("click",function(){cmdPalette.open();});var bell=document.getElementById("notif-bell");var dd=document.getElementById("notif-dropdown");if(bell&&dd){bell.addEventListener("click",function(e){e.stopPropagation();dd.classList.toggle("hidden");notifCenter.render();});document.addEventListener("click",function(){dd.classList.add("hidden");});dd.addEventListener("click",function(e){e.stopPropagation();});}var cb=document.getElementById("notif-clear");if(cb)cb.addEventListener("click",function(){notifCenter.clear();});var ov=document.getElementById("cmd-palette");if(ov)ov.addEventListener("click",function(e){if(e.target===ov)cmdPalette.close();});state.activityLog.slice(0,5).forEach(function(a){notifCenter.add(a.detail,"🔔");});}
+function initNewFeatures(){var cmdInput=document.getElementById("cmd-palette-input");if(cmdInput){cmdInput.addEventListener("input",function(){cmdPalette.render(cmdInput.value);});cmdInput.addEventListener("keydown",function(e){if(e.key==="Escape")cmdPalette.close();if(e.key==="ArrowDown"){e.preventDefault();cmdPalette.navigate(1);}if(e.key==="ArrowUp"){e.preventDefault();cmdPalette.navigate(-1);}if(e.key==="Enter"){e.preventDefault();cmdPalette.execute();}});}document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="k"){e.preventDefault();if(cmdPalette.isOpen)cmdPalette.close();else cmdPalette.open();}});var fab=document.getElementById("fab-quick");if(fab)fab.addEventListener("click",function(){cmdPalette.open();});var bell=document.getElementById("notif-bell");var dd=document.getElementById("notif-dropdown");if(bell&&dd){bell.addEventListener("click",function(e){e.stopPropagation();dd.classList.toggle("hidden");notifCenter.render();});document.addEventListener("click",function(){dd.classList.add("hidden");});dd.addEventListener("click",function(e){e.stopPropagation();});}var cb=document.getElementById("notif-clear");if(cb)cb.addEventListener("click",function(){notifCenter.clear();});var ov=document.getElementById("cmd-palette");if(ov)ov.addEventListener("click",function(e){if(e.target===ov)cmdPalette.close();});(state.activityLog||[]).slice(0,5).forEach(function(a){notifCenter.add(a.detail,"🔔");});}
 
 
   // =====================================================================

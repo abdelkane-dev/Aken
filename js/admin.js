@@ -1301,9 +1301,58 @@
   function init() {
     initStorage();
     initListeners();
+    initNewFeatures();
     checkAuthOnLoad();
   }
 
+// PHASE 1: COMMAND PALETTE
+var cmdPalette={commands:[
+  {icon:"📋",label:"Tableau de bord",hint:"Vue d'ensemble",action:function(){switchTab("dashboard");}},
+  {icon:"📧",label:"Boite de reception",hint:"Leads & contacts",action:function(){switchTab("inbox");}},
+  {icon:"🚀",label:"Suivi projets",hint:"Pipeline Kanban",action:function(){switchTab("pipeline");}},
+  {icon:"📄",label:"Echange & outils",hint:"Notes, liens, devis",action:function(){switchTab("tools");}},
+  {icon:"🔐",label:"Cles & securite",hint:"Permissions",action:function(){switchTab("permissions");}},
+  {icon:"✨",label:"Nouveau projet",hint:"Creer",action:function(){switchTab("pipeline");setTimeout(handleNewProjectPrompt,200);}},
+  {icon:"🔗",label:"Ajouter un lien",hint:"Lien",action:function(){switchTab("tools");setTimeout(handleAddLink,200);}},
+  {icon:"📝",label:"Ajouter une note",hint:"Note",action:function(){switchTab("tools");setTimeout(function(){var t=document.getElementById("new-note-input");if(t)t.focus();},200);}},
+  {icon:"💾",label:"Exporter",hint:"JSON",action:exportBackup},
+  {icon:"🚪",label:"Deconnexion",action:handleLogout}
+],isOpen:false,activeIdx:0,
+open:function(){var el=document.getElementById("cmd-palette");if(!el)return;this.isOpen=true;el.classList.remove("hidden");var inp=document.getElementById("cmd-palette-input");if(inp){inp.value="";inp.focus();}this.activeIdx=0;this.render("");},
+close:function(){this.isOpen=false;var el=document.getElementById("cmd-palette");if(el)el.classList.add("hidden");},
+  render:function(q){var results=document.getElementById("cmd-palette-results");if(!results)return;var self=this;var filtered=this.commands.filter(function(c){  if(!q)return true;  return(c.label.toLowerCase().indexOf(q.toLowerCase())>-1)||(c.hint&&c.hint.toLowerCase().indexOf(q.toLowerCase())>-1);});if(filtered.length===0){results.innerHTML='<div class=\"\">Aucun resultat</div>';return;}this.activeIdx=0;results.innerHTML=filtered.map(function(c,i){  var cls="cmd-result"+(i===0?" active":"");  var h=c.hint?'<div class=\"\">'+c.hint+'</div>':'';  return '<div class=\"\" data-idx="'+i+'"><span class=\"\">'+c.icon+'</span><div class=\"\"><div class=\"\">'+c.label+'</div>'+h+'</div></div>';}).join("");results.querySelectorAll(".cmd-result").forEach(function(el,i){  el.addEventListener("click",function(){filtered[i].action();self.close();});});},
+navigate:function(dir){var results=document.getElementById("cmd-palette-results");if(!results)return;var items=results.querySelectorAll(".cmd-result");if(!items.length)return;items[this.activeIdx].classList.remove("active");this.activeIdx=Math.max(0,Math.min(items.length-1,this.activeIdx+dir));items[this.activeIdx].classList.add("active");items[this.activeIdx].scrollIntoView({block:"nearest"});},
+execute:function(){var r=document.getElementById("cmd-palette-results");if(!r)return;var a=r.querySelector(".cmd-result.active");if(a)a.click();}};
+
+// PHASE 2: DRAG & DROP KANBAN
+function enableKanbanDragDrop(){var cols=document.querySelectorAll(".col-cards");cols.forEach(function(col){col.addEventListener("dragover",function(e){e.preventDefault();col.classList.add("drag-over");});col.addEventListener("dragleave",function(){col.classList.remove("drag-over");});col.addEventListener("drop",function(e){e.preventDefault();col.classList.remove("drag-over");var pid=e.dataTransfer.getData("text/plain");var ts=col.id.replace("col-cards-","");var proj=state.projects.find(function(p){return p.id===pid;});if(proj&&proj.status!==ts){proj.status=ts;if(ts==="cadrage")proj.progress=10;if(ts==="acompte")proj.progress=30;if(ts==="en_cours")proj.progress=65;if(ts==="termine")proj.progress=100;proj.updatedAt=new Date().toISOString();persistAll();renderProjects();renderDashboard();logActivity("project_status","Projet deplace vers "+ts);showToast("Projet deplace vers "+ts,"success");}});});}
+var origRenderProjects=renderProjects;
+renderProjects=function(){origRenderProjects();document.querySelectorAll(".project-card").forEach(function(card){var id=card.querySelector(".btn-proj-status");if(id){card.setAttribute("draggable","true");card.addEventListener("dragstart",function(e){e.dataTransfer.setData("text/plain",id.getAttribute("data-id"));card.classList.add("dragging");});card.addEventListener("dragend",function(){card.classList.remove("dragging");});}});enableKanbanDragDrop();};
+
+// PHASE 3: NOTIFICATIONS CENTER
+var notifCenter={items:[],add:function(text,icon){this.items.unshift({id:"n_"+Date.now(),text:text,icon:icon||"🔔",time:new Date().toISOString()});if(this.items.length>30)this.items=this.items.slice(0,30);this.render();},render:function(){var badge=document.getElementById("notif-badge");var list=document.getElementById("notif-list");if(badge){badge.textContent=this.items.length;badge.style.display=this.items.length>0?"flex":"none";}if(!list)return;if(this.items.length===0){list.innerHTML="<div class=\"notif-empty\">🚫 Aucune notification</div>";return;}list.innerHTML=this.items.slice(0,15).map(function(n){return"<div class=\"\"><span class=\"\">"+n.icon+"</span><div><div class=\"\">"+n.text+"</div><div class=\"\">"+formatDate(n.time)+"</div></div></div>";}).join("");},clear:function(){this.items=[];this.render();}};
+
+// PHASE 4: BREADCRUMB + FAB
+var tabTitles={dashboard:"Tableau de bord",inbox:"Boite de reception",pipeline:"Suivi projets",tools:"Echange & outils",permissions:"Cles & securite"};
+var origSwitchTab=switchTab;
+switchTab=function(tabId){origSwitchTab(tabId);var bc=document.getElementById("breadcrumb-current");if(bc)bc.textContent=tabTitles[tabId]||tabId;};
+
+// PHASE 5: ENHANCED EMPTY STATES
+var origRenderInbox=renderInbox;
+renderInbox=function(){origRenderInbox();var c=document.getElementById("inbox-leads-container");if(c&&c.children.length===0){c.innerHTML="<div class=\"\"><span class=\"\">📦</span><div class=\"\">Boite de reception vide</div><div class=\"\">Les nouveaux formulaires envoyes depuis le site apparaitront ici automatiquement.</div></div>";}};
+
+// PHASE 6: LIVE COUNTER ANIMATION
+function animateCounter(el,target){if(!el)return;var cur=parseInt(el.textContent.replace(/[^0-9]/g,""),10)||0;if(cur===target)return;var diff=target-cur;var steps=20;var step=diff/steps;var i=0;var timer=setInterval(function(){i++;var val=Math.round(cur+step*i);if(el.id==="stat-total-revenue"){el.textContent=formatFCFA(val);}else{el.textContent=val;}if(i>=steps){clearInterval(timer);if(el.id==="stat-total-revenue"){el.textContent=formatFCFA(target);}else{el.textContent=target;}}},25);}
+var origRenderDashboard2=renderDashboard;
+renderDashboard=function(){var oN=parseInt(document.getElementById("stat-new-leads")?.textContent||"0",10);var oP=parseInt(document.getElementById("stat-active-projects")?.textContent||"0",10);var oL=parseInt(document.getElementById("stat-total-leads")?.textContent||"0",10);origRenderDashboard2();var nN=state.leads.filter(function(l){return l.status==="nouveau"||l.status==="acompte_recu";}).length;var nP=state.projects.filter(function(p){return p.status!=="termine";}).length;var nL=state.leads.length;animateCounter(document.getElementById("stat-new-leads"),nN);animateCounter(document.getElementById("stat-active-projects"),nP);animateCounter(document.getElementById("stat-total-leads"),nL);if(oN!==nN||oP!==nP||oL!==nL){document.querySelectorAll(".stat-card").forEach(function(card){card.classList.remove("pulse");void card.offsetWidth;card.classList.add("pulse");});}};
+
+// INIT: Wire up all new features
+function initNewFeatures(){var cmdInput=document.getElementById("cmd-palette-input");if(cmdInput){cmdInput.addEventListener("input",function(){cmdPalette.render(cmdInput.value);});cmdInput.addEventListener("keydown",function(e){if(e.key==="Escape")cmdPalette.close();if(e.key==="ArrowDown"){e.preventDefault();cmdPalette.navigate(1);}if(e.key==="ArrowUp"){e.preventDefault();cmdPalette.navigate(-1);}if(e.key==="Enter"){e.preventDefault();cmdPalette.execute();}});}document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="k"){e.preventDefault();if(cmdPalette.isOpen)cmdPalette.close();else cmdPalette.open();}});var fab=document.getElementById("fab-quick");if(fab)fab.addEventListener("click",function(){cmdPalette.open();});var bell=document.getElementById("notif-bell");var dd=document.getElementById("notif-dropdown");if(bell&&dd){bell.addEventListener("click",function(e){e.stopPropagation();dd.classList.toggle("hidden");notifCenter.render();});document.addEventListener("click",function(){dd.classList.add("hidden");});dd.addEventListener("click",function(e){e.stopPropagation();});}var cb=document.getElementById("notif-clear");if(cb)cb.addEventListener("click",function(){notifCenter.clear();});var ov=document.getElementById("cmd-palette");if(ov)ov.addEventListener("click",function(e){if(e.target===ov)cmdPalette.close();});state.activityLog.slice(0,5).forEach(function(a){notifCenter.add(a.detail,"🔔");});}
+
+
+  // =====================================================================
+  // CALL INIT NEW FEATURES
+  // =====================================================================
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {

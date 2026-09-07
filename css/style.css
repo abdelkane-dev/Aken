@@ -1855,7 +1855,7 @@ body.nav-open .nav-drawer-backdrop,
 
   [data-theme="dark"] .mobile-drawer,
   [data-theme="dark"] .main-nav {
-    background: linear-gradient(180deg, #0d1322 0%, #070a14 100%) !important;
+    background: var(--paper) !important;
     border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: -16px 0 60px rgba(0, 0, 0, 0.8) !important;
   }
@@ -1994,7 +1994,7 @@ body.nav-open .nav-drawer-backdrop,
 
   .main-nav .nav-drawer-footer .btn {
     background: var(--teal) !important;
-    color: #0a0e1c !important;
+    color: var(--paper) !important;
     border-color: var(--teal) !important;
     font-weight: 700 !important;
   }

@@ -1347,6 +1347,86 @@ body.admin-body {
 .live-dot { width:8px; height:8px; border-radius:50%; background:var(--admin-mint); display:inline-block; margin-right:6px; animation:livePulse 2s ease-in-out infinite; }
 @keyframes livePulse { 0%, 100% { opacity:1; box-shadow:0 0 0 0 rgba(25,230,140,0.4); } 50% { opacity:0.7; box-shadow:0 0 0 6px rgba(25,230,140,0); } }
 /* ==========================================================================
+   SELECT & OPTION DARK MODE FIX
+   ========================================================================== */
+select.form-control-admin,
+select.form-control-admin option,
+select.form-control-admin optgroup {
+  background: #1a1f2e;
+  color: #f0f4fc;
+  border-color: var(--admin-border);
+}
+
+select.form-control-admin option {
+  background: #1a1f2e;
+  color: #f0f4fc;
+  padding: 8px;
+}
+
+select.form-control-admin option:hover,
+select.form-control-admin option:focus,
+select.form-control-admin option:active,
+select.form-control-admin option:checked {
+  background: rgba(0, 240, 255, 0.15);
+  color: #00f0ff;
+}
+
+select.form-control-admin:focus {
+  border-color: var(--admin-teal);
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.15);
+}
+
+/* Firefox select fix */
+@-moz-document url-prefix() {
+  select.form-control-admin option {
+    background-color: #1a1f2e;
+    color: #f0f4fc;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE FIXES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .admin-topbar { padding: 0 12px !important; height: 60px !important; }
+  .page-headline h1 { font-size: 1rem !important; }
+  .admin-content-area { padding: 12px 10px !important; }
+  .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .stat-card { padding: 14px 12px !important; }
+  .stat-number { font-size: 1.3rem !important; }
+  .stat-label { font-size: 0.72rem !important; }
+  .stat-sub { font-size: 0.65rem !important; }
+  .charts-row { grid-template-columns: 1fr !important; }
+  .dashboard-split { grid-template-columns: 1fr !important; }
+  .lead-card { padding: 14px !important; }
+  .lead-actions { flex-wrap: wrap; }
+  .lead-time { display: none; }
+  .lead-message-snippet { max-width: 100%; font-size: 0.8rem; }
+  .tools-grid { grid-template-columns: 1fr !important; }
+  .permissions-grid { grid-template-columns: 1fr !important; }
+  .pipeline-board { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .pipeline-col { min-height: auto !important; padding: 12px !important; }
+  .admin-card-section { padding: 16px !important; }
+  .cmd-palette-box { margin: 0 10px !important; max-width: calc(100vw - 20px) !important; }
+  .notif-dropdown { width: calc(100vw - 20px) !important; right: -10px !important; }
+  .fab-quick-actions { bottom: 16px !important; right: 16px !important; width: 44px !important; height: 44px !important; }
+  .modal-close-x { top: 12px !important; right: 12px !important; }
+  .admin-modal-box { padding: 20px !important; }
+  .form-group-admin { margin-bottom: 12px !important; }
+  .inbox-filters { gap: 6px !important; }
+  .filter-chip { font-size: 0.72rem !important; padding: 5px 10px !important; }
+  .search-input-wrap { min-width: 100% !important; }
+  .search-input-wrap input { width: 100% !important; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr !important; }
+  .inbox-toolbar { flex-direction: column !important; gap: 10px !important; }
+  .inbox-filters { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .inbox-filters::-webkit-scrollbar { height: 0; }
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (MOBILE & TABLETTE)
    ========================================================================== */
 @media (max-width: 1024px) {

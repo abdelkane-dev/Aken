@@ -340,7 +340,7 @@
   // 3. AUTHENTIFICATION & SESSIONS
   // --------------------------------------------------------------------------
   async function checkAuthOnLoad() {
-    var session = sessionStorage.getItem("aken_admin_session");
+    var session = localStorage.getItem("aken_admin_session");
     if (session) {
       try {
         var user = JSON.parse(session);
@@ -365,7 +365,7 @@
 
   function loginSuccess(user) {
     state.currentUser = user;
-    sessionStorage.setItem("aken_admin_session", JSON.stringify(user));
+    localStorage.setItem("aken_admin_session", JSON.stringify(user));
     hideLockscreen();
 
     // Mettre à jour profil dans la sidebar
@@ -421,7 +421,7 @@
   }
 
   function handleLogout() {
-    sessionStorage.removeItem("aken_admin_session");
+    localStorage.removeItem("aken_admin_session");
     state.currentUser = null;
     showLockscreen();
   }

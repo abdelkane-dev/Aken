@@ -34,6 +34,7 @@
   --radius-lg: 16px;
   --max-width: 1160px;
   --transition: 200ms ease;
+  --card-bg: var(--surface);
 }
 
 [data-theme="dark"] {
@@ -57,6 +58,7 @@
   --red-light: rgba(231, 76, 60, 0.1);
   --gold: #F1C40F;
   --gold-light: rgba(241, 196, 15, 0.12);
+  --card-bg: #1A1924;
 }
 
 * {
@@ -367,6 +369,7 @@ body.nav-open .nav-drawer-backdrop,
   font-size: 0.95rem;
   text-decoration: none;
   border: 1.5px solid transparent;
+  background: transparent;
   cursor: pointer;
   transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
 }
@@ -381,7 +384,20 @@ body.nav-open .nav-drawer-backdrop,
 }
 
 [data-theme="dark"] .btn-primary {
+  background: var(--indigo);
   color: var(--ink);
+}
+
+[data-theme="dark"] .btn-outline {
+  background: transparent;
+  border-color: rgba(240, 230, 210, 0.25);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: rgba(240, 230, 210, 0.06);
+  border-color: var(--teal);
+  color: var(--teal);
 }
 
 .btn-primary:hover {
@@ -389,6 +405,7 @@ body.nav-open .nav-drawer-backdrop,
 }
 
 .btn-outline {
+  background: transparent;
   border-color: var(--border);
   color: var(--ink);
 }
@@ -2584,10 +2601,12 @@ body.nav-open .nav-drawer-backdrop,
     --paper-soft: #1D1C26;
     --surface: #1A1924;
     --border: rgba(240, 230, 210, 0.14);
+
     --indigo: #7C8FD6;
     --indigo-deep: #A9B6E6;
     --ochre: #D9A441;
     --teal: #4FC3BB;
+    --card-bg: #1A1924;
   }
 }
 

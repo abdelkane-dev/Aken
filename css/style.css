@@ -202,20 +202,27 @@ img {
 }
 
 .logo:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   opacity: 0.96;
 }
 
 .logo-mark {
-  height: 42px;
+  height: 38px;
   width: auto;
-  max-width: 52px;
+  max-width: 140px;
   border-radius: 0 !important;
   object-fit: contain;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .logo-mark {
+    height: 32px;
+    max-width: 115px;
+  }
 }
 
 .logo-title {

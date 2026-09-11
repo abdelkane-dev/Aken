@@ -1,5 +1,5 @@
-// Aken — Service Worker v8.0 (Vercel deployment & fresh assets)
-const CACHE_NAME = 'aken-v8';
+// Aken — Service Worker v9.0 (Updated logo & separate favoricon)
+const CACHE_NAME = 'aken-v9';
 
 const APP_SHELL = [
   '/',
@@ -15,6 +15,7 @@ const APP_SHELL = [
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
+  '/assets/favoricon.png',
   '/assets/og-cover.png',
   '/lang/fr.json',
   '/lang/en.json'

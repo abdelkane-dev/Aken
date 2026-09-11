@@ -6,6 +6,7 @@
   <title>Aken — Espace d'Administration & Gestion</title>
   <!-- Protection stricte : Aucune indexation par les moteurs de recherche -->
   <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" href="assets/favoricon.png">
 
   <!-- Polices Google Fonts identiques au site principal -->
@@ -82,6 +83,22 @@
         <button class="nav-item" data-tab="pipeline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           <span>Suivi Projets</span>
+        </button>
+
+        <button class="nav-item" data-tab="agenda">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Agenda &amp; Tâches</span>
+          <span class="nav-badge" id="agenda-badge" style="display:none;background:var(--admin-amber);color:#050811;">0</span>
+        </button>
+
+        <button class="nav-item" data-tab="clients">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Répertoire Clients</span>
+        </button>
+
+        <button class="nav-item" data-tab="analytics">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Performances &amp; Santé</span>
         </button>
 
         <button class="nav-item" data-tab="tools">
@@ -576,6 +593,397 @@
           </div>
         </section>
 
+        <!-- ===============================================================
+             VUE 6 : AGENDA & TÂCHES D'ÉQUIPE
+             =============================================================== -->
+        <section class="admin-view" id="view-agenda">
+          <div class="stats-grid" style="margin-bottom:24px;">
+            <div class="stat-card">
+              <div class="stat-icon-pill teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="stat-label">Tâches en cours</div>
+              <div class="stat-number" id="stat-tasks-pending">0</div>
+              <div class="stat-sub"><span>🎯 Priorités actives</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill rose" style="background:rgba(255,59,105,0.12);color:var(--admin-rose);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="stat-label">Urgentes / Critiques</div>
+              <div class="stat-number" id="stat-tasks-urgent">0</div>
+              <div class="stat-sub" style="color:var(--admin-rose);"><span>⚡ À traiter aujourd'hui</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="stat-label">Jalons cette semaine</div>
+              <div class="stat-number" id="stat-milestones-week">0</div>
+              <div class="stat-sub" style="color:var(--admin-amber);"><span>📅 Livraisons prévues</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="stat-label">Tâches Réalisées</div>
+              <div class="stat-number" id="stat-tasks-completed">0</div>
+              <div class="stat-sub"><span>✨ Progression sprint</span></div>
+            </div>
+          </div>
+
+          <div class="dashboard-split">
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  Gestionnaire de Tâches &amp; To-Do
+                </h3>
+                <span class="lockscreen-badge" id="tasks-progress-badge">0% Réalisé</span>
+              </div>
+
+              <!-- Formulaire nouvelle tâche -->
+              <form id="form-add-task" style="background:rgba(255,255,255,0.02);padding:16px;border:1px solid var(--admin-border);border-radius:var(--admin-radius);margin-bottom:20px;">
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+                  <div class="form-group-admin" style="margin-bottom:0;">
+                    <label>Intitulé de la tâche :</label>
+                    <input type="text" id="task-title-input" class="form-control-admin" placeholder="Ex: Intégrer l'API Wave sur le projet Seydou" required>
+                  </div>
+                  <div class="form-group-admin" style="margin-bottom:0;">
+                    <label>Priorité :</label>
+                    <select id="task-priority-input" class="form-control-admin">
+                      <option value="normale">Normale</option>
+                      <option value="moyenne">Moyenne</option>
+                      <option value="urgente">⚡ Urgente</option>
+                    </select>
+                  </div>
+                  <div class="form-group-admin" style="margin-bottom:0;">
+                    <label>Échéance :</label>
+                    <input type="date" id="task-due-input" class="form-control-admin">
+                  </div>
+                  <div class="form-group-admin" style="margin-bottom:0;">
+                    <label>Projet lié :</label>
+                    <input type="text" id="task-project-input" class="form-control-admin" placeholder="Ex: Faso Santé">
+                  </div>
+                </div>
+                <button type="submit" class="btn-action-primary" style="width:100%;">+ Ajouter la tâche à l'agenda</button>
+              </form>
+
+              <!-- Filtres et recherche -->
+              <div class="inbox-toolbar" style="margin-bottom:16px;">
+                <div class="inbox-filters">
+                  <button type="button" class="filter-chip active" data-task-filter="all">Toutes (<span id="count-filter-all">0</span>)</button>
+                  <button type="button" class="filter-chip" data-task-filter="todo">À faire (<span id="count-filter-todo">0</span>)</button>
+                  <button type="button" class="filter-chip" data-task-filter="urgent">⚡ Urgentes (<span id="count-filter-urgent">0</span>)</button>
+                  <button type="button" class="filter-chip" data-task-filter="done">✅ Terminées (<span id="count-filter-done">0</span>)</button>
+                </div>
+                <div class="search-input-wrap" style="min-width:200px;">
+                  <input type="text" id="task-search-input" placeholder="Filtrer une tâche...">
+                </div>
+              </div>
+
+              <!-- Liste interactive des tâches -->
+              <div id="agenda-tasks-list" class="agenda-tasks-container">
+                <!-- Rendu dynamique -->
+              </div>
+            </div>
+
+            <!-- Colonne droite : Jalons & Focus -->
+            <div style="display:flex;flex-direction:column;gap:24px;">
+              <div class="admin-card-section">
+                <div class="section-title-row">
+                  <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Jalons &amp; Échéances Clés
+                  </h3>
+                  <button type="button" class="btn-action-light" id="btn-add-milestone" style="font-size:0.75rem;padding:4px 10px;">+ Jalon</button>
+                </div>
+                <div id="agenda-milestones-list" class="milestones-timeline">
+                  <!-- Rendu dynamique -->
+                </div>
+              </div>
+
+              <div class="admin-card-section">
+                <div class="section-title-row">
+                  <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Session Focus / Sprint
+                  </h3>
+                </div>
+                <p style="color:var(--admin-text-muted);font-size:0.85rem;line-height:1.5;margin-bottom:16px;">
+                  Sprint de productivité de 25 min sans interruption pour l'équipe Aken.
+                </p>
+                <div class="focus-timer-card">
+                  <div class="focus-timer-display" id="focus-timer-display">25:00</div>
+                  <div style="display:flex;gap:10px;justify-content:center;">
+                    <button type="button" class="btn-action-primary" id="btn-focus-start">▶ Démarrer Focus</button>
+                    <button type="button" class="btn-action-light" id="btn-focus-reset">↺ Réinitialiser</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 7 : RÉPERTOIRE & CRM CLIENTS
+             =============================================================== -->
+        <section class="admin-view" id="view-clients">
+          <div class="stats-grid" style="margin-bottom:24px;">
+            <div class="stat-card">
+              <div class="stat-icon-pill teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <div class="stat-label">Clients Référencés</div>
+              <div class="stat-number" id="stat-total-clients">0</div>
+              <div class="stat-sub"><span>🤝 Partenaires &amp; Entreprises</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="stat-label">Volume Facturé Portefeuille</div>
+              <div class="stat-number" id="stat-clients-revenue" style="font-size:1.45rem;">0 FCFA</div>
+              <div class="stat-sub"><span>📈 CA cumulé</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="stat-label">Clients Actifs</div>
+              <div class="stat-number" id="stat-clients-active">0</div>
+              <div class="stat-sub" style="color:var(--admin-amber);"><span>🚀 En cours de livraison</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="stat-label">Indice de Satisfaction</div>
+              <div class="stat-number">98.5%</div>
+              <div class="stat-sub" style="color:var(--admin-purple);"><span>⭐ Retours d'excellence</span></div>
+            </div>
+          </div>
+
+          <div class="inbox-toolbar" style="margin-bottom:20px;">
+            <div class="inbox-filters">
+              <button type="button" class="filter-chip active" data-client-filter="all">Tous les Clients</button>
+              <button type="button" class="filter-chip" data-client-filter="actif">Actifs</button>
+              <button type="button" class="filter-chip" data-client-filter="prospect">Prospects</button>
+              <button type="button" class="filter-chip" data-client-filter="termine">Livrés</button>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <div class="search-input-wrap">
+                <input type="text" id="client-search-input" placeholder="Chercher un client, entreprise, tél...">
+              </div>
+              <button type="button" class="btn-action-primary" id="btn-new-client">
+                + Nouveau Client
+              </button>
+            </div>
+          </div>
+
+          <div id="clients-cards-grid" class="clients-grid">
+            <!-- Rendu dynamique des cartes clients -->
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VUE 8 : PERFORMANCES & MONITORING DU SITE
+             =============================================================== -->
+        <section class="admin-view" id="view-analytics">
+          <div class="stats-grid" style="margin-bottom:24px;">
+            <div class="stat-card">
+              <div class="stat-icon-pill teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div class="stat-label">Visiteurs Aujourd'hui</div>
+              <div class="stat-number" id="stat-site-visitors">238</div>
+              <div class="stat-sub"><span>+18.4% vs hier</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="stat-label">Temps Moyen Session</div>
+              <div class="stat-number">3m 42s</div>
+              <div class="stat-sub"><span>Engagement élevé</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="stat-label">Taux de Conversion</div>
+              <div class="stat-number">6.2%</div>
+              <div class="stat-sub" style="color:var(--admin-amber);"><span>Formulaires &amp; Devis</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-pill purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="stat-label">Disponibilité Site (Uptime)</div>
+              <div class="stat-number" style="color:var(--admin-mint);">99.98%</div>
+              <div class="stat-sub"><span>🟢 En ligne • 0 incident</span></div>
+            </div>
+          </div>
+
+          <div class="dashboard-split" style="margin-bottom:24px;">
+            <div class="admin-card-section">
+              <div class="section-title-row">
+                <h3>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                  Score Google Lighthouse &amp; Core Web Vitals
+                </h3>
+                <span class="lockscreen-badge" style="border-color:var(--admin-mint);color:var(--admin-mint);background:rgba(25,230,140,0.1);">Grade A+</span>
+              </div>
+              <p style="color:var(--admin-text-muted);font-size:0.85rem;margin-bottom:20px;">
+                Performances mesurées pour un référencement Google optimal et une expérience ultra-rapide.
+              </p>
+
+              <div class="vitals-grid">
+                <div class="vital-card">
+                  <div class="vital-gauge-val" style="color:var(--admin-mint);">99</div>
+                  <div class="vital-title">Performance Globale</div>
+                  <div class="vital-badge ok">Excellent</div>
+                </div>
+                <div class="vital-card">
+                  <div class="vital-gauge-val" style="color:var(--admin-teal);">0.7s</div>
+                  <div class="vital-title">LCP (Chargement)</div>
+                  <div class="vital-badge ok">Optimal (&lt; 1.2s)</div>
+                </div>
+                <div class="vital-card">
+                  <div class="vital-gauge-val" style="color:var(--admin-mint);">9ms</div>
+                  <div class="vital-title">FID (Interactivité)</div>
+                  <div class="vital-badge ok">Instantané (&lt; 50ms)</div>
+                </div>
+                <div class="vital-card">
+                  <div class="vital-gauge-val" style="color:var(--admin-mint);">0.001</div>
+                  <div class="vital-title">CLS (Stabilité)</div>
+                  <div class="vital-badge ok">Parfait (&lt; 0.05)</div>
+                </div>
+              </div>
+
+              <!-- Top Pages Consultées Table -->
+              <div style="margin-top:28px;">
+                <div class="section-title-row">
+                  <h4 style="font-size:1rem;color:#fff;display:flex;align-items:center;gap:8px;">
+                    📄 Pages les Plus Visitées
+                  </h4>
+                  <span style="font-size:0.78rem;color:var(--admin-text-dim);">Dernières 24 heures</span>
+                </div>
+                <table class="collab-keys-table">
+                  <thead>
+                    <tr>
+                      <th>Page / URL</th>
+                      <th>Vues</th>
+                      <th>Visiteurs Uniques</th>
+                      <th>Taux Rebond</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>/ (Accueil &amp; Hero)</code></td>
+                      <td><strong>482</strong></td>
+                      <td>204</td>
+                      <td><span style="color:var(--admin-mint);">28%</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>#tarifs (Offres &amp; Prix)</code></td>
+                      <td><strong>291</strong></td>
+                      <td>168</td>
+                      <td><span style="color:var(--admin-mint);">19%</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>/blog.html (Articles &amp; Tech)</code></td>
+                      <td><strong>174</strong></td>
+                      <td>98</td>
+                      <td><span style="color:var(--admin-teal);">34%</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>#projets (Portfolio Réalisations)</code></td>
+                      <td><strong>142</strong></td>
+                      <td>87</td>
+                      <td><span style="color:var(--admin-mint);">22%</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>#contact (Formulaire &amp; WhatsApp)</code></td>
+                      <td><strong>96</strong></td>
+                      <td>65</td>
+                      <td><span style="color:var(--admin-amber);">14%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Colonne droite : Canaux & Diagnostic -->
+            <div style="display:flex;flex-direction:column;gap:24px;">
+              <div class="admin-card-section">
+                <div class="section-title-row">
+                  <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    Canaux d'Acquisition
+                  </h3>
+                </div>
+                <div class="traffic-bars">
+                  <div class="traffic-bar-item">
+                    <div class="traffic-bar-label"><span>🔍 Recherche Google (SEO)</span><strong>48%</strong></div>
+                    <div class="traffic-bar-track"><div class="traffic-bar-fill" style="width:48%;background:var(--admin-teal);"></div></div>
+                  </div>
+                  <div class="traffic-bar-item">
+                    <div class="traffic-bar-label"><span>💼 LinkedIn &amp; Réseaux Pro</span><strong>26%</strong></div>
+                    <div class="traffic-bar-track"><div class="traffic-bar-fill" style="width:26%;background:var(--admin-mint);"></div></div>
+                  </div>
+                  <div class="traffic-bar-item">
+                    <div class="traffic-bar-label"><span>🔗 Accès Direct (Favoris / Marque)</span><strong>18%</strong></div>
+                    <div class="traffic-bar-track"><div class="traffic-bar-fill" style="width:18%;background:var(--admin-amber);"></div></div>
+                  </div>
+                  <div class="traffic-bar-item">
+                    <div class="traffic-bar-label"><span>🤝 Recommandations &amp; Réseau</span><strong>8%</strong></div>
+                    <div class="traffic-bar-track"><div class="traffic-bar-fill" style="width:8%;background:var(--admin-purple);"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="admin-card-section">
+                <div class="section-title-row">
+                  <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    Diagnostic Système en Direct
+                  </h3>
+                </div>
+                <p style="color:var(--admin-text-muted);font-size:0.85rem;margin-bottom:14px;">
+                  Testez en direct la connectivité, la latence et le bon fonctionnement des services.
+                </p>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <button type="button" class="btn-action-primary" id="btn-run-diagnostics" style="justify-content:center;">
+                    ⚡ Lancer le Diagnostic Réseau
+                  </button>
+                  <div id="diagnostics-result" class="diagnostics-box" style="display:none;">
+                    <div class="diag-line"><span>Ping serveur Aken</span><strong style="color:var(--admin-mint);">34ms (Parfait)</strong></div>
+                    <div class="diag-line"><span>Certificat SSL HTTPS</span><strong style="color:var(--admin-mint);">Valide &amp; Chiffré</strong></div>
+                    <div class="diag-line"><span>Base Locale (Indexed/Storage)</span><strong style="color:var(--admin-mint);">Opérationnelle (100%)</strong></div>
+                    <div class="diag-line"><span>PWA Service Worker</span><strong style="color:var(--admin-mint);">Actif &amp; Synchronisé</strong></div>
+                  </div>
+                  <button type="button" class="btn-action-light" id="btn-test-notification" style="justify-content:center;">
+                    🔔 Déclencher une Notification Toast
+                  </button>
+                  <button type="button" class="btn-action-light" id="btn-clear-cache" style="justify-content:center;color:var(--admin-amber);border-color:rgba(255,184,0,0.3);">
+                    🧹 Rafraîchir le Cache Local
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   </div>
@@ -720,6 +1128,95 @@
         <div style="display:flex;gap:12px;margin-top:8px;">
           <button type="button" class="btn-action-light" id="tpl-cancel" style="flex:1;">Annuler</button>
           <button type="submit" class="btn-action-primary" style="flex:1;">Enregistrer le modèle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3f. MODALE : NOUVEAU CLIENT (CRM)
+       ===================================================================== -->
+  <div class="admin-modal-overlay hidden" id="modal-add-client">
+    <div class="admin-modal-box" style="max-width:520px;">
+      <button class="modal-close-x" id="modal-add-client-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin-bottom:18px;font-size:1.2rem;color:#fff;">👤 Ajouter un Client au Répertoire</h3>
+      <form id="form-add-client">
+        <div class="form-group-admin">
+          <label>Nom complet ou Contact <span style="color:var(--admin-rose);">*</span> :</label>
+          <input type="text" id="client-name-input" class="form-control-admin" required placeholder="Ex: Oumar Diallo">
+        </div>
+        <div class="form-group-admin">
+          <label>Entreprise / Organisation :</label>
+          <input type="text" id="client-company-input" class="form-control-admin" placeholder="Ex: Diallo Tech Mali">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group-admin">
+            <label>Téléphone / WhatsApp <span style="color:var(--admin-rose);">*</span> :</label>
+            <input type="text" id="client-phone-input" class="form-control-admin" required placeholder="+223 70 00 00 00">
+          </div>
+          <div class="form-group-admin">
+            <label>Email professionnel :</label>
+            <input type="email" id="client-email-input" class="form-control-admin" placeholder="contact@diallotech.ml">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group-admin">
+            <label>Statut relation :</label>
+            <select id="client-status-input" class="form-control-admin">
+              <option value="actif" selected>Actif (En projet)</option>
+              <option value="prospect">Prospect qualifié</option>
+              <option value="termine">Projet Livré</option>
+            </select>
+          </div>
+          <div class="form-group-admin">
+            <label>Budget / CA (FCFA) :</label>
+            <input type="number" id="client-budget-input" class="form-control-admin" placeholder="150000" step="5000">
+          </div>
+        </div>
+        <div class="form-group-admin">
+          <label>Projet / Service associé :</label>
+          <input type="text" id="client-project-input" class="form-control-admin" placeholder="Ex: Application mobile et site vitrine">
+        </div>
+        <div style="display:flex;gap:12px;margin-top:16px;">
+          <button type="button" class="btn-action-light" id="modal-add-client-cancel" style="flex:1;">Annuler</button>
+          <button type="submit" class="btn-action-primary" style="flex:1;">Enregistrer le client</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3g. MODALE : NOUVEAU JALON (AGENDA)
+       ===================================================================== -->
+  <div class="admin-modal-overlay hidden" id="modal-add-milestone">
+    <div class="admin-modal-box" style="max-width:480px;">
+      <button class="modal-close-x" id="modal-add-milestone-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin-bottom:18px;font-size:1.2rem;color:#fff;">📅 Ajouter un Jalon d'Échéance</h3>
+      <form id="form-add-milestone">
+        <div class="form-group-admin">
+          <label>Titre de l'échéance <span style="color:var(--admin-rose);">*</span> :</label>
+          <input type="text" id="milestone-title-input" class="form-control-admin" required placeholder="Ex: Livraison Version Bêta">
+        </div>
+        <div class="form-group-admin">
+          <label>Date limite <span style="color:var(--admin-rose);">*</span> :</label>
+          <input type="date" id="milestone-date-input" class="form-control-admin" required>
+        </div>
+        <div class="form-group-admin">
+          <label>Projet / Client concerné :</label>
+          <input type="text" id="milestone-project-input" class="form-control-admin" placeholder="Ex: Bamako E-Commerce">
+        </div>
+        <div class="form-group-admin">
+          <label>Type de jalon :</label>
+          <select id="milestone-type-input" class="form-control-admin">
+            <option value="livraison" selected>🚀 Livraison / Déploiement</option>
+            <option value="reunion">🤝 Réunion / Appel Client</option>
+            <option value="validation">✅ Validation Maquette</option>
+            <option value="facturation">💰 Échéance Facture</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:16px;">
+          <button type="button" class="btn-action-light" id="modal-add-milestone-cancel" style="flex:1;">Annuler</button>
+          <button type="submit" class="btn-action-primary" style="flex:1;">Créer le jalon</button>
         </div>
       </form>
     </div>

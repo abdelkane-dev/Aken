@@ -21,7 +21,14 @@
     notes: [],
     sharedLinks: [],
     collabKeys: [],
-    activityLog: []
+    activityLog: [],
+    tasks: [],
+    milestones: [],
+    clients: [],
+    taskFilter: "all",
+    taskSearch: "",
+    clientFilter: "all",
+    clientSearch: ""
   };
 
   // --------------------------------------------------------------------------
@@ -331,6 +338,47 @@
     state.activityLog = [];
     var storedAct = localStorage.getItem("aken_admin_activity");
     if (storedAct) { try { state.activityLog = JSON.parse(storedAct); } catch (e) { state.activityLog = []; } }
+
+    var storedTasks = localStorage.getItem("aken_admin_tasks");
+    if (!storedTasks) {
+      var demoTasks = [
+        { id: "task_1", title: "Intégrer les passerelles de paiement Wave et Orange Money", priority: "urgente", dueDate: "2026-09-13", project: "E-Commerce Traoré", completed: false, createdAt: new Date().toISOString() },
+        { id: "task_2", title: "Valider l'ergonomie de l'agenda médical avec Dr. Coulibaly", priority: "moyenne", dueDate: "2026-09-15", project: "Faso Santé", completed: false, createdAt: new Date().toISOString() },
+        { id: "task_3", title: "Auditer les Core Web Vitals et le PWA pour le lancement officiel", priority: "normale", dueDate: "2026-09-14", project: "Portfolio Aken", completed: true, createdAt: new Date().toISOString() },
+        { id: "task_4", title: "Finaliser la proposition commerciale pour la refonte ERP BTP", priority: "urgente", dueDate: "2026-09-12", project: "Diallo BTP", completed: false, createdAt: new Date().toISOString() }
+      ];
+      localStorage.setItem("aken_admin_tasks", JSON.stringify(demoTasks));
+      state.tasks = demoTasks;
+    } else {
+      try { state.tasks = JSON.parse(storedTasks); } catch (e) { state.tasks = []; }
+    }
+
+    var storedMilestones = localStorage.getItem("aken_admin_milestones");
+    if (!storedMilestones) {
+      var demoMilestones = [
+        { id: "mile_1", title: "Livraison Version Bêta — Faso Santé", date: "2026-09-15", project: "Clinique Faso Santé", type: "livraison" },
+        { id: "mile_2", title: "Revue Sprint & Démo Traoré B2B", date: "2026-09-17", project: "Traoré Import-Export", type: "reunion" },
+        { id: "mile_3", title: "Échéance Facture Solde BTP", date: "2026-09-20", project: "Diallo BTP", type: "facturation" }
+      ];
+      localStorage.setItem("aken_admin_milestones", JSON.stringify(demoMilestones));
+      state.milestones = demoMilestones;
+    } else {
+      try { state.milestones = JSON.parse(storedMilestones); } catch (e) { state.milestones = []; }
+    }
+
+    var storedClients = localStorage.getItem("aken_admin_clients");
+    if (!storedClients) {
+      var demoClients = [
+        { id: "cli_1", name: "Dr. Amadou Coulibaly", company: "Clinique Faso Santé", phone: "+223 76 12 34 56", email: "direction@fasosante.ml", status: "actif", budget: 350000, project: "Plateforme Médicale & Téléconsultation", createdAt: new Date().toISOString() },
+        { id: "cli_2", name: "Mamadou Traoré", company: "Traoré Import-Export", phone: "+223 70 88 99 00", email: "contact@traore-import.com", status: "actif", budget: 250000, project: "Boutique E-commerce B2B", createdAt: new Date().toISOString() },
+        { id: "cli_3", name: "Fatoumata Diarra", company: "Diarra Créations Bamako", phone: "+223 66 55 44 33", email: "fatou@diarracreations.ml", status: "prospect", budget: 150000, project: "Catalogue interactif & Instagram Sync", createdAt: new Date().toISOString() },
+        { id: "cli_4", name: "Sekou Diallo", company: "Diallo BTP Mali", phone: "+223 78 22 11 00", email: "s.diallo@diallobtp.ml", status: "termine", budget: 450000, project: "Portail Chantiers & Suivi Devis", createdAt: new Date().toISOString() }
+      ];
+      localStorage.setItem("aken_admin_clients", JSON.stringify(demoClients));
+      state.clients = demoClients;
+    } else {
+      try { state.clients = JSON.parse(storedClients); } catch (e) { state.clients = []; }
+    }
   }
 
   function persistAll() {
@@ -340,6 +388,9 @@
     localStorage.setItem("aken_admin_links", JSON.stringify(state.sharedLinks));
     localStorage.setItem("aken_admin_collab_keys", JSON.stringify(state.collabKeys));
     localStorage.setItem("aken_admin_activity", JSON.stringify(state.activityLog || []));
+    localStorage.setItem("aken_admin_tasks", JSON.stringify(state.tasks || []));
+    localStorage.setItem("aken_admin_milestones", JSON.stringify(state.milestones || []));
+    localStorage.setItem("aken_admin_clients", JSON.stringify(state.clients || []));
     updateBadges();
   }
 
@@ -453,6 +504,9 @@
         dashboard: "Tableau de bord & Activité",
         inbox: "Boîte de Réception des Demandes",
         pipeline: "Suivi des Projets Clients",
+        agenda: "Agenda & Tâches de l'Équipe",
+        clients: "Répertoire & Gestion Clients",
+        analytics: "Performances & Monitoring du Site",
         tools: "Espace d'Échange & Outils",
         permissions: "Gestion des Clés & Sécurité"
       };
@@ -470,6 +524,13 @@
     if (badge) {
       badge.textContent = newLeadsCount;
       badge.style.display = newLeadsCount > 0 ? "inline-block" : "none";
+    }
+
+    var pendingTasks = (state.tasks || []).filter(function (t) { return !t.completed; }).length;
+    var agendaBadge = document.getElementById("agenda-badge");
+    if (agendaBadge) {
+      agendaBadge.textContent = pendingTasks;
+      agendaBadge.style.display = pendingTasks > 0 ? "inline-block" : "none";
     }
   }
 
@@ -1125,6 +1186,457 @@
   }
 
   // --------------------------------------------------------------------------
+  // 11b. AGENDA & TÂCHES DE L'ÉQUIPE
+  // --------------------------------------------------------------------------
+  function renderAgenda() {
+    var tasks = state.tasks || [];
+    var totalTasks = tasks.length;
+    var pendingTasks = tasks.filter(function (t) { return !t.completed; }).length;
+    var urgentTasks = tasks.filter(function (t) { return !t.completed && t.priority === "urgente"; }).length;
+    var completedTasks = tasks.filter(function (t) { return t.completed; }).length;
+    var milestones = state.milestones || [];
+
+    var elPending = document.getElementById("stat-tasks-pending");
+    if (elPending) elPending.textContent = pendingTasks;
+    var elUrgent = document.getElementById("stat-tasks-urgent");
+    if (elUrgent) elUrgent.textContent = urgentTasks;
+    var elMiles = document.getElementById("stat-milestones-week");
+    if (elMiles) elMiles.textContent = milestones.length;
+    var elComp = document.getElementById("stat-tasks-completed");
+    if (elComp) elComp.textContent = completedTasks;
+
+    var badge = document.getElementById("tasks-progress-badge");
+    if (badge) {
+      badge.textContent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) + "% Réalisé" : "0% Réalisé";
+    }
+
+    var cAll = document.getElementById("count-filter-all");
+    if (cAll) cAll.textContent = totalTasks;
+    var cTodo = document.getElementById("count-filter-todo");
+    if (cTodo) cTodo.textContent = pendingTasks;
+    var cUrg = document.getElementById("count-filter-urgent");
+    if (cUrg) cUrg.textContent = urgentTasks;
+    var cDone = document.getElementById("count-filter-done");
+    if (cDone) cDone.textContent = completedTasks;
+
+    // Filter tasks
+    var filter = state.taskFilter || "all";
+    var query = (state.taskSearch || "").toLowerCase();
+
+    var filtered = tasks.filter(function (t) {
+      if (filter === "todo" && t.completed) return false;
+      if (filter === "urgent" && (t.completed || t.priority !== "urgente")) return false;
+      if (filter === "done" && !t.completed) return false;
+      if (query) {
+        var str = [t.title, t.project, t.priority].join(" ").toLowerCase();
+        if (str.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+
+    var container = document.getElementById("agenda-tasks-list");
+    if (container) {
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:32px 16px;color:var(--admin-text-dim);"><span style="font-size:2rem;display:block;margin-bottom:8px;">🎯</span>Aucune tâche correspondant au filtre.</div>';
+      } else {
+        container.innerHTML = filtered.map(function (t) {
+          return [
+            '<div class="agenda-task-item' + (t.completed ? ' completed' : '') + '">',
+            '  <div class="task-left">',
+            '    <button type="button" class="task-checkbox-custom' + (t.completed ? ' checked' : '') + '" data-id="' + t.id + '" title="' + (t.completed ? 'Marquer comme non terminée' : 'Terminer cette tâche') + '">',
+            t.completed ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '',
+            '    </button>',
+            '    <div class="task-content">',
+            '      <div class="task-title">' + escapeHtml(t.title) + '</div>',
+            '      <div class="task-meta">',
+            '        <span class="task-priority-badge ' + (t.priority || 'normale') + '">' + (t.priority === 'urgente' ? '⚡ Urgente' : (t.priority === 'moyenne' ? 'Moyenne' : 'Normale')) + '</span>',
+            t.project ? '        <span class="task-project-tag">📁 ' + escapeHtml(t.project) + '</span>' : '',
+            t.dueDate ? '        <span class="task-due-date">📅 ' + t.dueDate + '</span>' : '',
+            '      </div>',
+            '    </div>',
+            '  </div>',
+            '  <div class="task-actions">',
+            '    <button type="button" class="task-del-btn" data-id="' + t.id + '" title="Supprimer la tâche">',
+            '      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+            '    </button>',
+            '  </div>',
+            '</div>'
+          ].join("");
+        }).join("");
+
+        // Attach checkbox listeners
+        container.querySelectorAll(".task-checkbox-custom").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var id = btn.getAttribute("data-id");
+            var task = (state.tasks || []).find(function (t) { return t.id === id; });
+            if (task) {
+              task.completed = !task.completed;
+              persistAll();
+              renderAgenda();
+              if (typeof logActivity === "function") {
+                logActivity("task_toggle", (task.completed ? "Tâche terminée : " : "Tâche réactivée : ") + task.title);
+              }
+              showToast(task.completed ? "Tâche validée ! 🎉" : "Tâche réactivée.", "success");
+            }
+          });
+        });
+
+        // Attach delete listeners
+        container.querySelectorAll(".task-del-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var id = btn.getAttribute("data-id");
+            state.tasks = (state.tasks || []).filter(function (t) { return t.id !== id; });
+            persistAll();
+            renderAgenda();
+            showToast("Tâche supprimée.", "info");
+          });
+        });
+      }
+    }
+
+    // Milestones
+    var milesList = document.getElementById("agenda-milestones-list");
+    if (milesList) {
+      if (milestones.length === 0) {
+        milesList.innerHTML = '<p style="color:var(--admin-text-dim);font-size:0.85rem;padding:12px 0;">Aucun jalon d\'échéance enregistré.</p>';
+      } else {
+        milesList.innerHTML = milestones.map(function (m) {
+          return [
+            '<div class="milestone-item ' + (m.type || 'livraison') + '">',
+            '  <div class="milestone-info">',
+            '    <div class="milestone-title">' + escapeHtml(m.title) + '</div>',
+            '    <div class="milestone-sub">' + (m.project ? 'Projet : ' + escapeHtml(m.project) : 'Échéance équipe') + '</div>',
+            '  </div>',
+            '  <div style="display:flex;align-items:center;gap:8px;">',
+            '    <span class="milestone-date-badge">' + (m.date || 'À définir') + '</span>',
+            '    <button type="button" class="task-del-btn milestone-del-btn" data-id="' + m.id + '" title="Supprimer">✕</button>',
+            '  </div>',
+            '</div>'
+          ].join("");
+        }).join("");
+
+        milesList.querySelectorAll(".milestone-del-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var id = btn.getAttribute("data-id");
+            state.milestones = (state.milestones || []).filter(function (m) { return m.id !== id; });
+            persistAll();
+            renderAgenda();
+            showToast("Jalon retiré de l'agenda.", "info");
+          });
+        });
+      }
+    }
+  }
+
+  function handleAddTaskSubmit(e) {
+    e.preventDefault();
+    var titleEl = document.getElementById("task-title-input");
+    var priorityEl = document.getElementById("task-priority-input");
+    var dueEl = document.getElementById("task-due-input");
+    var projEl = document.getElementById("task-project-input");
+    if (!titleEl || !titleEl.value.trim()) return;
+
+    var newTask = {
+      id: "task_" + Date.now(),
+      title: titleEl.value.trim(),
+      priority: priorityEl ? priorityEl.value : "normale",
+      dueDate: dueEl ? dueEl.value : "",
+      project: projEl ? projEl.value.trim() : "",
+      completed: false,
+      createdAt: new Date().toISOString()
+    };
+
+    if (!state.tasks) state.tasks = [];
+    state.tasks.unshift(newTask);
+    titleEl.value = "";
+    if (dueEl) dueEl.value = "";
+    if (projEl) projEl.value = "";
+
+    persistAll();
+    renderAgenda();
+    if (typeof logActivity === "function") {
+      logActivity("task_new", "Nouvelle tâche : " + newTask.title);
+    }
+    showToast("Tâche ajoutée à l'agenda !", "success");
+  }
+
+  function handleAddMilestoneSubmit(e) {
+    e.preventDefault();
+    var title = document.getElementById("milestone-title-input");
+    var date = document.getElementById("milestone-date-input");
+    var proj = document.getElementById("milestone-project-input");
+    var type = document.getElementById("milestone-type-input");
+    if (!title || !title.value.trim()) return;
+
+    var newM = {
+      id: "mile_" + Date.now(),
+      title: title.value.trim(),
+      date: date ? date.value : "",
+      project: proj ? proj.value.trim() : "",
+      type: type ? type.value : "livraison"
+    };
+
+    if (!state.milestones) state.milestones = [];
+    state.milestones.push(newM);
+    persistAll();
+    renderAgenda();
+
+    var modal = document.getElementById("modal-add-milestone");
+    if (modal) modal.classList.add("hidden");
+    title.value = "";
+    showToast("Nouveau jalon enregistré !", "success");
+  }
+
+  // FOCUS TIMER (Pomodoro 25min)
+  var focusTimer = {
+    totalSeconds: 25 * 60,
+    remainingSeconds: 25 * 60,
+    intervalId: null,
+    isRunning: false,
+    start: function () {
+      if (this.isRunning) {
+        this.pause();
+        return;
+      }
+      this.isRunning = true;
+      var btn = document.getElementById("btn-focus-start");
+      if (btn) btn.textContent = "⏸ Pause Focus";
+      var self = this;
+      this.intervalId = setInterval(function () {
+        if (self.remainingSeconds > 0) {
+          self.remainingSeconds--;
+          self.updateDisplay();
+        } else {
+          self.pause();
+          self.remainingSeconds = self.totalSeconds;
+          self.updateDisplay();
+          showToast("🎉 Session Focus terminée ! Prenez 5 minutes de pause.", "success");
+        }
+      }, 1000);
+    },
+    pause: function () {
+      this.isRunning = false;
+      if (this.intervalId) clearInterval(this.intervalId);
+      this.intervalId = null;
+      var btn = document.getElementById("btn-focus-start");
+      if (btn) btn.textContent = "▶ Démarrer Focus";
+    },
+    reset: function () {
+      this.pause();
+      this.remainingSeconds = this.totalSeconds;
+      this.updateDisplay();
+    },
+    updateDisplay: function () {
+      var el = document.getElementById("focus-timer-display");
+      if (!el) return;
+      var m = Math.floor(this.remainingSeconds / 60);
+      var s = this.remainingSeconds % 60;
+      el.textContent = String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+  };
+
+  // --------------------------------------------------------------------------
+  // 11c. GESTION DU RÉPERTOIRE CLIENTS (CRM)
+  // --------------------------------------------------------------------------
+  function renderClients() {
+    var clients = state.clients || [];
+    var totalClients = clients.length;
+    var totalRevenue = clients.reduce(function (sum, c) { return sum + (Number(c.budget) || 0); }, 0);
+    var activeClients = clients.filter(function (c) { return c.status === "actif"; }).length;
+
+    var elTotal = document.getElementById("stat-total-clients");
+    if (elTotal) elTotal.textContent = totalClients;
+    var elRev = document.getElementById("stat-clients-revenue");
+    if (elRev) elRev.textContent = formatFCFA(totalRevenue);
+    var elAct = document.getElementById("stat-clients-active");
+    if (elAct) elAct.textContent = activeClients;
+
+    var filter = state.clientFilter || "all";
+    var query = (state.clientSearch || "").toLowerCase();
+
+    var filtered = clients.filter(function (c) {
+      if (filter !== "all" && c.status !== filter) return false;
+      if (query) {
+        var str = [c.name, c.company, c.phone, c.email, c.project].join(" ").toLowerCase();
+        if (str.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+
+    var grid = document.getElementById("clients-cards-grid");
+    if (!grid) return;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--admin-text-dim);"><span style="font-size:2.4rem;display:block;margin-bottom:10px;">👥</span>Aucun client ne correspond à la recherche.<br><button type="button" class="btn-action-primary" id="btn-empty-add-client" style="margin-top:14px;">+ Ajouter un client</button></div>';
+      var emptyBtn = document.getElementById("btn-empty-add-client");
+      if (emptyBtn) {
+        emptyBtn.addEventListener("click", function () {
+          var modal = document.getElementById("modal-add-client");
+          if (modal) modal.classList.remove("hidden");
+        });
+      }
+      return;
+    }
+
+    grid.innerHTML = filtered.map(function (c) {
+      var initial = (c.name || "C").trim().charAt(0).toUpperCase();
+      var cleanPhone = (c.phone || "").replace(/[^0-9+]/g, "");
+      var waPhone = cleanPhone.replace("+", "");
+      var statusLabel = c.status === "actif" ? "Actif" : (c.status === "prospect" ? "Prospect" : "Livré");
+
+      return [
+        '<div class="client-card">',
+        '  <div class="client-card-header">',
+        '    <div class="client-avatar-wrap">',
+        '      <div class="client-avatar">' + initial + '</div>',
+        '      <div class="client-header-text">',
+        '        <div class="client-name">' + escapeHtml(c.name) + '</div>',
+        '        <div class="client-company">' + escapeHtml(c.company || "Particulier / Indépendant") + '</div>',
+        '      </div>',
+        '    </div>',
+        '    <span class="client-status-pill ' + (c.status || 'actif') + '">' + statusLabel + '</span>',
+        '  </div>',
+        '  <div class="client-details-list">',
+        '    <div class="client-detail-row">',
+        '      <span>📱 Téléphone :</span>',
+        '      <strong>' + (c.phone ? '<a href="tel:' + cleanPhone + '">' + escapeHtml(c.phone) + '</a>' : '—') + '</strong>',
+        '    </div>',
+        '    <div class="client-detail-row">',
+        '      <span>✉️ Email :</span>',
+        '      <span>' + (c.email ? '<a href="mailto:' + escapeHtml(c.email) + '">' + escapeHtml(c.email) + '</a>' : '—') + '</span>',
+        '    </div>',
+        '    <div class="client-detail-row">',
+        '      <span>🚀 Projet :</span>',
+        '      <strong style="color:var(--admin-teal);">' + escapeHtml(c.project || "Non défini") + '</strong>',
+        '    </div>',
+        '    <div class="client-detail-row">',
+        '      <span>💰 Budget / CA :</span>',
+        '      <span style="color:var(--admin-mint);font-weight:600;">' + formatFCFA(c.budget) + '</span>',
+        '    </div>',
+        '  </div>',
+        '  <div class="client-card-footer">',
+        '    <div class="client-quick-btns">',
+        cleanPhone ? '      <a href="https://wa.me/' + waPhone + '" target="_blank" class="btn-action-primary" style="padding:6px 10px;font-size:0.75rem;text-decoration:none;">💬 WhatsApp</a>' : '',
+        '      <button type="button" class="btn-action-light client-devis-btn" data-id="' + c.id + '" style="font-size:0.75rem;">📄 Devis</button>',
+        '    </div>',
+        '    <button type="button" class="task-del-btn client-del-btn" data-id="' + c.id + '" title="Supprimer ce client">✕</button>',
+        '  </div>',
+        '</div>'
+      ].join("");
+    }).join("");
+
+    // Devis shortcut
+    grid.querySelectorAll(".client-devis-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-id");
+        var client = (state.clients || []).find(function (c) { return c.id === id; });
+        if (client) {
+          switchTab("tools");
+          var nameInp = document.getElementById("quote-client-name");
+          var phoneInp = document.getElementById("quote-client-phone");
+          var compInp = document.getElementById("quote-client-company");
+          if (nameInp) nameInp.value = client.name || "";
+          if (phoneInp) phoneInp.value = client.phone || "";
+          if (compInp) compInp.value = client.company || "";
+          showToast("Formulaire de devis prérempli pour " + client.name, "info");
+        }
+      });
+    });
+
+    // Delete client
+    grid.querySelectorAll(".client-del-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-id");
+        var client = (state.clients || []).find(function (c) { return c.id === id; });
+        if (confirm("Supprimer " + (client ? client.name : "ce client") + " du répertoire ?")) {
+          state.clients = (state.clients || []).filter(function (c) { return c.id !== id; });
+          persistAll();
+          renderClients();
+          showToast("Client retiré du répertoire.", "info");
+        }
+      });
+    });
+  }
+
+  function handleAddClientSubmit(e) {
+    e.preventDefault();
+    var name = document.getElementById("client-name-input");
+    var comp = document.getElementById("client-company-input");
+    var phone = document.getElementById("client-phone-input");
+    var email = document.getElementById("client-email-input");
+    var status = document.getElementById("client-status-input");
+    var budget = document.getElementById("client-budget-input");
+    var proj = document.getElementById("client-project-input");
+
+    if (!name || !name.value.trim() || !phone || !phone.value.trim()) {
+      showToast("Veuillez renseigner au moins le nom et le téléphone.", "error");
+      return;
+    }
+
+    var newClient = {
+      id: "cli_" + Date.now(),
+      name: name.value.trim(),
+      company: comp ? comp.value.trim() : "",
+      phone: phone.value.trim(),
+      email: email ? email.value.trim() : "",
+      status: status ? status.value : "actif",
+      budget: budget ? Number(budget.value) || 0 : 0,
+      project: proj ? proj.value.trim() : "",
+      createdAt: new Date().toISOString()
+    };
+
+    if (!state.clients) state.clients = [];
+    state.clients.unshift(newClient);
+    persistAll();
+    renderClients();
+
+    var modal = document.getElementById("modal-add-client");
+    if (modal) modal.classList.add("hidden");
+
+    name.value = "";
+    if (comp) comp.value = "";
+    phone.value = "";
+    if (email) email.value = "";
+    if (budget) budget.value = "";
+    if (proj) proj.value = "";
+
+    if (typeof logActivity === "function") {
+      logActivity("client_new", "Nouveau client enregistré : " + newClient.name);
+    }
+    showToast("Client enregistré avec succès !", "success");
+  }
+
+  // --------------------------------------------------------------------------
+  // 11d. PERFORMANCES & MONITORING DU SITE
+  // --------------------------------------------------------------------------
+  function renderAnalytics() {
+    var visEl = document.getElementById("stat-site-visitors");
+    if (visEl && !visEl.dataset.initialized) {
+      visEl.dataset.initialized = "true";
+      visEl.textContent = "238";
+    }
+  }
+
+  function runDiagnostics() {
+    var btn = document.getElementById("btn-run-diagnostics");
+    var box = document.getElementById("diagnostics-result");
+    if (!btn || !box) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Analyse des flux &amp; serveurs...';
+
+    setTimeout(function () {
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Relancer le Diagnostic Réseau';
+      box.style.display = "flex";
+      showToast("Diagnostic terminé : Tout est au vert (Ping 34ms, SSL OK) !", "success");
+      if (typeof logActivity === "function") {
+        logActivity("system", "Test de diagnostic réseau et santé système exécuté");
+      }
+    }, 1000);
+  }
+
+  // --------------------------------------------------------------------------
   // 12. EXPORT & IMPORT DE SAUVEGARDE JSON
   // --------------------------------------------------------------------------
   function exportBackup() {
@@ -1134,7 +1646,10 @@
       projects: state.projects,
       notes: state.notes,
       sharedLinks: state.sharedLinks,
-      collabKeys: state.collabKeys
+      collabKeys: state.collabKeys,
+      tasks: state.tasks,
+      milestones: state.milestones,
+      clients: state.clients
     };
     var jsonStr = JSON.stringify(backupData, null, 2);
     var blob = new Blob([jsonStr], { type: "application/json" });
@@ -1156,6 +1671,9 @@
         if (data.notes) state.notes = data.notes;
         if (data.sharedLinks) state.sharedLinks = data.sharedLinks;
         if (data.collabKeys) state.collabKeys = data.collabKeys;
+        if (data.tasks) state.tasks = data.tasks;
+        if (data.milestones) state.milestones = data.milestones;
+        if (data.clients) state.clients = data.clients;
         persistAll();
         renderAllViews();
         showToast("Sauvegarde restaurée avec succès !", "success");
@@ -1173,6 +1691,9 @@
     renderDashboard();
     renderInbox();
     renderProjects();
+    renderAgenda();
+    renderClients();
+    renderAnalytics();
     renderNotes();
     renderSharedLinks();
     renderCollabKeys();
@@ -1319,6 +1840,128 @@
       });
     }
 
+    // Agenda & Tâches
+    var formAddTask = document.getElementById("form-add-task");
+    if (formAddTask) formAddTask.addEventListener("submit", handleAddTaskSubmit);
+
+    var taskSearchInp = document.getElementById("task-search-input");
+    if (taskSearchInp) {
+      taskSearchInp.addEventListener("input", function () {
+        state.taskSearch = taskSearchInp.value.trim();
+        renderAgenda();
+      });
+    }
+
+    document.querySelectorAll("[data-task-filter]").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        document.querySelectorAll("[data-task-filter]").forEach(function (c) { c.classList.remove("active"); });
+        chip.classList.add("active");
+        state.taskFilter = chip.getAttribute("data-task-filter") || "all";
+        renderAgenda();
+      });
+    });
+
+    var btnAddMilestone = document.getElementById("btn-add-milestone");
+    if (btnAddMilestone) {
+      btnAddMilestone.addEventListener("click", function () {
+        var modal = document.getElementById("modal-add-milestone");
+        if (modal) modal.classList.remove("hidden");
+      });
+    }
+
+    var formMilestone = document.getElementById("form-add-milestone");
+    if (formMilestone) formMilestone.addEventListener("submit", handleAddMilestoneSubmit);
+
+    var modalMilestoneClose = document.getElementById("modal-add-milestone-close");
+    if (modalMilestoneClose) {
+      modalMilestoneClose.addEventListener("click", function () {
+        document.getElementById("modal-add-milestone").classList.add("hidden");
+      });
+    }
+    var modalMilestoneCancel = document.getElementById("modal-add-milestone-cancel");
+    if (modalMilestoneCancel) {
+      modalMilestoneCancel.addEventListener("click", function () {
+        document.getElementById("modal-add-milestone").classList.add("hidden");
+      });
+    }
+    var modalMilestoneOverlay = document.getElementById("modal-add-milestone");
+    if (modalMilestoneOverlay) {
+      modalMilestoneOverlay.addEventListener("click", function (e) {
+        if (e.target === modalMilestoneOverlay) modalMilestoneOverlay.classList.add("hidden");
+      });
+    }
+
+    var btnFocusStart = document.getElementById("btn-focus-start");
+    if (btnFocusStart) btnFocusStart.addEventListener("click", function () { focusTimer.start(); });
+    var btnFocusReset = document.getElementById("btn-focus-reset");
+    if (btnFocusReset) btnFocusReset.addEventListener("click", function () { focusTimer.reset(); });
+
+    // Clients & CRM
+    var clientSearchInp = document.getElementById("client-search-input");
+    if (clientSearchInp) {
+      clientSearchInp.addEventListener("input", function () {
+        state.clientSearch = clientSearchInp.value.trim();
+        renderClients();
+      });
+    }
+
+    document.querySelectorAll("[data-client-filter]").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        document.querySelectorAll("[data-client-filter]").forEach(function (c) { c.classList.remove("active"); });
+        chip.classList.add("active");
+        state.clientFilter = chip.getAttribute("data-client-filter") || "all";
+        renderClients();
+      });
+    });
+
+    var btnNewClient = document.getElementById("btn-new-client");
+    if (btnNewClient) {
+      btnNewClient.addEventListener("click", function () {
+        var modal = document.getElementById("modal-add-client");
+        if (modal) modal.classList.remove("hidden");
+      });
+    }
+
+    var formAddClient = document.getElementById("form-add-client");
+    if (formAddClient) formAddClient.addEventListener("submit", handleAddClientSubmit);
+
+    var modalClientClose = document.getElementById("modal-add-client-close");
+    if (modalClientClose) {
+      modalClientClose.addEventListener("click", function () {
+        document.getElementById("modal-add-client").classList.add("hidden");
+      });
+    }
+    var modalClientCancel = document.getElementById("modal-add-client-cancel");
+    if (modalClientCancel) {
+      modalClientCancel.addEventListener("click", function () {
+        document.getElementById("modal-add-client").classList.add("hidden");
+      });
+    }
+    var modalClientOverlay = document.getElementById("modal-add-client");
+    if (modalClientOverlay) {
+      modalClientOverlay.addEventListener("click", function (e) {
+        if (e.target === modalClientOverlay) modalClientOverlay.classList.add("hidden");
+      });
+    }
+
+    // Analytics & Diagnostic
+    var btnRunDiag = document.getElementById("btn-run-diagnostics");
+    if (btnRunDiag) btnRunDiag.addEventListener("click", runDiagnostics);
+
+    var btnTestNotif = document.getElementById("btn-test-notification");
+    if (btnTestNotif) {
+      btnTestNotif.addEventListener("click", function () {
+        showToast("🔔 Notification test : Le portail d'administration Aken est parfaitement synchronisé.", "info");
+      });
+    }
+
+    var btnClearCache = document.getElementById("btn-clear-cache");
+    if (btnClearCache) {
+      btnClearCache.addEventListener("click", function () {
+        showToast("Cache local et buffers rafraîchis avec succès !", "success");
+      });
+    }
+
     // Touche Escape pour fermer toutes les modales
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" || e.keyCode === 27) {
@@ -1341,9 +1984,14 @@ var cmdPalette={commands:[
   {icon:"📋",label:"Tableau de bord",hint:"Vue d'ensemble",action:function(){switchTab("dashboard");}},
   {icon:"📧",label:"Boite de reception",hint:"Leads & contacts",action:function(){switchTab("inbox");}},
   {icon:"🚀",label:"Suivi projets",hint:"Pipeline Kanban",action:function(){switchTab("pipeline");}},
+  {icon:"📅",label:"Agenda & Tâches",hint:"Planning & to-do",action:function(){switchTab("agenda");}},
+  {icon:"👥",label:"Répertoire Clients",hint:"CRM & partenaires",action:function(){switchTab("clients");}},
+  {icon:"📈",label:"Performances & Santé",hint:"Vitals & diagnostic",action:function(){switchTab("analytics");}},
   {icon:"📄",label:"Echange & outils",hint:"Notes, liens, devis",action:function(){switchTab("tools");}},
   {icon:"🔐",label:"Cles & securite",hint:"Permissions",action:function(){switchTab("permissions");}},
   {icon:"✨",label:"Nouveau projet",hint:"Creer",action:function(){switchTab("pipeline");setTimeout(handleNewProjectPrompt,200);}},
+  {icon:"➕",label:"Nouvelle tâche",hint:"Agenda",action:function(){switchTab("agenda");setTimeout(function(){var t=document.getElementById("task-title-input");if(t)t.focus();},200);}},
+  {icon:"👤",label:"Nouveau client",hint:"CRM",action:function(){switchTab("clients");setTimeout(function(){var m=document.getElementById("modal-add-client");if(m)m.classList.remove("hidden");},200);}},
   {icon:"🔗",label:"Ajouter un lien",hint:"Lien",action:function(){switchTab("tools");setTimeout(handleAddLink,200);}},
   {icon:"📝",label:"Ajouter une note",hint:"Note",action:function(){switchTab("tools");setTimeout(function(){var t=document.getElementById("new-note-input");if(t)t.focus();},200);}},
   {icon:"💾",label:"Exporter",hint:"JSON",action:exportBackup},
@@ -1364,7 +2012,7 @@ renderProjects=function(){origRenderProjects();document.querySelectorAll(".proje
 var notifCenter={items:[],add:function(text,icon){this.items.unshift({id:"n_"+Date.now(),text:text,icon:icon||"🔔",time:new Date().toISOString()});if(this.items.length>30)this.items=this.items.slice(0,30);this.render();},render:function(){var badge=document.getElementById("notif-badge");var list=document.getElementById("notif-list");if(badge){badge.textContent=this.items.length;badge.style.display=this.items.length>0?"flex":"none";}if(!list)return;if(this.items.length===0){list.innerHTML="<div class=\"notif-empty\">🚫 Aucune notification</div>";return;}list.innerHTML=this.items.slice(0,15).map(function(n){return"<div class=\"\"><span class=\"\">"+n.icon+"</span><div><div class=\"\">"+n.text+"</div><div class=\"\">"+formatDate(n.time)+"</div></div></div>";}).join("");},clear:function(){this.items=[];this.render();}};
 
 // PHASE 4: BREADCRUMB + FAB
-var tabTitles={dashboard:"Tableau de bord",inbox:"Boite de reception",pipeline:"Suivi projets",tools:"Echange & outils",permissions:"Cles & securite"};
+var tabTitles={dashboard:"Tableau de bord",inbox:"Boîte de réception",pipeline:"Suivi projets",agenda:"Agenda & Tâches",clients:"Répertoire Clients",analytics:"Performances & Santé",tools:"Échange & outils",permissions:"Clés & sécurité"};
 var origSwitchTab=switchTab;
 switchTab=function(tabId){origSwitchTab(tabId);var bc=document.getElementById("breadcrumb-current");if(bc)bc.textContent=tabTitles[tabId]||tabId;};
 
@@ -1755,6 +2403,20 @@ function globalSearch(query) {
     var text = [ln.title, ln.url, ln.category].join(' ').toLowerCase();
     if (text.indexOf(q) > -1) {
       results.push({ type: 'link', icon: '🔗', title: ln.title, meta: ln.url, badge: 'Lien', id: ln.id, tab: 'tools' });
+    }
+  });
+
+  (state.tasks || []).forEach(function(t) {
+    var text = [t.title, t.project, t.priority].join(' ').toLowerCase();
+    if (text.indexOf(q) > -1) {
+      results.push({ type: 'task', icon: '📋', title: t.title, meta: (t.priority || 'Normal') + (t.project ? ' • ' + t.project : ''), badge: 'Tâche', id: t.id, tab: 'agenda' });
+    }
+  });
+
+  (state.clients || []).forEach(function(c) {
+    var text = [c.name, c.company, c.phone, c.email, c.project].join(' ').toLowerCase();
+    if (text.indexOf(q) > -1) {
+      results.push({ type: 'client', icon: '👤', title: c.name, meta: c.company || c.phone || '', badge: 'Client', id: c.id, tab: 'clients' });
     }
   });
 

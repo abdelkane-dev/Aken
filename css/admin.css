@@ -2095,3 +2095,488 @@ select.form-control-admin:focus {
 #csv-preview-errors li {
   margin-bottom: 2px;
 }
+
+/* ==========================================================================
+   NOUVELLES SECTIONS ADMIN : AGENDA, CRM CLIENTS & ANALYTICS
+   ========================================================================== */
+
+/* --- 1. AGENDA & TÂCHES --- */
+.agenda-tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.agenda-task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  transition: all 0.25s ease;
+}
+
+.agenda-task-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateX(2px);
+}
+
+.agenda-task-item.completed {
+  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.agenda-task-item.completed .task-title {
+  text-decoration: line-through;
+  color: var(--admin-text-dim);
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-checkbox-custom {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--admin-teal);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  color: transparent;
+}
+
+.task-checkbox-custom:hover {
+  box-shadow: 0 0 10px var(--admin-teal-glow);
+}
+
+.task-checkbox-custom.checked {
+  background: var(--admin-teal);
+  color: #050811;
+}
+
+.task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #f0f4fc;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: var(--admin-text-muted);
+  flex-wrap: wrap;
+}
+
+.task-priority-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.task-priority-badge.urgente {
+  background: rgba(255, 59, 105, 0.15);
+  color: var(--admin-rose);
+  border: 1px solid rgba(255, 59, 105, 0.3);
+}
+
+.task-priority-badge.moyenne {
+  background: rgba(255, 184, 0, 0.15);
+  color: var(--admin-amber);
+  border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.task-priority-badge.normale {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--admin-teal);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+}
+
+.task-project-tag {
+  color: var(--admin-mint);
+  background: rgba(25, 230, 140, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-del-btn {
+  background: none;
+  border: none;
+  color: var(--admin-text-dim);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.task-del-btn:hover {
+  color: var(--admin-rose);
+  background: rgba(255, 59, 105, 0.12);
+}
+
+/* JALONS TIMELINE */
+.milestones-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.milestone-item {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--admin-amber);
+  border-radius: 0 var(--admin-radius-sm) var(--admin-radius-sm) 0;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.milestone-item.livraison { border-left-color: var(--admin-teal); }
+.milestone-item.reunion { border-left-color: var(--admin-amber); }
+.milestone-item.validation { border-left-color: var(--admin-mint); }
+.milestone-item.facturation { border-left-color: var(--admin-purple); }
+
+.milestone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.milestone-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.milestone-sub {
+  font-size: 0.76rem;
+  color: var(--admin-text-muted);
+}
+
+.milestone-date-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--admin-amber);
+  background: rgba(255, 184, 0, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* FOCUS TIMER */
+.focus-timer-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 24px;
+  text-align: center;
+}
+
+.focus-timer-display {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--admin-teal);
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  text-shadow: 0 0 20px var(--admin-teal-glow);
+}
+
+/* --- 2. RÉPERTOIRE & CRM CLIENTS --- */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.client-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.client-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--admin-teal), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.client-card:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.client-card:hover::before {
+  opacity: 1;
+}
+
+.client-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.client-avatar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.client-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(25, 230, 140, 0.2));
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--admin-teal);
+  font-family: var(--font-mono);
+}
+
+.client-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.client-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.client-company {
+  font-size: 0.8rem;
+  color: var(--admin-text-muted);
+}
+
+.client-status-pill {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.client-status-pill.actif {
+  background: rgba(25, 230, 140, 0.12);
+  color: var(--admin-mint);
+  border: 1px solid rgba(25, 230, 140, 0.3);
+}
+
+.client-status-pill.prospect {
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--admin-amber);
+  border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.client-status-pill.termine {
+  background: rgba(157, 78, 221, 0.12);
+  color: var(--admin-purple);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+}
+
+.client-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--admin-text-muted);
+  border-top: 1px solid var(--admin-border);
+  border-bottom: 1px solid var(--admin-border);
+  padding: 12px 0;
+}
+
+.client-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.client-detail-row a {
+  color: var(--admin-teal);
+  text-decoration: none;
+}
+
+.client-detail-row a:hover {
+  text-decoration: underline;
+}
+
+.client-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.client-card-footer .client-quick-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.client-card-footer button {
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  border-radius: var(--admin-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* --- 3. ANALYTICS & MONITORING --- */
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.vital-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.vital-gauge-val {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vital-title {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+
+.vital-badge.ok {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--admin-mint);
+  background: rgba(25, 230, 140, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(25, 230, 140, 0.25);
+}
+
+.traffic-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.traffic-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.traffic-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #fff;
+}
+
+.traffic-bar-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.traffic-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.8s ease-in-out;
+}
+
+.diagnostics-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(25, 230, 140, 0.25);
+  border-radius: var(--admin-radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.diag-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--admin-text-muted);
+}
+

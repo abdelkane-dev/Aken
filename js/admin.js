@@ -832,7 +832,8 @@
     renderDashboard();
     var modal = document.getElementById("new-project-modal");
     if (modal) modal.classList.add("hidden");
-    showToast("Projet \" + title + \" créé avec succès !", "success");
+    showToast('Projet "' + title + '" créé avec succès !', "success");
+    logActivity("project_new", "Projet creé : " + title);
   }
 
   // --------------------------------------------------------------------------
@@ -859,6 +860,21 @@
         '</div>'
       ].join("");
     }).join("");
+
+    // Bind delete buttons after rendering
+    container.querySelectorAll(".btn-del-note").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-id");
+        var note = state.notes.find(function(n){ return n.id === id; });
+        if (confirm("Supprimer cette note ?")) {
+          state.notes = state.notes.filter(function (n) { return n.id !== id; });
+          persistAll();
+          renderNotes();
+          logActivity("note_delete", "Note supprimee : " + (note ? note.text.substring(0,40) : ""));
+          showToast("Note supprimée.", "success");
+        }
+      });
+    });
   }
 
   function handleAddNote() {
@@ -945,7 +961,7 @@
     var modal = document.getElementById("add-link-modal");
     if (modal) modal.classList.add("hidden");
     logActivity("link_new", "Lien ajouté : " + title);
-    showToast("Lien \" + title + \" ajouté avec succès !", "success");
+    showToast('Lien "' + title + '" ajouté avec succès !', "success");
   }
 
   // --------------------------------------------------------------------------
@@ -1163,7 +1179,8 @@
     renderActivityLog();
     updateBadges();
     if (typeof renderTemplates === 'function') renderTemplates();
-    if (typeof initGlobalSearch === 'function') initGlobalSearch();
+    // Note: initGlobalSearch() is only called once from initNewFeatures()
+    // to avoid duplicating event listeners on each renderAllViews() call
   }
 
   function initListeners() {
@@ -1395,8 +1412,11 @@ function fillTemplateVars(text, lead) {
   };
   var result = text;
   Object.keys(vars).forEach(function(key) {
-    var regex = new RegExp('\{' + key + '\}', 'gi');
-    result = result.replace(regex, vars[key]);
+    // Use split/join instead of RegExp to avoid escape issues with special chars
+    var placeholder = '{' + key + '}';
+    while (result.indexOf(placeholder) > -1) {
+      result = result.replace(placeholder, vars[key]);
+    }
   });
   return result;
 }

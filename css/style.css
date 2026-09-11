@@ -216,6 +216,19 @@ img {
   border: none !important;
   box-shadow: none !important;
   display: block;
+  transition: filter 0.3s ease, transform 0.25s ease, opacity 0.25s ease;
+  /* Mode clair (par défaut) : logo sombre élégant et parfaitement lisible */
+  filter: brightness(0) opacity(0.88);
+}
+
+/* Mode sombre explicite */
+[data-theme="dark"] .logo-mark {
+  filter: brightness(1) opacity(1);
+}
+
+/* Mode clair explicite */
+[data-theme="light"] .logo-mark {
+  filter: brightness(0) opacity(0.88);
 }
 
 @media (max-width: 768px) {
@@ -223,21 +236,6 @@ img {
     height: 32px;
     max-width: 115px;
   }
-}
-
-.logo-title {
-  font-family: var(--display-font);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  line-height: 1;
-  display: inline-block;
-  user-select: none;
-}
-
-[data-theme="dark"] .logo-title {
-  color: #ffffff;
 }
 
 .logo-word {
@@ -2614,6 +2612,10 @@ body.nav-open .nav-drawer-backdrop,
     --ochre: #D9A441;
     --teal: #4FC3BB;
     --card-bg: #1A1924;
+  }
+
+  :root:not([data-theme="light"]) .logo-mark {
+    filter: brightness(1) opacity(1);
   }
 }
 

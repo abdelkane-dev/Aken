@@ -262,6 +262,7 @@ body.admin-body {
   max-width: 150px;
   object-fit: contain;
   display: block;
+  filter: brightness(1) opacity(1);
 }
 
 .sidebar-header .brand-role {

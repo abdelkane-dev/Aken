@@ -124,6 +124,12 @@
           </div>
         </div>
         <div class="topbar-right">
+          <div class="global-search-wrap" id="global-search-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="global-search-input" placeholder="Rechercher partout...">
+            <kbd>⌘K</kbd>
+            <div class="global-search-dropdown hidden" id="global-search-dropdown"></div>
+          </div>
           <a href="/" target="_blank" class="btn-action-light" title="Voir le site en ligne">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <span>Voir le site</span>
@@ -239,13 +245,62 @@
               </div>
             </div>
           </div>
-        <div class="admin-card-section" style="grid-column:1/-1;"><div class="section-title-row"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Journal d'activité récente</h3></div><div id="dashboard-activity-log" class="activity-log"></div></div>
+        <div class="admin-card-section" style="grid-column:1/-1;">
+          <div class="section-title-row">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Journal d'activité complet & Audit Trail
+            </h3>
+          </div>
+          <div class="audit-toolbar" id="audit-toolbar">
+            <div class="audit-filter-group">
+              <label>Action :</label>
+              <select id="audit-filter-action">
+                <option value="all">Toutes</option>
+                <option value="lead">Leads</option>
+                <option value="project">Projets</option>
+                <option value="note">Notes</option>
+                <option value="link">Liens</option>
+                <option value="security">Sécurité</option>
+                <option value="system">Système</option>
+              </select>
+            </div>
+            <div class="audit-filter-group">
+              <label>Utilisateur :</label>
+              <select id="audit-filter-user">
+                <option value="all">Tous</option>
+              </select>
+            </div>
+            <div class="audit-filter-group">
+              <label>Date :</label>
+              <input type="date" id="audit-filter-date-from" title="À partir de">
+              <input type="date" id="audit-filter-date-to" title="Jusqu'à">
+            </div>
+            <button class="csv-btn" id="btn-export-audit" style="font-size:0.75rem;padding:4px 10px;margin-left:auto;">📊 Exporter l'audit (CSV)</button>
+            <span class="audit-count" id="audit-count"></span>
+          </div>
+          <div id="dashboard-activity-log" class="activity-log"></div>
+        </div>
 </section>
 
         <!-- ===============================================================
              VUE 2 : BOÎTE DE RÉCEPTION (LEADS & CONTACTS)
              =============================================================== -->
         <section class="admin-view" id="view-inbox">
+          <!-- TEMPLATES DE RÉPONSES -->
+          <div class="templates-panel" id="templates-panel">
+            <div class="section-title-row">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Modèles de réponses rapides
+              </h3>
+              <button class="btn-action-light" id="btn-add-template" style="font-size:0.75rem;padding:4px 10px;">+ Nouveau modèle</button>
+            </div>
+            <div class="templates-grid" id="templates-grid">
+              <!-- Rendu dynamique des templates -->
+            </div>
+          </div>
+
           <div class="inbox-toolbar">
             <div class="inbox-filters">
               <button class="filter-chip active" data-filter="all">Tous les messages</button>
@@ -501,6 +556,24 @@
                   <input type="file" id="import-backup-file" accept=".json" style="display:none;">
                 </label>
               </div>
+
+              <div class="csv-actions">
+                <span style="font-size:0.85rem;color:var(--admin-text-muted);width:100%;margin-bottom:4px;">Export / Import CSV pour Excel, Google Sheets...</span>
+                <button class="csv-btn teal" id="btn-csv-export-leads">
+                  📊 Exporter les Leads (CSV)
+                </button>
+                <button class="csv-btn teal" id="btn-csv-export-projects">
+                  📊 Exporter les Projets (CSV)
+                </button>
+                <label class="csv-btn" style="cursor:pointer;">
+                  📥 Importer Leads (CSV)
+                  <input type="file" id="import-csv-leads" accept=".csv" style="display:none;">
+                </label>
+                <label class="csv-btn" style="cursor:pointer;">
+                  📥 Importer Projets (CSV)
+                  <input type="file" id="import-csv-projects" accept=".csv" style="display:none;">
+                </label>
+              </div>
             </div>
           </div>
         </section>
@@ -597,6 +670,58 @@
         <div style="display:flex;gap:12px;margin-top:8px;">
           <button type="button" class="btn-action-light" id="al-cancel" style="flex:1;">Annuler</button>
           <button type="submit" class="btn-action-primary" style="flex:1;">Ajouter le lien</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODALE : PRÉVISUALISATION CSV -->
+  <div class="admin-modal-overlay hidden" id="csv-preview-modal">
+    <div class="admin-modal-box" style="max-width:700px;">
+      <button class="modal-close-x" id="csv-preview-close" aria-label="Fermer">&times;</button>
+      <h3 id="csv-preview-title" style="margin-bottom:12px;font-size:1.15rem;color:#fff;">📊 Aperçu de l'import CSV</h3>
+      <div id="csv-preview-info" style="font-size:0.85rem;color:var(--admin-text-muted);margin-bottom:16px;"></div>
+      <div id="csv-preview-errors" style="margin-bottom:12px;"></div>
+      <div style="overflow-x:auto;max-height:300px;overflow-y:auto;border:1px solid var(--admin-border);border-radius:8px;">
+        <table id="csv-preview-table" style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+          <thead id="csv-preview-thead"></thead>
+          <tbody id="csv-preview-tbody"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:16px;">
+        <button type="button" class="btn-action-light" id="csv-preview-cancel" style="flex:1;">Annuler</button>
+        <button type="button" class="btn-action-primary" id="csv-preview-confirm" style="flex:1;">✅ Confirmer l'import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE : AJOUTER UN TEMPLATE DE RÉPONSE -->
+  <div class="admin-modal-overlay hidden" id="add-template-modal">
+    <div class="admin-modal-box" style="max-width:520px;">
+      <button class="modal-close-x" id="add-template-modal-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin-bottom:18px;font-size:1.2rem;color:#fff;">💬 Nouveau modèle de réponse</h3>
+      <form id="add-template-form">
+        <div class="form-group-admin">
+          <label>Nom du modèle <span style="color:var(--admin-rose);">*</span></label>
+          <input type="text" id="tpl-title" class="form-control-admin" required placeholder="Ex: Premier contact WhatsApp">
+        </div>
+        <div class="form-group-admin">
+          <label>Type</label>
+          <select id="tpl-type" class="form-control-admin">
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+        <div class="form-group-admin">
+          <label>Contenu du message <span style="color:var(--admin-rose);">*</span></label>
+          <textarea id="tpl-content" class="form-control-admin" rows="5" required placeholder="Bonjour {nom}, merci pour votre intérêt pour nos services Aken..."></textarea>
+        </div>
+        <p style="font-size:0.75rem;color:var(--admin-text-dim);margin-bottom:12px;">
+          Variables disponibles : <code>{nom}</code> <code>{telephone}</code> <code>{entreprise}</code> <code>{projet}</code>
+        </p>
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <button type="button" class="btn-action-light" id="tpl-cancel" style="flex:1;">Annuler</button>
+          <button type="submit" class="btn-action-primary" style="flex:1;">Enregistrer le modèle</button>
         </div>
       </form>
     </div>

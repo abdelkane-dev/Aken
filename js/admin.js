@@ -15,6 +15,7 @@
     currentTab: "dashboard",
     currentFilter: "all",
     searchQuery: "",
+    currentLeadId: null, // Track active lead in detail modal
     leads: [],
     projects: [],
     notes: [],
@@ -200,21 +201,25 @@
       date: new Date().toISOString(),
       user: state.currentUser ? state.currentUser.name : "Admin"
     });
-    if (state.activityLog.length > 50) state.activityLog = state.activityLog.slice(0, 50);
+    if (state.activityLog.length > 200) state.activityLog = state.activityLog.slice(0, 200);
   }
 
   function renderActivityLog() {
-    var el = document.getElementById("dashboard-activity-log");
-    if (!el) return;
-    if (state.activityLog.length === 0) {
-      el.innerHTML = '<p style="color:var(--admin-text-dim);padding:16px;font-size:0.85rem">Aucune activité récente.</p>';
-      return;
+    if (typeof renderAuditLog === 'function') {
+      renderAuditLog();
+    } else {
+      var el = document.getElementById("dashboard-activity-log");
+      if (!el) return;
+      if (state.activityLog.length === 0) {
+        el.innerHTML = '<p style="color:var(--admin-text-dim);padding:16px;font-size:0.85rem">Aucune activité récente.</p>';
+        return;
+      }
+      var icons = {lead_new:"📥",lead_status:"🔄",lead_delete:"🗑",project_new:"🚀",note_new:"📝",note_delete:"🗑",link_new:"🔗",key_create:"🔑",password_change:"🔐",import:"📥"};
+      var items = state.activityLog.slice(0, 12);
+      el.innerHTML = items.map(function(a) {
+        return '<div class="activity-item"><span class="activity-icon">' + (icons[a.action]||"•") + '</span><div class="activity-content"><span class="activity-text">' + a.detail + '</span><span class="activity-meta">' + (a.user||"Admin") + " · " + formatDate(a.date) + '</span></div></div>';
+      }).join("");
     }
-    var icons = {lead_new:"📥",lead_status:"🔄",lead_delete:"🗑",project_new:"🚀",note_new:"📝",note_delete:"🗑",link_new:"🔗",key_create:"🔑",password_change:"🔐",import:"📥"};
-    var items = state.activityLog.slice(0, 12);
-    el.innerHTML = items.map(function(a) {
-      return '<div class="activity-item"><span class="activity-icon">' + (icons[a.action]||"•") + '</span><div class="activity-content"><span class="activity-text">' + a.detail + '</span><span class="activity-meta">' + (a.user||"Admin") + " · " + formatDate(a.date) + '</span></div></div>';
-    }).join("");
   }
 
 
@@ -622,6 +627,7 @@
   function openLeadModal(leadId) {
     var lead = state.leads.find(function (l) { return l.id === leadId; });
     if (!lead) return;
+    state.currentLeadId = leadId;
 
     var modal = document.getElementById("admin-modal");
     var body = document.getElementById("admin-modal-body");
@@ -707,6 +713,7 @@
   function closeModal() {
     var modal = document.getElementById("admin-modal");
     if (modal) modal.classList.add("hidden");
+    state.currentLeadId = null;
   }
 
   // --------------------------------------------------------------------------
@@ -897,9 +904,11 @@
     container.querySelectorAll(".btn-del-link").forEach(function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-id");
+        var deletedLink = state.sharedLinks.find(function(l){return l.id===id;});
         state.sharedLinks = state.sharedLinks.filter(function (l) { return l.id !== id; });
         persistAll();
         renderSharedLinks();
+        logActivity("link_delete", "Lien supprimé : " + (deletedLink ? deletedLink.title : "lien"));
       });
     });
   }
@@ -935,6 +944,7 @@
     renderSharedLinks();
     var modal = document.getElementById("add-link-modal");
     if (modal) modal.classList.add("hidden");
+    logActivity("link_new", "Lien ajouté : " + title);
     showToast("Lien \" + title + \" ajouté avec succès !", "success");
   }
 
@@ -1152,6 +1162,8 @@
     renderCollabKeys();
     renderActivityLog();
     updateBadges();
+    if (typeof renderTemplates === 'function') renderTemplates();
+    if (typeof initGlobalSearch === 'function') initGlobalSearch();
   }
 
   function initListeners() {
@@ -1348,8 +1360,622 @@ function animateCounter(el,target){if(!el)return;var cur=parseInt(el.textContent
 var origRenderDashboard2=renderDashboard;
 renderDashboard=function(){var oN=parseInt(document.getElementById("stat-new-leads")?.textContent||"0",10);var oP=parseInt(document.getElementById("stat-active-projects")?.textContent||"0",10);var oL=parseInt(document.getElementById("stat-total-leads")?.textContent||"0",10);origRenderDashboard2();var nN=state.leads.filter(function(l){return l.status==="nouveau"||l.status==="acompte_recu";}).length;var nP=state.projects.filter(function(p){return p.status!=="termine";}).length;var nL=state.leads.length;animateCounter(document.getElementById("stat-new-leads"),nN);animateCounter(document.getElementById("stat-active-projects"),nP);animateCounter(document.getElementById("stat-total-leads"),nL);if(oN!==nN||oP!==nP||oL!==nL){document.querySelectorAll(".stat-card").forEach(function(card){card.classList.remove("pulse");void card.offsetWidth;card.classList.add("pulse");});}};
 
+// ==========================================================================
+// PHASE 7: TEMPLATES DE RÉPONSES RAPIDES (EMAIL / WHATSAPP)
+// ==========================================================================
+var templates = [];
+function initTemplates() {
+  var stored = localStorage.getItem("aken_admin_templates");
+  if (!stored) {
+    templates = [
+      { id: "tpl_1", title: "Premier contact WhatsApp", type: "whatsapp", content: "Bonjour {nom}, c'est Abdelkane de l'agence Aken. J'ai bien reçu votre demande sur notre site pour {projet}. Je reste disponible pour en discuter. Merci de votre confiance ! 🙏" },
+      { id: "tpl_2", title: "Suivi devis envoyé", type: "whatsapp", content: "Bonjour {nom}, je me permets de revenir vers vous concernant le devis envoyé pour {projet}. Avez-vous pu l'examiner ? Je reste à votre disposition pour toute question. À bientôt !" },
+      { id: "tpl_3", title: "Demande d'acompte", type: "whatsapp", content: "Bonjour {nom}, suite à notre échange, je vous rappelle les modalités de règlement pour {projet} : un acompte de 30% est demandé pour démarrer les travaux. Paiement par Wave ou Orange Money au +223 93 78 99 16. Merci !" },
+      { id: "tpl_4", title: "Confirmation réception acompte", type: "email", content: "Objet : Confirmation de réception — Acompte {projet}\n\nBonjour {nom},\n\nNous confirmons la bonne réception de votre acompte pour le projet {projet}. Les travaux démarrent dans les plus brefs délais.\n\nCordialement,\nAbdelkane — Aken" },
+      { id: "tpl_5", title: "Relance après 48h sans réponse", type: "whatsapp", content: "Bonjour {nom}, j'espère que vous allez bien. Je reviens vers vous au sujet de votre demande pour {projet}. Si vous avez des questions ou souhaitez avancer, n'hésitez pas à me contacter. Merci !" },
+      { id: "tpl_6", title: "Livraison projet terminé", type: "email", content: "Objet : Votre projet {projet} est prêt ! 🎉\n\nBonjour {nom},\n\nBonne nouvelle ! Votre projet {projet} est désormais terminé et livré. Vous pouvez le consulter en ligne.\n\nMerci pour votre confiance et à bientôt pour de prochains projets !\n\nAbdelkane — Aken" }
+    ];
+    localStorage.setItem("aken_admin_templates", JSON.stringify(templates));
+  } else {
+    try { templates = JSON.parse(stored); } catch(e) { templates = []; }
+  }
+}
+
+function persistTemplates() {
+  localStorage.setItem("aken_admin_templates", JSON.stringify(templates));
+}
+
+function fillTemplateVars(text, lead) {
+  if (!lead) return text;
+  var vars = {
+    nom: lead.name || 'Client',
+    telephone: lead.phone || '',
+    entreprise: lead.company || '',
+    projet: lead.projectName || lead.projectTitle || 'votre projet'
+  };
+  var result = text;
+  Object.keys(vars).forEach(function(key) {
+    var regex = new RegExp('\{' + key + '\}', 'gi');
+    result = result.replace(regex, vars[key]);
+  });
+  return result;
+}
+
+function renderTemplates() {
+  var grid = document.getElementById("templates-grid");
+  if (!grid) return;
+  if (templates.length === 0) {
+    grid.innerHTML = '<p style="color:var(--admin-text-dim);font-size:0.85rem;">Aucun modèle. Créez-en un pour répondre rapidement à vos leads.</p>';
+    return;
+  }
+  grid.innerHTML = templates.map(function(t) {
+    var preview = t.content.replace(/\n/g, ' ');
+    if (preview.length > 80) preview = preview.substring(0, 80) + '...';
+    return [
+      '<div class="template-card" data-id="' + t.id + '">',
+      '  <div class="template-card-header">',
+      '    <span class="template-card-title">' + escapeHtml(t.title) + '</span>',
+      '    <span class="template-card-type ' + t.type + '">' + (t.type === 'whatsapp' ? '📱 WhatsApp' : '✉️ Email') + '</span>',
+      '  </div>',
+      '  <div class="template-card-preview">' + escapeHtml(preview) + '</div>',
+      '  <div class="template-card-actions">',
+      '    <button class="template-use-btn ' + (t.type === 'whatsapp' ? 'wa' : '') + '" data-id="' + t.id + '" data-action="use">📋 Copier</button>',
+      '    <button class="template-del-btn" data-id="' + t.id + '" data-action="delete">✕</button>',
+      '  </div>',
+      '</div>'
+    ].join("");
+  }).join("");
+
+  grid.querySelectorAll("[data-action='use']").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var id = btn.getAttribute("data-id");
+      var tpl = templates.find(function(t) { return t.id === id; });
+      if (!tpl) return;
+      var content = tpl.content;
+      // Auto-fill variables if a lead is active in the detail modal
+      if (state.currentLeadId) {
+        var lead = state.leads.find(function(l) { return l.id === state.currentLeadId; });
+        if (lead) {
+          content = fillTemplateVars(content, lead);
+        }
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(content).then(function() {
+          var msg = state.currentLeadId ? "Modèle rempli avec les données du lead et copié !" : "Modèle copié dans le presse-papier !";
+          showToast(msg, "success");
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = content;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var msg2 = state.currentLeadId ? "Modèle rempli avec les données du lead et copié !" : "Modèle copié dans le presse-papier !";
+        showToast(msg2, "success");
+      }
+    });
+  });
+
+  grid.querySelectorAll("[data-action='delete']").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var id = btn.getAttribute("data-id");
+      if (confirm("Supprimer ce modèle ?")) {
+        templates = templates.filter(function(t) { return t.id !== id; });
+        persistTemplates();
+        renderTemplates();
+      }
+    });
+  });
+}
+
+function handleAddTemplateSubmit(e) {
+  e.preventDefault();
+  var title = document.getElementById("tpl-title").value.trim();
+  var type = document.getElementById("tpl-type").value;
+  var content = document.getElementById("tpl-content").value.trim();
+  if (!title || !content) {
+    showToast("Le titre et le contenu sont obligatoires.", "error");
+    return;
+  }
+  templates.unshift({ id: "tpl_" + Date.now(), title: title, type: type, content: content });
+  persistTemplates();
+  renderTemplates();
+  document.getElementById("add-template-modal").classList.add("hidden");
+  logActivity("system", "Modèle de réponse ajouté : " + title);
+  showToast("Modèle " + title + " créé avec succès !", "success");
+}
+
+// ==========================================================================
+// PHASE 8: EXPORT / IMPORT CSV
+// ==========================================================================
+function arrayToCsv(headers, rows) {
+  var csvContent = headers.join(',') + '\n';
+  rows.forEach(function(row) {
+    csvContent += row.map(function(cell) {
+      var escaped = String(cell || '');
+      if (escaped.indexOf(',') > -1 || escaped.indexOf('"') > -1 || escaped.indexOf('\n') > -1) {
+        escaped = '"' + escaped.replace(/"/g, '""') + '"';
+      }
+      return escaped;
+    }).join(',') + '\n';
+  });
+  return csvContent;
+}
+
+function downloadCsv(csvStr, filename) {
+  var BOM = '\uFEFF';
+  var blob = new Blob([BOM + csvStr], { type: 'text/csv;charset=utf-8;' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function parseCsvLine(line) {
+  var result = [];
+  var current = '';
+  var inQuotes = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (i + 1 < line.length && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        current += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ',') {
+        result.push(current);
+        current = '';
+      } else {
+        current += ch;
+      }
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+function parseCsvFile(file, callback) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var text = e.target.result;
+    var lines = text.split('\n').filter(function(l) { return l.trim().length > 0; });
+    if (lines.length < 2) { callback([], []); return; }
+    var headers = parseCsvLine(lines[0]);
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      rows.push(parseCsvLine(lines[i]));
+    }
+    callback(headers, rows);
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function exportLeadsCsv() {
+  var headers = ['id','type','status','name','phone','email','company','message','projectName','projectTitle','totalAmount','depositAmount','paymentMethod','source','createdAt'];
+  var rows = state.leads.map(function(l) {
+    return headers.map(function(h) { return l[h] || ''; });
+  });
+  var csv = arrayToCsv(headers, rows);
+  downloadCsv(csv, 'aken-leads-' + new Date().toISOString().slice(0,10) + '.csv');
+  logActivity('system', 'Export CSV des leads (' + rows.length + ' entrées)');
+  showToast('Export CSV de ' + rows.length + ' leads téléchargé !', 'success');
+}
+
+function exportProjectsCsv() {
+  var headers = ['id','title','client','phone','total','paid','status','progress','notes','updatedAt'];
+  var rows = state.projects.map(function(p) {
+    return headers.map(function(h) { return p[h] !== undefined ? p[h] : ''; });
+  });
+  var csv = arrayToCsv(headers, rows);
+  downloadCsv(csv, 'aken-projets-' + new Date().toISOString().slice(0,10) + '.csv');
+  logActivity('system', 'Export CSV des projets (' + rows.length + ' entrées)');
+  showToast('Export CSV de ' + rows.length + ' projets téléchargé !', 'success');
+}
+
+function showCsvPreview(title, headers, rows, requiredCols, type) {
+  var modal = document.getElementById('csv-preview-modal');
+  var titleEl = document.getElementById('csv-preview-title');
+  var infoEl = document.getElementById('csv-preview-info');
+  var errorsEl = document.getElementById('csv-preview-errors');
+  var thead = document.getElementById('csv-preview-thead');
+  var tbody = document.getElementById('csv-preview-tbody');
+  if (!modal) return;
+
+  titleEl.textContent = '📊 ' + title;
+  infoEl.textContent = rows.length + ' ligne' + (rows.length !== 1 ? 's' : '') + ' détectée' + (rows.length !== 1 ? 's' : '') + ' · ' + headers.length + ' colonne' + (headers.length !== 1 ? 's' : '');
+
+  // Validate required columns
+  var missing = [];
+  requiredCols.forEach(function(col) {
+    if (headers.indexOf(col) === -1) missing.push(col);
+  });
+
+  if (missing.length > 0) {
+    errorsEl.innerHTML = '<span>⚠️ Colonnes manquantes : </span><ul>' + missing.map(function(m) { return '<li><strong>' + m + '</strong></li>'; }).join('') + '</ul>';
+    errorsEl.classList.add('visible');
+    document.getElementById('csv-preview-confirm').disabled = true;
+    document.getElementById('csv-preview-confirm').style.opacity = '0.5';
+  } else {
+    errorsEl.innerHTML = '';
+    errorsEl.classList.remove('visible');
+    document.getElementById('csv-preview-confirm').disabled = false;
+    document.getElementById('csv-preview-confirm').style.opacity = '1';
+  }
+
+  // Render header
+  thead.innerHTML = '<tr>' + headers.map(function(h) {
+    var isRequired = requiredCols.indexOf(h) > -1;
+    var cls = missing.indexOf(h) > -1 ? 'col-missing' : (isRequired ? 'col-ok' : '');
+    return '<th class="' + cls + '">' + escapeHtml(h) + (isRequired ? ' *' : '') + '</th>';
+  }).join('') + '</tr>';
+
+  // Render rows (max 10 preview)
+  var previewRows = rows.slice(0, 10);
+  tbody.innerHTML = previewRows.map(function(row) {
+    return '<tr>' + row.map(function(cell) {
+      return '<td title="' + escapeHtml(cell) + '">' + escapeHtml(cell || '—') + '</td>';
+    }).join('') + '</tr>';
+  }).join('');
+
+  if (rows.length > 10) {
+    tbody.innerHTML += '<tr><td colspan="' + headers.length + '" style="text-align:center;color:var(--admin-text-dim);padding:8px;font-style:italic;">… et ' + (rows.length - 10) + ' autres lignes</td></tr>';
+  }
+
+  modal.classList.remove('hidden');
+
+  // Store data for confirmation
+  modal._csvData = { headers: headers, rows: rows, type: type };
+}
+
+function confirmCsvImport() {
+  var modal = document.getElementById('csv-preview-modal');
+  if (!modal || !modal._csvData) return;
+  var data = modal._csvData;
+  var imported = 0;
+
+  if (data.type === 'leads') {
+    data.rows.forEach(function(row) {
+      var lead = {};
+      data.headers.forEach(function(h, i) {
+        var val = row[i] || '';
+        if (['totalAmount','depositAmount'].indexOf(h) > -1) val = parseInt(val, 10) || 0;
+        lead[h] = val;
+      });
+      if (!lead.id) lead.id = 'lead_csv_' + Date.now() + '_' + Math.random().toString(36).substr(2,4);
+      if (!lead.createdAt) lead.createdAt = new Date().toISOString();
+      if (!lead.type) lead.type = 'contact';
+      if (!lead.status) lead.status = 'nouveau';
+      state.leads.push(lead);
+      imported++;
+    });
+    persistAll();
+    renderInbox();
+    renderDashboard();
+  } else {
+    data.rows.forEach(function(row) {
+      var proj = {};
+      data.headers.forEach(function(h, i) {
+        var val = row[i] || '';
+        if (['total','paid','progress'].indexOf(h) > -1) val = parseInt(val, 10) || 0;
+        proj[h] = val;
+      });
+      if (!proj.id) proj.id = 'proj_csv_' + Date.now() + '_' + Math.random().toString(36).substr(2,4);
+      if (!proj.status) proj.status = 'cadrage';
+      if (!proj.updatedAt) proj.updatedAt = new Date().toISOString();
+      state.projects.push(proj);
+      imported++;
+    });
+    persistAll();
+    renderProjects();
+    renderDashboard();
+  }
+
+  logActivity('import', 'Import CSV ' + data.type + ' : ' + imported + ' entrées ajoutées');
+  showToast(imported + ' ' + data.type + ' importés avec succès !', 'success');
+  modal.classList.add('hidden');
+}
+
+function importLeadsCsv(file) {
+  var requiredCols = ['name'];
+  parseCsvFile(file, function(headers, rows) {
+    showCsvPreview('Aperçu import Leads', headers, rows, requiredCols, 'leads');
+  });
+}
+
+function importProjectsCsv(file) {
+  var requiredCols = ['title'];
+  parseCsvFile(file, function(headers, rows) {
+    showCsvPreview('Aperçu import Projets', headers, rows, requiredCols, 'projects');
+  });
+}
+
+// ==========================================================================
+// PHASE 9: RECHERCHE GLOBALE
+// ==========================================================================
+function globalSearch(query) {
+  if (!query || query.length < 2) return [];
+  var q = query.toLowerCase();
+  var results = [];
+
+  state.leads.forEach(function(l) {
+    var text = [l.name, l.phone, l.email, l.company, l.message, l.projectName].join(' ').toLowerCase();
+    if (text.indexOf(q) > -1) {
+      results.push({ type: 'lead', icon: '📧', title: l.name || 'Client anonyme', meta: l.phone || l.email || '', badge: 'Lead', id: l.id, tab: 'inbox' });
+    }
+  });
+
+  state.projects.forEach(function(p) {
+    var text = [p.title, p.client, p.notes].join(' ').toLowerCase();
+    if (text.indexOf(q) > -1) {
+      results.push({ type: 'project', icon: '🚀', title: p.title || 'Projet', meta: p.client || '', badge: 'Projet', id: p.id, tab: 'pipeline' });
+    }
+  });
+
+  state.notes.forEach(function(n) {
+    if ((n.text || '').toLowerCase().indexOf(q) > -1 || (n.author || '').toLowerCase().indexOf(q) > -1) {
+      results.push({ type: 'note', icon: '📝', title: (n.text || '').substring(0, 60), meta: n.author || 'Admin', badge: 'Note', id: n.id, tab: 'tools' });
+    }
+  });
+
+  state.sharedLinks.forEach(function(ln) {
+    var text = [ln.title, ln.url, ln.category].join(' ').toLowerCase();
+    if (text.indexOf(q) > -1) {
+      results.push({ type: 'link', icon: '🔗', title: ln.title, meta: ln.url, badge: 'Lien', id: ln.id, tab: 'tools' });
+    }
+  });
+
+  return results.slice(0, 12);
+}
+
+function renderGlobalSearchResults(results) {
+  var dd = document.getElementById('global-search-dropdown');
+  if (!dd) return;
+  if (results.length === 0) {
+    dd.innerHTML = '<div class="search-no-results">Aucun résultat trouvé</div>';
+    dd.classList.remove('hidden');
+    return;
+  }
+  dd.innerHTML = results.map(function(r, i) {
+    return [
+      '<div class="search-result-item" data-idx="' + i + '">',
+      '  <span class="search-result-icon">' + r.icon + '</span>',
+      '  <div class="search-result-text">',
+      '    <div class="search-result-title">' + escapeHtml(r.title) + '</div>',
+      '    <div class="search-result-meta">' + escapeHtml(r.meta) + '</div>',
+      '  </div>',
+      '  <span class="search-result-badge ' + r.type + '">' + r.badge + '</span>',
+      '</div>'
+    ].join('');
+  }).join('');
+  dd.classList.remove('hidden');
+
+  dd.querySelectorAll('.search-result-item').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var idx = parseInt(el.getAttribute('data-idx'), 10);
+      var r = results[idx];
+      if (r) switchTab(r.tab);
+      dd.classList.add('hidden');
+      document.getElementById('global-search-input').value = '';
+    });
+  });
+}
+
+function initGlobalSearch() {
+  var input = document.getElementById('global-search-input');
+  var dd = document.getElementById('global-search-dropdown');
+  if (!input || !dd) return;
+
+  input.addEventListener('input', function() {
+    var q = input.value.trim();
+    if (q.length < 2) { dd.classList.add('hidden'); return; }
+    var results = globalSearch(q);
+    renderGlobalSearchResults(results);
+  });
+
+  input.addEventListener('focus', function() {
+    if (input.value.trim().length >= 2) {
+      var results = globalSearch(input.value.trim());
+      renderGlobalSearchResults(results);
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.global-search-wrap')) {
+      dd.classList.add('hidden');
+    }
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      dd.classList.add('hidden');
+      input.blur();
+    }
+  });
+}
+
+// ==========================================================================
+// PHASE 10: AUDIT TRAIL AMÉLIORÉ AVEC FILTRES
+// ==========================================================================
+function getAuditActionCategory(action) {
+  if (action.indexOf('lead') > -1) return 'lead';
+  if (action.indexOf('project') > -1) return 'project';
+  if (action.indexOf('note') > -1) return 'note';
+  if (action.indexOf('link') > -1) return 'link';
+  if (action.indexOf('password') > -1 || action.indexOf('key') > -1) return 'security';
+  if (action.indexOf('import') > -1 || action.indexOf('export') > -1 || action.indexOf('system') > -1) return 'system';
+  return 'system';
+}
+
+function getAuditActionLabel(action) {
+  var labels = {
+    lead_new: 'Lead créé', lead_status: 'Statut lead', lead_delete: 'Lead supprimé',
+    project_new: 'Projet créé', project_status: 'Projet mis à jour', project_delete: 'Projet supprimé',
+    note_new: 'Note ajoutée', note_delete: 'Note supprimée',
+    link_new: 'Lien ajouté', link_delete: 'Lien supprimé',
+    key_create: 'Clé créée', key_revoke: 'Clé révoquée', password_change: 'MDP changé',
+    import: 'Import données', export: 'Export données', system: 'Système'
+  };
+  return labels[action] || action;
+}
+
+function renderAuditLog() {
+  var el = document.getElementById('dashboard-activity-log');
+  var countEl = document.getElementById('audit-count');
+  if (!el) return;
+
+  // Populate user filter
+  var userSelect = document.getElementById('audit-filter-user');
+  if (userSelect && userSelect.options.length <= 1) {
+    var users = {};
+    (state.activityLog || []).forEach(function(a) { if (a.user) users[a.user] = true; });
+    Object.keys(users).forEach(function(u) {
+      var opt = document.createElement('option');
+      opt.value = u; opt.textContent = u;
+      userSelect.appendChild(opt);
+    });
+  }
+
+  // Get filter values
+  var filterAction = (document.getElementById('audit-filter-action') || {}).value || 'all';
+  var filterUser = (document.getElementById('audit-filter-user') || {}).value || 'all';
+  var filterDateFrom = (document.getElementById('audit-filter-date-from') || {}).value || '';
+  var filterDateTo = (document.getElementById('audit-filter-date-to') || {}).value || '';
+
+  var filtered = (state.activityLog || []).filter(function(a) {
+    if (filterAction !== 'all') {
+      var cat = getAuditActionCategory(a.action);
+      if (cat !== filterAction) return false;
+    }
+    if (filterUser !== 'all' && a.user !== filterUser) return false;
+    if (filterDateFrom) {
+      var d = new Date(a.date);
+      var from = new Date(filterDateFrom);
+      if (d < from) return false;
+    }
+    if (filterDateTo) {
+      var d2 = new Date(a.date);
+      var to = new Date(filterDateTo);
+      to.setHours(23,59,59,999);
+      if (d2 > to) return false;
+    }
+    return true;
+  });
+
+  if (countEl) countEl.textContent = filtered.length + ' événement' + (filtered.length !== 1 ? 's' : '');
+
+  if (filtered.length === 0) {
+    el.innerHTML = '<p style="color:var(--admin-text-dim);padding:16px;font-size:0.85rem">Aucune activité correspondant aux filtres.</p>';
+    return;
+  }
+
+  var icons = {lead_new:"📥",lead_status:"🔄",lead_delete:"🗑",project_new:"🚀",project_status:"🔄",project_delete:"🗑",note_new:"📝",note_delete:"🗑",link_new:"🔗",link_delete:"🗑",key_create:"🔑",key_revoke:"🔒",password_change:"🔐",import:"📥",export:"📤",system:"⚙️"};
+  var items = filtered.slice(0, 50);
+  el.innerHTML = items.map(function(a) {
+    var cat = getAuditActionCategory(a.action);
+    var label = getAuditActionLabel(a.action);
+    return [
+      '<div class="activity-item">',
+      '  <span class="activity-icon">' + (icons[a.action]||"•") + '</span>',
+      '  <div class="activity-content">',
+      '    <span class="activity-text">' + a.detail + '</span>',
+      '    <span class="activity-meta">' + (a.user||"Admin") + " · " + formatDate(a.date) + '</span>',
+      '  </div>',
+      '  <span class="audit-type"><span class="audit-action-type-badge ' + cat + '">' + label + '</span></span>',
+      '</div>'
+    ].join("");
+  }).join("");
+}
+
+function exportAuditCsv() {
+  var headers = ['date','user','action','action_label','category','detail'];
+  var rows = (state.activityLog || []).map(function(a) {
+    var cat = getAuditActionCategory(a.action);
+    return [
+      a.date || '',
+      a.user || 'Admin',
+      a.action || '',
+      getAuditActionLabel(a.action),
+      cat,
+      a.detail || ''
+    ];
+  });
+  var csv = arrayToCsv(headers, rows);
+  downloadCsv(csv, 'aken-audit-trail-' + new Date().toISOString().slice(0,10) + '.csv');
+  logActivity('export', 'Export CSV de l\'audit trail (' + rows.length + ' événements)');
+  showToast('Audit trail exporté en CSV !', 'success');
+}
+
+function initAuditFilters() {
+  ['audit-filter-action', 'audit-filter-user', 'audit-filter-date-from', 'audit-filter-date-to'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', renderAuditLog);
+  });
+  var btnExportAudit = document.getElementById('btn-export-audit');
+  if (btnExportAudit) btnExportAudit.addEventListener('click', exportAuditCsv);
+}
+
+// ==========================================================================
 // INIT: Wire up all new features
-function initNewFeatures(){var cmdInput=document.getElementById("cmd-palette-input");if(cmdInput){cmdInput.addEventListener("input",function(){cmdPalette.render(cmdInput.value);});cmdInput.addEventListener("keydown",function(e){if(e.key==="Escape")cmdPalette.close();if(e.key==="ArrowDown"){e.preventDefault();cmdPalette.navigate(1);}if(e.key==="ArrowUp"){e.preventDefault();cmdPalette.navigate(-1);}if(e.key==="Enter"){e.preventDefault();cmdPalette.execute();}});}document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="k"){e.preventDefault();if(cmdPalette.isOpen)cmdPalette.close();else cmdPalette.open();}});var fab=document.getElementById("fab-quick");if(fab)fab.addEventListener("click",function(){cmdPalette.open();});var bell=document.getElementById("notif-bell");var dd=document.getElementById("notif-dropdown");if(bell&&dd){bell.addEventListener("click",function(e){e.stopPropagation();dd.classList.toggle("hidden");notifCenter.render();});document.addEventListener("click",function(){dd.classList.add("hidden");});dd.addEventListener("click",function(e){e.stopPropagation();});}var cb=document.getElementById("notif-clear");if(cb)cb.addEventListener("click",function(){notifCenter.clear();});var ov=document.getElementById("cmd-palette");if(ov)ov.addEventListener("click",function(e){if(e.target===ov)cmdPalette.close();});(state.activityLog||[]).slice(0,5).forEach(function(a){notifCenter.add(a.detail,"🔔");});}
+// ==========================================================================
+function initNewFeatures(){var cmdInput=document.getElementById("cmd-palette-input");if(cmdInput){cmdInput.addEventListener("input",function(){cmdPalette.render(cmdInput.value);});cmdInput.addEventListener("keydown",function(e){if(e.key==="Escape")cmdPalette.close();if(e.key==="ArrowDown"){e.preventDefault();cmdPalette.navigate(1);}if(e.key==="ArrowUp"){e.preventDefault();cmdPalette.navigate(-1);}if(e.key==="Enter"){e.preventDefault();cmdPalette.execute();}});}document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="k"){e.preventDefault();if(cmdPalette.isOpen)cmdPalette.close();else cmdPalette.open();}});var fab=document.getElementById("fab-quick");if(fab)fab.addEventListener("click",function(){cmdPalette.open();});var bell=document.getElementById("notif-bell");var dd=document.getElementById("notif-dropdown");if(bell&&dd){bell.addEventListener("click",function(e){e.stopPropagation();dd.classList.toggle("hidden");notifCenter.render();});document.addEventListener("click",function(){dd.classList.add("hidden");});dd.addEventListener("click",function(e){e.stopPropagation();});}var cb=document.getElementById("notif-clear");if(cb)cb.addEventListener("click",function(){notifCenter.clear();});var ov=document.getElementById("cmd-palette");if(ov)ov.addEventListener("click",function(e){if(e.target===ov)cmdPalette.close();});(state.activityLog||[]).slice(0,5).forEach(function(a){notifCenter.add(a.detail,"🔔");});
+
+  // Templates
+  initTemplates();
+  renderTemplates();
+  var btnAddTemplate = document.getElementById('btn-add-template');
+  if (btnAddTemplate) btnAddTemplate.addEventListener('click', function() {
+    var modal = document.getElementById('add-template-modal');
+    if (modal) { modal.classList.remove('hidden'); document.getElementById('tpl-title').focus(); }
+  });
+  var tplForm = document.getElementById('add-template-form');
+  if (tplForm) tplForm.addEventListener('submit', handleAddTemplateSubmit);
+  var tplClose = document.getElementById('add-template-modal-close');
+  if (tplClose) tplClose.addEventListener('click', function() { document.getElementById('add-template-modal').classList.add('hidden'); });
+  var tplCancel = document.getElementById('tpl-cancel');
+  if (tplCancel) tplCancel.addEventListener('click', function() { document.getElementById('add-template-modal').classList.add('hidden'); });
+  var tplOverlay = document.getElementById('add-template-modal');
+  if (tplOverlay) tplOverlay.addEventListener('click', function(e) { if (e.target === tplOverlay) tplOverlay.classList.add('hidden'); });
+
+  // CSV Export/Import
+  var btnCsvLeads = document.getElementById('btn-csv-export-leads');
+  if (btnCsvLeads) btnCsvLeads.addEventListener('click', exportLeadsCsv);
+  var btnCsvProjects = document.getElementById('btn-csv-export-projects');
+  if (btnCsvProjects) btnCsvProjects.addEventListener('click', exportProjectsCsv);
+  var importCsvLeads = document.getElementById('import-csv-leads');
+  if (importCsvLeads) importCsvLeads.addEventListener('change', function(e) { if (e.target.files[0]) importLeadsCsv(e.target.files[0]); });
+  var importCsvProjects = document.getElementById('import-csv-projects');
+  if (importCsvProjects) importCsvProjects.addEventListener('change', function(e) { if (e.target.files[0]) importProjectsCsv(e.target.files[0]); });
+
+  // CSV Preview modal buttons
+  var csvPreviewClose = document.getElementById('csv-preview-close');
+  if (csvPreviewClose) csvPreviewClose.addEventListener('click', function() { document.getElementById('csv-preview-modal').classList.add('hidden'); });
+  var csvPreviewCancel = document.getElementById('csv-preview-cancel');
+  if (csvPreviewCancel) csvPreviewCancel.addEventListener('click', function() { document.getElementById('csv-preview-modal').classList.add('hidden'); });
+  var csvPreviewConfirm = document.getElementById('csv-preview-confirm');
+  if (csvPreviewConfirm) csvPreviewConfirm.addEventListener('click', confirmCsvImport);
+  var csvPreviewOverlay = document.getElementById('csv-preview-modal');
+  if (csvPreviewOverlay) csvPreviewOverlay.addEventListener('click', function(e) { if (e.target === csvPreviewOverlay) csvPreviewOverlay.classList.add('hidden'); });
+
+  // Global search
+  initGlobalSearch();
+
+  // Audit trail filters
+  initAuditFilters();
+}
 
 
   // =====================================================================

@@ -2580,3 +2580,154 @@ select.form-control-admin:focus {
   color: var(--admin-text-muted);
 }
 
+/* ==========================================================================
+   RESPONSIVE — NOUVELLES SECTIONS (AGENDA, CRM, ANALYTICS)
+   ========================================================================== */
+
+/* === Tablet (≤ 1024px) === */
+@media (max-width: 1024px) {
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .vitals-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* === Mobile (≤ 768px) === */
+@media (max-width: 768px) {
+  /* Agenda & Tâches */
+  .agenda-tasks-container {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-right: 0 !important;
+  }
+  .agenda-task-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+  .task-left {
+    gap: 10px !important;
+  }
+  .task-actions {
+    justify-content: flex-end !important;
+    border-top: 1px solid var(--admin-border) !important;
+    padding-top: 8px !important;
+  }
+  .focus-timer-display {
+    font-size: 2.2rem !important;
+  }
+  .focus-timer-card {
+    padding: 16px !important;
+  }
+  .milestone-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+  }
+  .milestone-date-badge {
+    align-self: flex-start !important;
+  }
+  .milestones-timeline {
+    gap: 8px !important;
+  }
+
+  /* CRM Clients */
+  .clients-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .client-card {
+    padding: 16px !important;
+  }
+  .client-card-header {
+    flex-wrap: wrap !important;
+  }
+  .client-name {
+    font-size: 0.95rem !important;
+  }
+  .client-card-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .client-card-footer .client-quick-btns {
+    justify-content: stretch !important;
+    gap: 8px !important;
+  }
+  .client-card-footer button {
+    flex: 1 !important;
+    text-align: center !important;
+  }
+
+  /* Analytics & Monitoring */
+  .vitals-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .vital-card {
+    padding: 12px 10px !important;
+  }
+  .vital-gauge-val {
+    font-size: 1.4rem !important;
+  }
+  .diagnostics-box {
+    padding: 12px !important;
+    font-size: 0.78rem !important;
+  }
+  .traffic-bars {
+    gap: 12px !important;
+  }
+  .traffic-bar-label {
+    font-size: 0.76rem !important;
+  }
+}
+
+/* === Small phones (≤ 480px) === */
+@media (max-width: 480px) {
+  /* Agenda */
+  .task-title {
+    font-size: 0.85rem !important;
+  }
+  .task-meta {
+    font-size: 0.7rem !important;
+    gap: 5px !important;
+  }
+  .task-checkbox-custom {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .focus-timer-display {
+    font-size: 1.9rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* CRM */
+  .client-avatar {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 0.95rem !important;
+  }
+  .client-details-list {
+    font-size: 0.78rem !important;
+  }
+  .client-status-pill {
+    font-size: 0.65rem !important;
+    padding: 2px 7px !important;
+  }
+
+  /* Analytics */
+  .vitals-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .vital-gauge-val {
+    font-size: 1.25rem !important;
+  }
+  .vital-title {
+    font-size: 0.68rem !important;
+  }
+}

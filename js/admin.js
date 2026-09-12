@@ -1307,7 +1307,7 @@
             '    <div class="milestone-title">' + escapeHtml(m.title) + '</div>',
             '    <div class="milestone-sub">' + (m.project ? 'Projet : ' + escapeHtml(m.project) : 'Échéance équipe') + '</div>',
             '  </div>',
-            '  <div style="display:flex;align-items:center;gap:8px;">',
+            '  <div class="milestone-item-right" style="display:flex;align-items:center;gap:8px;flex-shrink:0;">',
             '    <span class="milestone-date-badge">' + (m.date || 'À définir') + '</span>',
             '    <button type="button" class="task-del-btn milestone-del-btn" data-id="' + m.id + '" title="Supprimer">✕</button>',
             '  </div>',

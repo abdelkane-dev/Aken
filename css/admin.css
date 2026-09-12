@@ -2101,11 +2101,82 @@ select.form-control-admin:focus {
    ========================================================================== */
 
 /* --- 1. AGENDA & TÂCHES --- */
+.agenda-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.agenda-side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.agenda-add-task-form {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 16px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  margin-bottom: 20px;
+}
+
+.agenda-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(110px, 1fr) minmax(130px, 1fr) minmax(120px, 1fr);
+  gap: 10px;
+}
+
+.agenda-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.agenda-title-row h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.btn-add-milestone {
+  font-size: 0.8rem !important;
+  padding: 6px 14px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: var(--admin-radius-sm) !important;
+  background: linear-gradient(135deg, var(--admin-amber) 0%, #ff8c00 100%) !important;
+  color: #07090f !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 10px rgba(255, 184, 0, 0.25) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+}
+
+.btn-add-milestone:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(255, 184, 0, 0.4) !important;
+}
+
 .agenda-tasks-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 520px;
+  max-height: 540px;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -2259,19 +2330,25 @@ select.form-control-admin:focus {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .milestone-item {
   display: flex;
-  gap: 14px;
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.02);
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.025);
   border-left: 3px solid var(--admin-amber);
   border-radius: 0 var(--admin-radius-sm) var(--admin-radius-sm) 0;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.milestone-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-left-width: 4px;
 }
 
 .milestone-item.livraison { border-left-color: var(--admin-teal); }
@@ -2283,12 +2360,16 @@ select.form-control-admin:focus {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .milestone-title {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
+  line-height: 1.35;
+  word-break: break-word;
 }
 
 .milestone-sub {
@@ -2296,12 +2377,20 @@ select.form-control-admin:focus {
   color: var(--admin-text-muted);
 }
 
+.milestone-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .milestone-date-badge {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--admin-amber);
-  background: rgba(255, 184, 0, 0.1);
-  padding: 4px 8px;
+  background: rgba(255, 184, 0, 0.12);
+  border: 1px solid rgba(255, 184, 0, 0.25);
+  padding: 4px 10px;
   border-radius: 6px;
   white-space: nowrap;
 }
@@ -2311,8 +2400,12 @@ select.form-control-admin:focus {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
-  padding: 24px;
+  padding: 24px 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .focus-timer-display {
@@ -2322,7 +2415,25 @@ select.form-control-admin:focus {
   color: var(--admin-teal);
   letter-spacing: 0.05em;
   margin-bottom: 16px;
-  text-shadow: 0 0 20px var(--admin-teal-glow);
+  text-shadow: 0 0 24px var(--admin-teal-glow);
+}
+
+.focus-timer-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.focus-timer-btns .btn-action-primary,
+.focus-timer-btns .btn-action-light {
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  min-width: 135px;
+  justify-content: center;
 }
 
 /* --- 2. RÉPERTOIRE & CRM CLIENTS --- */
@@ -2584,8 +2695,23 @@ select.form-control-admin:focus {
    RESPONSIVE — NOUVELLES SECTIONS (AGENDA, CRM, ANALYTICS)
    ========================================================================== */
 
-/* === Tablet (≤ 1024px) === */
-@media (max-width: 1024px) {
+/* === Tablet & Small Laptops (≤ 1200px) === */
+@media (max-width: 1200px) {
+  .agenda-split {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .agenda-side-col {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+  .agenda-form-grid {
+    grid-template-columns: minmax(0, 1.5fr) 1fr 1fr !important;
+  }
+  .agenda-form-grid .form-group-admin:last-child {
+    grid-column: 1 / -1 !important;
+  }
   .clients-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -2597,6 +2723,32 @@ select.form-control-admin:focus {
 /* === Mobile (≤ 768px) === */
 @media (max-width: 768px) {
   /* Agenda & Tâches */
+  .agenda-split {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .agenda-side-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+  .agenda-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .agenda-title-row {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  .agenda-title-row h3 {
+    font-size: 0.95rem !important;
+  }
+  .btn-add-milestone {
+    padding: 5px 12px !important;
+    font-size: 0.76rem !important;
+  }
   .agenda-tasks-container {
     max-height: none !important;
     overflow-y: visible !important;
@@ -2616,23 +2768,35 @@ select.form-control-admin:focus {
     border-top: 1px solid var(--admin-border) !important;
     padding-top: 8px !important;
   }
-  .focus-timer-display {
-    font-size: 2.2rem !important;
-  }
-  .focus-timer-card {
-    padding: 16px !important;
-  }
   .milestone-item {
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-    padding: 10px 12px !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
   }
-  .milestone-date-badge {
-    align-self: flex-start !important;
+  .milestone-item-right {
+    width: 100% !important;
+    justify-content: space-between !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding-top: 8px !important;
   }
   .milestones-timeline {
+    gap: 10px !important;
+  }
+  .focus-timer-display {
+    font-size: 2.3rem !important;
+  }
+  .focus-timer-card {
+    padding: 18px 14px !important;
+  }
+  .focus-timer-btns {
+    flex-direction: column !important;
+    width: 100% !important;
     gap: 8px !important;
+  }
+  .focus-timer-btns button {
+    width: 100% !important;
+    min-width: 0 !important;
   }
 
   /* CRM Clients */
@@ -2689,6 +2853,18 @@ select.form-control-admin:focus {
 /* === Small phones (≤ 480px) === */
 @media (max-width: 480px) {
   /* Agenda */
+  .agenda-title-row h3 {
+    font-size: 0.88rem !important;
+    gap: 6px !important;
+  }
+  .agenda-title-row h3 svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .btn-add-milestone {
+    padding: 4px 10px !important;
+    font-size: 0.72rem !important;
+  }
   .task-title {
     font-size: 0.85rem !important;
   }
@@ -2701,7 +2877,7 @@ select.form-control-admin:focus {
     height: 20px !important;
   }
   .focus-timer-display {
-    font-size: 1.9rem !important;
+    font-size: 1.95rem !important;
     letter-spacing: 0.02em !important;
   }
 

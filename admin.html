@@ -635,8 +635,8 @@
             </div>
           </div>
 
-          <div class="dashboard-split">
-            <div class="admin-card-section">
+          <div class="dashboard-split agenda-split">
+            <div class="admin-card-section agenda-tasks-card">
               <div class="section-title-row">
                 <h3>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-teal)" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -645,9 +645,9 @@
                 <span class="lockscreen-badge" id="tasks-progress-badge">0% Réalisé</span>
               </div>
 
-              <!-- Formulaire nouvelle tâche -->
-              <form id="form-add-task" style="background:rgba(255,255,255,0.02);padding:16px;border:1px solid var(--admin-border);border-radius:var(--admin-radius);margin-bottom:20px;">
-                <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
+              <!-- Formulaire nouvelle tâche responsive -->
+              <form id="form-add-task" class="agenda-add-task-form">
+                <div class="agenda-form-grid">
                   <div class="form-group-admin" style="margin-bottom:0;">
                     <label>Intitulé de la tâche :</label>
                     <input type="text" id="task-title-input" class="form-control-admin" placeholder="Ex: Intégrer l'API Wave sur le projet Seydou" required>
@@ -669,18 +669,18 @@
                     <input type="text" id="task-project-input" class="form-control-admin" placeholder="Ex: Faso Santé">
                   </div>
                 </div>
-                <button type="submit" class="btn-action-primary" style="width:100%;">+ Ajouter la tâche à l'agenda</button>
+                <button type="submit" class="btn-action-primary btn-submit-task" style="width:100%;margin-top:12px;">+ Ajouter la tâche à l'agenda</button>
               </form>
 
               <!-- Filtres et recherche -->
-              <div class="inbox-toolbar" style="margin-bottom:16px;">
-                <div class="inbox-filters">
+              <div class="inbox-toolbar agenda-toolbar" style="margin-bottom:16px;">
+                <div class="inbox-filters agenda-filters">
                   <button type="button" class="filter-chip active" data-task-filter="all">Toutes (<span id="count-filter-all">0</span>)</button>
                   <button type="button" class="filter-chip" data-task-filter="todo">À faire (<span id="count-filter-todo">0</span>)</button>
                   <button type="button" class="filter-chip" data-task-filter="urgent">⚡ Urgentes (<span id="count-filter-urgent">0</span>)</button>
                   <button type="button" class="filter-chip" data-task-filter="done">✅ Terminées (<span id="count-filter-done">0</span>)</button>
                 </div>
-                <div class="search-input-wrap" style="min-width:200px;">
+                <div class="search-input-wrap agenda-search-wrap" style="min-width:200px;">
                   <input type="text" id="task-search-input" placeholder="Filtrer une tâche...">
                 </div>
               </div>
@@ -692,33 +692,33 @@
             </div>
 
             <!-- Colonne droite : Jalons & Focus -->
-            <div style="display:flex;flex-direction:column;gap:24px;">
-              <div class="admin-card-section">
-                <div class="section-title-row">
+            <div class="agenda-side-col">
+              <div class="admin-card-section agenda-milestones-card">
+                <div class="section-title-row agenda-title-row">
                   <h3>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-amber)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    Jalons &amp; Échéances Clés
+                    <span>Jalons &amp; Échéances Clés</span>
                   </h3>
-                  <button type="button" class="btn-action-light" id="btn-add-milestone" style="font-size:0.75rem;padding:4px 10px;">+ Jalon</button>
+                  <button type="button" class="btn-action-primary btn-add-milestone" id="btn-add-milestone">+ Jalon</button>
                 </div>
                 <div id="agenda-milestones-list" class="milestones-timeline">
                   <!-- Rendu dynamique -->
                 </div>
               </div>
 
-              <div class="admin-card-section">
-                <div class="section-title-row">
+              <div class="admin-card-section agenda-focus-card">
+                <div class="section-title-row agenda-title-row">
                   <h3>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-mint)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Session Focus / Sprint
+                    <span>Session Focus / Sprint</span>
                   </h3>
                 </div>
-                <p style="color:var(--admin-text-muted);font-size:0.85rem;line-height:1.5;margin-bottom:16px;">
+                <p class="focus-desc" style="color:var(--admin-text-muted);font-size:0.85rem;line-height:1.5;margin-bottom:16px;">
                   Sprint de productivité de 25 min sans interruption pour l'équipe Aken.
                 </p>
                 <div class="focus-timer-card">
                   <div class="focus-timer-display" id="focus-timer-display">25:00</div>
-                  <div style="display:flex;gap:10px;justify-content:center;">
+                  <div class="focus-timer-btns">
                     <button type="button" class="btn-action-primary" id="btn-focus-start">▶ Démarrer Focus</button>
                     <button type="button" class="btn-action-light" id="btn-focus-reset">↺ Réinitialiser</button>
                   </div>

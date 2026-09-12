@@ -1832,6 +1832,7 @@ select.form-control-admin:focus {
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2907,3 +2908,217 @@ select.form-control-admin:focus {
     font-size: 0.68rem !important;
   }
 }
+
+
+/* ==========================================================================
+   SIDEBAR SITE LINK
+   ========================================================================== */
+.sidebar-site-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: var(--admin-radius-sm);
+  color: var(--admin-teal);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar-site-link:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: rgba(0, 240, 255, 0.35);
+  transform: translateX(2px);
+}
+
+.sidebar-site-link svg {
+  flex-shrink: 0;
+  color: var(--admin-teal);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   TOPBAR — RESPONSIVE FIXES
+   ========================================================================== */
+/* Btn View Site in topbar */
+.btn-view-site {
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Hide search bar text label on smaller screens */
+@media (max-width: 900px) {
+  .global-search-wrap {
+    max-width: 200px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide global search on mobile (use Cmd+K / FAB instead) */
+  .global-search-wrap {
+    display: none !important;
+  }
+  /* Hide "Voir le site" text label, keep icon only */
+  .btn-view-site-text {
+    display: none !important;
+  }
+  /* Topbar right: keep compact */
+  .topbar-right {
+    gap: 8px !important;
+  }
+  /* Notification dropdown: position from right edge of screen */
+  .notif-bell-wrap .notif-dropdown {
+    right: 0 !important;
+    width: min(340px, calc(100vw - 16px)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Very small phones: even tighter topbar */
+  .admin-topbar {
+    padding: 0 8px !important;
+  }
+  .page-headline h1 {
+    font-size: 0.88rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+  .topbar-right {
+    gap: 6px !important;
+  }
+}
+
+/* ==========================================================================
+   CHARTS — SOURCES DES LEADS ALWAYS FULLY VISIBLE
+   ========================================================================== */
+/* Remove restrictive max-width from chart-container-sm on all screens */
+.chart-container-sm {
+  max-width: 100% !important;
+  height: 200px;
+}
+
+/* On dashboard charts row: all charts fill their grid cell */
+.charts-row .chart-card {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Ensure canvas doesn't overflow card */
+.chart-container canvas {
+  display: block;
+  width: 100% !important;
+}
+
+/* ==========================================================================
+   NOTIFICATION DROPDOWN — IMPROVED DISPLAY
+   ========================================================================== */
+/* Make dropdown scroll properly on all screens */
+.notif-dropdown:not(.hidden) {
+  max-height: min(420px, calc(100vh - 100px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.notif-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+/* Notif item: ensure proper display */
+.notif-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.12s;
+  cursor: default;
+}
+
+.notif-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.notif-item-icon {
+  font-size: 1.1rem;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.notif-item-text {
+  font-size: 0.85rem;
+  color: var(--admin-text);
+  line-height: 1.35;
+  flex: 1;
+}
+
+.notif-item-time {
+  font-size: 0.7rem;
+  color: var(--admin-text-dim);
+  font-family: var(--font-mono);
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   FAB — ENSURE IT DOESN'T OBSCURE CONTENT
+   ========================================================================== */
+.fab-quick-actions {
+  z-index: 9000 !important;
+}
+
+/* Ensure FAB doesn't overlap topbar notification on mobile */
+@media (max-width: 768px) {
+  .fab-quick-actions {
+    bottom: 20px !important;
+    right: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   CLOSE BUTTONS (NOTIF & CMD PALETTE)
+   ========================================================================== */
+.notif-close-btn,
+.cmd-close-btn {
+  background: none;
+  border: none;
+  color: var(--admin-text-dim);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 0.95rem;
+  line-height: 1;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.notif-close-btn:hover,
+.cmd-close-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   AGENDA FORM GRID — SPACIOUS DESKTOP LAYOUT
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1400px) {
+  .agenda-form-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+  .agenda-form-grid .form-group-admin:first-child {
+    grid-column: 1 / -1 !important;
+  }
+}
+

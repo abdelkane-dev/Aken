@@ -176,14 +176,14 @@
         <div class="comm-orbit-ring comm-orbit-ring-1" aria-hidden="true"></div>
         <div class="comm-orbit-ring comm-orbit-ring-2" aria-hidden="true"></div>
 
-        <!-- 1. WhatsApp (Canal Actif) -->
-        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-orbit-node comm-orbit-wa is-live" style="--angle: 0deg; --brand: #25D366;" data-channel="WhatsApp" data-target="#ch-wa" aria-label="Rejoindre WhatsApp (Actif)">
+        <!-- 1. WhatsApp (Bientôt — groupe communauté en préparation) -->
+        <button type="button" class="comm-orbit-node comm-orbit-wa is-soon" style="--angle: 0deg; --brand: #25D366;" data-channel="WhatsApp" data-target="#ch-wa" data-url="" aria-label="Canal WhatsApp (Bientôt)">
           <div class="comm-orbit-icon-wrap">
             <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
-            <span class="comm-orbit-dot" title="Canal actif"></span>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
           </div>
           <span class="comm-orbit-name">WhatsApp</span>
-        </a>
+        </button>
 
         <!-- 2. GitHub (Canal Actif) -->
         <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-orbit-node comm-orbit-gh is-live" style="--angle: 45deg; --brand: #F0F6FC;" data-channel="GitHub" data-target="#ch-gh" aria-label="Explorer GitHub (Actif)">
@@ -308,17 +308,17 @@
 
       <div class="comm-channels-grid">
 
-        <!-- WhatsApp (lien réel) -->
-        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" id="ch-wa" data-channel="WhatsApp">
+        <!-- WhatsApp — groupe communautaire en préparation (REMPLACER data-url par le lien du groupe officiel) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-wa" data-channel="WhatsApp" data-url="">
           <div class="comm-channel-icon comm-icon-whatsapp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
           </div>
           <div class="comm-channel-body">
-            <h3>WhatsApp <span class="comm-live-dot" aria-hidden="true"></span></h3>
+            <h3>WhatsApp <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
             <p data-aken-text="communaute.ch_wa_desc">Le canal le plus réactif : entraide quotidienne, annonces et discussions en direct.</p>
           </div>
           <span class="comm-channel-arrow" aria-hidden="true">→</span>
-        </a>
+        </button>
 
         <!-- GitHub (lien réel) -->
         <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" id="ch-gh" data-channel="GitHub">

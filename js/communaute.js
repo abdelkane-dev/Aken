@@ -65,9 +65,32 @@
     obs.observe(stats);
   }
 
-  /* ═══ Cartes canaux « Bientôt » : toast d'information ═══ */
+  /* ═══ Cartes canaux « Bientôt » ═══
+     Activation automatique : dès qu'une carte porte un data-url non vide,
+     elle devient un lien ouvert dans un nouvel onglet (plus de toast).
+     Pour lancer un canal : remplacer le data-url="" dans communaute.html. */
   function initChannels() {
     document.querySelectorAll(".comm-channel-soon").forEach(function (card) {
+      var url = (card.getAttribute("data-url") || "").trim();
+      if (url) {
+        card.setAttribute("data-pending-url", url); /* préservé si retour en arrière */
+        var link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.className = "comm-channel-card comm-channel-live";
+        link.setAttribute("aria-label", "Rejoindre " + (card.getAttribute("data-channel") || "le canal"));
+        while (card.firstChild) link.appendChild(card.firstChild);
+        var arrow = document.createElement("span");
+        arrow.className = "comm-channel-arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+        link.appendChild(arrow);
+        var badge = link.querySelector(".comm-soon-badge");
+        if (badge) badge.remove();
+        card.parentNode.replaceChild(link, card);
+        return;
+      }
       card.addEventListener("click", function () {
         var channel = card.getAttribute("data-channel") || "ce canal";
         showCommToast("Rejoignez-nous très bientôt sur " + channel + " ! 🚀", "🔔");

@@ -33,6 +33,7 @@ const APP_SHELL = [
   '/assets/favicon.svg',
   '/assets/favoricon.png',
   '/assets/og-cover.png',
+  '/assets/og-communaute.png',
   '/assets/blog/cover-1.svg',
   '/assets/blog/cover-2.svg',
   '/assets/blog/cover-3.svg',

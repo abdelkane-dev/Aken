@@ -357,7 +357,7 @@ function verifySignature(payload, signature, secret) {
         });
       }
 
-      html += '<article class="blog-card" data-category="' + article.category + '" data-id="' + article.id + '" style="animation-delay: ' + (index * 0.08) + 's;">';
+      html += '<article class="blog-card" data-category="' + article.category + '" data-id="' + article.id + '" style="animation-delay: ' + ((index % articlesPerPage) * 0.08) + 's;">';
       html += '  <div class="blog-card-image">';
       html += '    <img src="' + article.cover + '" alt="Illustration : ' + article.title + '" class="blog-cover-img" width="720" height="405" loading="lazy" decoding="async">';
       html += '    <span class="blog-card-category-badge">' + article.category + '</span>';

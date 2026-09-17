@@ -482,6 +482,21 @@
   .comm-stat-sep { height: 32px; }
 }
 
+/* Très petits écrans : les stats passent en pile */
+@media (max-width: 380px) {
+  .comm-stats-row {
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .comm-stat-sep {
+    width: 44px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.5), transparent);
+  }
+}
+
 /* ---------- CANAUX ---------- */
 .comm-channels-section {
   position: relative;
@@ -498,7 +513,7 @@
 
 .comm-channels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 22px;
   margin-top: 40px;
 }
@@ -650,7 +665,7 @@
 
 .comm-charter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   gap: 22px;
   margin-top: 40px;
 }

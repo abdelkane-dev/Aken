@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Cloud versus VPS">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#120A1E"/><stop offset="0.55" stop-color="#1E1230"/><stop offset="1" stop-color="#0A0710"/>
+    </linearGradient>
+    <linearGradient id="o5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow5" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.24"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g5)"/>
+  <g fill="#FFAA00" opacity="0.13">
+    <circle cx="60" cy="60" r="1.4"/><circle cx="160" cy="40" r="1.4"/><circle cx="260" cy="100" r="1.4"/><circle cx="460" cy="50" r="1.4"/><circle cx="560" cy="110" r="1.4"/><circle cx="660" cy="60" r="1.4"/><circle cx="70" cy="310" r="1.4"/><circle cx="650" cy="320" r="1.4"/>
+  </g>
+  <rect width="720" height="405" fill="url(#glow5)"/>
+  <!-- Nuage (gauche) -->
+  <g transform="translate(190 150)">
+    <path d="M-70 40a44 44 0 0 1 8-86 56 56 0 0 1 104-16 40 40 0 0 1 38 62 36 36 0 0 1-12 40z" fill="none" stroke="#FFAA00" stroke-width="3.5" stroke-linejoin="round"/>
+    <g stroke="#E0E0E0" stroke-width="2" opacity="0.5" stroke-linecap="round">
+      <path d="M-40 12h80M-40 26h56"/>
+    </g>
+    <g fill="#FF6B00" opacity="0.9">
+      <circle cx="-52" cy="-20" r="4"/><circle cx="-20" cy="-44" r="4"/><circle cx="18" cy="-30" r="4"/><circle cx="44" cy="-8" r="4"/>
+    </g>
+    <text x="0" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E0E0E0" opacity="0.75">CLOUD</text>
+  </g>
+  <!-- Balance centrale (fléau) -->
+  <g stroke="#FF6B00" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M360 96v190"/>
+    <path d="M270 130h180"/>
+    <circle cx="360" cy="96" r="7" fill="#FFAA00" stroke="none"/>
+  </g>
+  <g stroke="#FFAA00" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M270 130l-30 36M270 130l30 36"/>
+    <circle cx="240" cy="176" r="14"/>
+    <path d="M450 130l-30 36M450 130l30 36"/>
+    <circle cx="480" cy="176" r="14"/>
+  </g>
+  <!-- Serveur rack (droite) -->
+  <g transform="translate(530 250)">
+    <rect x="-80" y="-60" width="160" height="150" rx="12" fill="#0D1216" stroke="#FF6B00" stroke-width="3.5"/>
+    <g stroke="#E0E0E0" stroke-width="2" opacity="0.6" stroke-linecap="round">
+      <path d="M-60 -34h84M-60 -6h84M-60 22h84M-60 50h84"/>
+    </g>
+    <g fill="url(#o5)">
+      <circle cx="56" cy="-34" r="5"/><circle cx="56" cy="-6" r="5"/><circle cx="56" cy="22" r="5"/><circle cx="56" cy="50" r="5"/>
+    </g>
+    <g fill="#FFAA00">
+      <rect x="-60" y="-44" width="26" height="8" rx="4" opacity="0.85"/>
+      <rect x="-60" y="-16" width="26" height="8" rx="4" opacity="0.5"/>
+      <rect x="-60" y="12" width="26" height="8" rx="4" opacity="0.85"/>
+      <rect x="-60" y="40" width="26" height="8" rx="4" opacity="0.5"/>
+    </g>
+    <text x="0" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E0E0E0" opacity="0.75">VPS</text>
+  </g>
+  <!-- VS -->
+  <g transform="translate(360 250)">
+    <circle cx="0" cy="0" r="34" fill="none" stroke="#FF6B00" stroke-width="3"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFAA00">VS</text>
+  </g>
+  <path d="M0 385q60 -14 120 0t120 0 120 0 120 0 120 0 120 0" fill="none" stroke="#FF6B00" stroke-width="2" opacity="0.35"/>
+</svg>

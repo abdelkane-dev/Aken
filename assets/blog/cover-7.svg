@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="PWA versus application native">
+  <defs>
+    <linearGradient id="g7" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#05141A"/><stop offset="0.55" stop-color="#0A222C"/><stop offset="1" stop-color="#040A0D"/>
+    </linearGradient>
+    <linearGradient id="o7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow7" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.25"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g7)"/>
+  <g fill="#FFAA00" opacity="0.13">
+    <circle cx="60" cy="60" r="1.4"/><circle cx="150" cy="40" r="1.4"/><circle cx="260" cy="90" r="1.4"/><circle cx="470" cy="50" r="1.4"/><circle cx="570" cy="100" r="1.4"/><circle cx="660" cy="60" r="1.4"/><circle cx="80" cy="310" r="1.4"/><circle cx="640" cy="300" r="1.4"/>
+  </g>
+  <rect width="720" height="405" fill="url(#glow7)"/>
+  <!-- Téléphone gauche : PWA installation instantanée -->
+  <g transform="translate(220 205)">
+    <rect x="-66" y="-130" width="132" height="260" rx="22" fill="#0D1216" stroke="#FFAA00" stroke-width="3"/>
+    <rect x="-54" y="-118" width="108" height="236" rx="14" fill="#081014"/>
+    <rect x="-22" y="-126" width="44" height="5" rx="2.5" fill="#FFAA00" opacity="0.8"/>
+    <!-- Icône d'app qui se pose -->
+    <g transform="translate(0 -58)">
+      <rect x="-24" y="-24" width="48" height="48" rx="12" fill="url(#o7)"/>
+      <path d="M-9 6l8-20 8 20M-6 -2h12" stroke="#0A0A0A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <rect x="-40" y="6" width="80" height="12" rx="6" fill="#E0E0E0" opacity="0.5"/>
+    <rect x="-28" y="30" width="56" height="8" rx="4" fill="#FFAA00" opacity="0.9"/>
+    <!-- Flash "2s" -->
+    <g transform="translate(0 88)">
+      <g stroke="#FF6B00" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 -22l-16 20h12l-6 20 20-24h-12l10-16z" fill="#FF6B00" stroke="none" transform="scale(0.9)"/>
+      </g>
+    </g>
+  </g>
+  <!-- Téléphone droite : store classique -->
+  <g transform="translate(500 205)">
+    <rect x="-66" y="-130" width="132" height="260" rx="22" fill="#0D1216" stroke="#E0E0E0" stroke-width="2.5" opacity="0.9"/>
+    <rect x="-54" y="-118" width="108" height="236" rx="14" fill="#081014"/>
+    <!-- Progression de téléchargement lente -->
+    <g transform="translate(0 -30)">
+      <rect x="-40" y="0" width="80" height="14" rx="7" fill="none" stroke="#E0E0E0" stroke-width="2" opacity="0.6"/>
+      <rect x="-40" y="0" width="30" height="14" rx="7" fill="#E0E0E0" opacity="0.45"/>
+      <text x="0" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#E0E0E0" opacity="0.7">50 Mo</text>
+    </g>
+    <!-- Sablier -->
+    <g transform="translate(0 60)" stroke="#E0E0E0" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round">
+      <path d="M-14 -18h28M-14 26h28M-12 -16c0 12 24 12 24 26M12 -16c0 12-24 12-24 26"/>
+      <path d="M-4 0h8l-4 6z" fill="#E0E0E0" stroke="none"/>
+    </g>
+  </g>
+  <!-- VS -->
+  <g transform="translate(360 205)">
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#FF6B00" stroke-width="3"/>
+    <text x="0" y="7" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#FFAA00">VS</text>
+  </g>
+  <path d="M0 385q60 -14 120 0t120 0 120 0 120 0 120 0 120 0" fill="none" stroke="#FF6B00" stroke-width="2" opacity="0.35"/>
+</svg>

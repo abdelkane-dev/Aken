@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark light">
 <title>Blog &amp; Insights — Aken | Solutions Digitales, Web &amp; Applications Mobiles</title>
-<meta name="description" content="Analyses, guides et retours d'expérience sur la digitalisation d'entreprises, la création de sites web et applications mobiles par Aken.">
+<meta name="description" content="Analyses, guides d'ingénierie et retours d'expérience sur la digitalisation d'entreprises, les paiements mobile money et le développement web & mobile par Aken à Bamako.">
 <meta property="og:title" content="Blog &amp; Insights — Aken">
-<meta property="og:description" content="Expertise technologique, transformation digitale et développement de solutions web & mobiles au Mali et à l'international.">
+<meta property="og:description" content="Expertise technologique, architecture résiliente et développement de solutions web & mobiles au Mali et à l'international.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/og-cover.png">
 <link rel="canonical" href="https://www.aken.dev/blog.html">
@@ -25,8 +25,13 @@
 <meta name="apple-mobile-web-app-title" content="Aken">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
-<body>
+<body class="blog-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
+<!-- Barre de progression de lecture de la page -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Lueur ambiante en arrière-plan -->
+<div class="blog-ambient-mesh" aria-hidden="true"></div>
 
 <header class="site-header" id="entete">
   <div class="wrap header-inner">
@@ -41,10 +46,11 @@
     <nav class="desktop-nav" aria-label="Navigation principale">
       <div class="nav-links-list">
         <a href="index.html#apropos" data-aken-text="nav.apropos">À propos</a>
-        <a href="index.html#expertise" data-aken-text="nav.expertise">Expertise</a>
+        <a href="index.html#expertise" data-aken-text="nav.expertise">Services</a>
         <a href="index.html#offres" data-aken-text="nav.offres">Offres</a>
         <a href="index.html#projets" data-aken-text="nav.projets">Projets</a>
-        <a href="blog.html" data-aken-text="nav.blog" style="color: var(--teal); font-weight: 600;">Blog</a>
+        <a href="blog.html" class="active" data-aken-text="nav.blog" style="color: var(--accent); font-weight: 700;">Blog</a>
+        <a href="communaute.html" data-aken-text="nav.communaute">Communauté</a>
         <a href="index.html#temoignages" data-aken-text="nav.temoignages">Avis</a>
         <a href="index.html#faq" data-aken-text="nav.faq">FAQ</a>
       </div>
@@ -96,17 +102,17 @@
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
       <span data-aken-text="nav.offres">Offres</span>
     </a>
-    <a href="index.html#tarifs">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      <span data-aken-text="nav.tarifs">Tarifs</span>
-    </a>
     <a href="index.html#projets">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       <span data-aken-text="nav.projets">Projets</span>
     </a>
-    <a href="blog.html">
+    <a href="blog.html" class="active">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      <span data-aken-text="nav.blog" style="color: var(--teal); font-weight: 600;">Blog</span>
+      <span data-aken-text="nav.blog" style="color: var(--accent); font-weight: 700;">Blog</span>
+    </a>
+    <a href="communaute.html">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span data-aken-text="nav.communaute">Communauté</span>
     </a>
     <a href="index.html#temoignages">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -135,25 +141,185 @@
 </nav>
 
 <main id="contenu">
+  <!-- ═══════════════════════════════════════════════════════
+       HERO DU BLOG — REFONTE MODERNE & DYNAMIQUE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="blog-hero">
+    <div class="wrap blog-hero-inner">
+      <div class="blog-hero-text">
+        <div class="blog-breadcrumb">
+          <a href="index.html">Accueil</a>
+          <span class="blog-breadcrumb-sep">/</span>
+          <span class="blog-breadcrumb-current">Blog &amp; Insights</span>
+        </div>
+
+        <div class="blog-badge-pulse">
+          <span class="pulse-dot"></span>
+          <span>Veille Technologique &amp; Architecture</span>
+        </div>
+
+        <h1 class="blog-hero-title">
+          Solutions Digitales &amp; <span class="accent-gradient">Ingénierie Logicielle</span> au Mali
+        </h1>
+
+        <p class="blog-hero-lead">
+          Retours d'expérience réels, guides techniques, comparatifs d'infrastructure et stratégies concrètes pour bâtir des systèmes web et mobiles fiables, rapides et monétisables en Afrique.
+        </p>
+
+        <!-- Stats Chips -->
+        <div class="blog-stats-row">
+          <span class="blog-stat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            8 Articles complets
+          </span>
+          <span class="blog-stat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            100% Cas réels &amp; Code testé
+          </span>
+          <span class="blog-stat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ~6 min de lecture moyenne
+          </span>
+        </div>
+      </div>
+
+      <!-- Mascotte Interactive avec suivi du regard & bulle -->
+      <div class="blog-hero-mascot-wrap hero-graphic" aria-label="Mascotte Aken interactive">
+        <div class="blog-mascot-container">
+          <div class="blog-mascot-glow"></div>
+          <div class="blog-mascot-orbit"></div>
+          <div class="mascot-float">
+            <svg class="hero-mascot" viewBox="0 0 240 240" width="240" height="240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mascotte Aken">
+              <defs>
+                <linearGradient id="mascotHeroGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#FFAA00"/>
+                  <stop offset="0.55" stop-color="#FF6B00"/>
+                  <stop offset="1" stop-color="#FF3D00"/>
+                </linearGradient>
+              </defs>
+              <ellipse class="mascot-part" cx="49" cy="55" rx="17" ry="16" fill="url(#mascotHeroGrad)"/>
+              <ellipse class="mascot-part" cx="191" cy="55" rx="17" ry="16" fill="url(#mascotHeroGrad)"/>
+              <path class="mascot-part" d="M120 32c-51 0-84 32-84 76 0 16 5 28 14 36 6 5 14 8 24 9 14 1 30-4 46-4s32 5 46 4c10-1 18-4 24-9 9-8 14-20 14-36 0-44-33-76-84-76Z" fill="url(#mascotHeroGrad)"/>
+              <g class="mascot-eye">
+                <ellipse cx="87" cy="108" rx="16" ry="18" fill="#0A0A0A"/>
+                <circle class="mascot-pupil" cx="87" cy="108" r="5" fill="#FFAA00" opacity="0.95"/>
+                <circle class="mascot-spark" cx="91" cy="101" r="2.2" fill="#FFFFFF" opacity="0.9"/>
+              </g>
+              <g class="mascot-eye">
+                <ellipse cx="153" cy="108" rx="16" ry="18" fill="#0A0A0A"/>
+                <circle class="mascot-pupil" cx="153" cy="108" r="5" fill="#FFAA00" opacity="0.95"/>
+                <circle class="mascot-spark" cx="157" cy="101" r="2.2" fill="#FFFFFF" opacity="0.9"/>
+              </g>
+              <path class="mascot-part" d="M50 150c22 10 45 14 70 14s48-4 70-14c-4 12-13 21-25 26-13 6-29 9-45 9s-32-3-45-9c-12-5-21-14-25-26Z" fill="#0A0A0A"/>
+              <ellipse class="mascot-part" cx="64" cy="206" rx="21" ry="20" fill="url(#mascotHeroGrad)"/>
+              <ellipse class="mascot-part" cx="176" cy="206" rx="21" ry="20" fill="url(#mascotHeroGrad)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="blog-speech-bubble" id="blog-speech-bubble">
+          Explorez nos guides d'ingénierie et retours d'expérience ! 💡
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CENTRE DE CONTRÔLE : RECHERCHE & FILTRES CATÉGORIES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="blog-controls-section" id="blog-controls">
+    <div class="wrap">
+      <div class="blog-controls-card">
+        <div class="blog-search-row">
+          <div class="blog-search-wrapper">
+            <svg class="blog-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="blog-search" class="blog-search-input" placeholder="Rechercher un article, une techno (Wave, PWA, Django, VPS...)" autocomplete="off">
+            <div class="blog-search-actions">
+              <span class="blog-kbd-shortcut">Ctrl + K</span>
+              <button id="blog-search-clear" class="blog-search-clear" aria-label="Effacer la recherche">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-filters-bar" role="tablist" aria-label="Filtrer par catégorie">
+          <button class="blog-filter-btn active" data-filter="all">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Tous les articles
+          </button>
+          <button class="blog-filter-btn" data-filter="Entrepreneurs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Entrepreneurs
+          </button>
+          <button class="blog-filter-btn" data-filter="Technique">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Technique
+          </button>
+          <button class="blog-filter-btn" data-filter="Études de cas">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Études de cas
+          </button>
+          <button class="blog-filter-btn" data-filter="Infrastructure">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            Infrastructure
+          </button>
+          <button class="blog-filter-btn" data-filter="Sécurité">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Sécurité
+          </button>
+          <button class="blog-filter-btn" data-filter="Data">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            Data &amp; IA
+          </button>
+        </div>
+
+        <div class="blog-results-bar">
+          <span class="blog-results-count" id="blog-results-count"><strong>8</strong> articles au total</span>
+          <button class="blog-reset-btn" id="blog-reset-filters">Réinitialiser les filtres</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ARTICLE VEDETTE ("À LA UNE") DYNAMIQUE
+       ═══════════════════════════════════════════════════════ -->
   <div class="wrap">
-    <div class="blog-header">
-      <p class="eyebrow" data-aken-text="nav.blog">Blog</p>
-      <h1>Articles sur le développement logiciel au Mali</h1>
-      <p>Conseils, tutoriels et retours d'expérience pour les entrepreneurs et développeurs du Mali.</p>
-    </div>
+    <div class="blog-featured-section" id="blog-featured-container"></div>
+  </div>
 
-    <div class="blog-filters">
-      <button class="blog-filter active" data-filter="all">Tous</button>
-      <button class="blog-filter" data-filter="Entrepreneurs">Entrepreneurs</button>
-      <button class="blog-filter" data-filter="Technique">Technique</button>
-      <button class="blog-filter" data-filter="Études de cas">Études de cas</button>
-      <button class="blog-filter" data-filter="Infrastructure">Infrastructure</button>
-      <button class="blog-filter" data-filter="Sécurité">Sécurité</button>
-      <button class="blog-filter" data-filter="Data">Data</button>
-    </div>
-
+  <!-- ═══════════════════════════════════════════════════════
+       GRILLE PRINCIPALE DES ARTICLES & PAGINATION
+       ═══════════════════════════════════════════════════════ -->
+  <div class="wrap">
     <div class="blog-grid" id="blog-grid"></div>
     <div class="blog-pagination" id="blog-pagination"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BANNIÈRE NEWSLETTER TECH & LEAD MAGNET
+       ═══════════════════════════════════════════════════════ -->
+  <div class="wrap">
+    <section class="blog-newsletter-section">
+      <div class="blog-newsletter-card">
+        <div class="blog-newsletter-text">
+          <div class="blog-badge-pulse" style="margin-bottom:12px;">
+            <span class="pulse-dot"></span>
+            <span>Veille Technologique Gratuite</span>
+          </div>
+          <h3>Recevez nos analyses &amp; guides d'ingénierie</h3>
+          <p>Pas de spam. Uniquement des retours d'expérience concrets, des architectures de code testées et des conseils pragmatiques pour entrepreneurs et développeurs au Mali.</p>
+          <a href="communaute.html" class="blog-comm-inline-link">💬 Ou rejoignez directement la <strong>communauté Aken</strong> →</a>
+        </div>
+        <form class="blog-newsletter-form" id="blog-newsletter-form">
+          <input type="email" id="blog-newsletter-email" class="blog-newsletter-input" placeholder="Votre adresse e-mail pro..." required>
+          <button type="submit" class="blog-newsletter-btn">
+            <span>S'inscrire</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -161,6 +327,7 @@
   <div class="wrap footer-inner">
     <p>© <span id="year"></span> <span data-aken-text="footer.copyright">Aken — Solutions digitales, création de sites web &amp; applications mobiles. Bamako, Mali.</span></p>
     <div class="footer-social" aria-label="Réseaux sociaux">
+      <a href="communaute.html" class="footer-comm-link" data-aken-text="nav.communaute">Communauté</a>
       <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
@@ -172,8 +339,12 @@
   </div>
 </footer>
 
-<!-- Boutons Flottants (Devis + WhatsApp) -->
+<!-- Boutons Flottants (Communauté + Devis + WhatsApp) -->
 <div class="floating-actions" id="floating-actions">
+  <a href="communaute.html" class="float-btn comm-float" aria-label="Espace communauté" title="Communauté">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="float-tooltip">Communauté</span>
+  </a>
   <a href="index.html#devis" class="float-btn devis-float" aria-label="Demander un devis" id="devis-float" title="Demander un devis">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -190,6 +361,9 @@
     <span class="float-tooltip">WhatsApp</span>
   </a>
 </div>
+
+<!-- Conteneur Toast Notifications -->
+<div id="blog-toast-container" class="blog-toast-container"></div>
 
 <script src="js/main.js" defer></script>
 <script src="js/i18n.js" defer></script>

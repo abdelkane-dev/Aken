@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Automatisation d'entreprise">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#120B04"/><stop offset="0.55" stop-color="#221206"/><stop offset="1" stop-color="#0C0906"/>
+    </linearGradient>
+    <linearGradient id="o1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.7" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.28"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g1)"/>
+  <g fill="#FF6B00" opacity="0.14">
+    <circle cx="30" cy="30" r="1.4"/><circle cx="90" cy="60" r="1.4"/><circle cx="150" cy="30" r="1.4"/><circle cx="60" cy="120" r="1.4"/><circle cx="210" cy="90" r="1.4"/><circle cx="270" cy="50" r="1.4"/><circle cx="330" cy="110" r="1.4"/><circle cx="390" cy="70" r="1.4"/><circle cx="450" cy="130" r="1.4"/><circle cx="510" cy="40" r="1.4"/><circle cx="570" cy="100" r="1.4"/><circle cx="630" cy="60" r="1.4"/><circle cx="690" cy="140" r="1.4"/><circle cx="120" cy="180" r="1.4"/><circle cx="600" cy="200" r="1.4"/>
+  </g>
+  <rect width="720" height="405" fill="url(#glow1)"/>
+  <!-- Engrenages -->
+  <g stroke="#FFAA00" stroke-width="3" fill="none" opacity="0.9">
+    <circle cx="150" cy="260" r="56"/>
+    <circle cx="150" cy="260" r="22"/>
+    <g stroke-linecap="round">
+      <path d="M150 190v-16M150 330v16M80 260H64M236 260h-16M99 209l-11-11M212 321l-11-11M201 209l11-11M88 321l11-11"/>
+    </g>
+  </g>
+  <g stroke="#FF6B00" stroke-width="2.5" fill="none" opacity="0.75">
+    <circle cx="248" cy="330" r="34"/>
+    <circle cx="248" cy="330" r="12"/>
+    <g stroke-linecap="round"><path d="M248 288v-10M248 372v10M206 330h-10M290 330h10M220 302l-7-7M276 358l7 7M276 302l7-7M220 358l-7 7"/></g>
+  </g>
+  <!-- Fusée -->
+  <g transform="translate(470 190) rotate(-38)">
+    <path d="M0 -78c22 22 30 58 22 96l-8 34h-28l-8-34c-8-38 0-74 22-96z" fill="url(#o1)"/>
+    <circle cx="0" cy="-26" r="15" fill="#0A0A0A" stroke="#FFD9A8" stroke-width="2.5"/>
+    <path d="M-14 34l-30 30 6-38zM14 34l30 30-6-38z" fill="#FF6B00" opacity="0.85"/>
+    <path d="M-10 62h20l-4 26q-6 6-12 0z" fill="#FFAA00"/>
+    <g stroke="#FFD9A8" stroke-width="3" stroke-linecap="round" opacity="0.9">
+      <path d="M-4 96q4 14 0 26M6 94q6 12 3 24"/>
+    </g>
+  </g>
+  <!-- Documents numérisés -->
+  <g stroke="#E0E0E0" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round">
+    <path d="M330 300h84v64h-84z" opacity="0.55"/>
+    <path d="M318 288h84v64" opacity="0.75"/>
+    <path d="M306 276h84v64" />
+    <path d="M320 292h56M320 306h56M320 320h36" opacity="0.7"/>
+  </g>
+  <g stroke="url(#o1)" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M420 250c40-24 60-8 84-30"/><path d="M496 214l10 4-4 11" stroke="#FFAA00"/>
+    <path d="M120 150c30 10 44 30 78 26"/><path d="M188 170l10 2-2 11" stroke="#FFAA00"/>
+  </g>
+  <!-- Titre discret -->
+  <g font-family="Arial, sans-serif" fill="#FFFFFF" opacity="0.16">
+    <rect x="36" y="34" width="120" height="10" rx="5" fill="#FF6B00" opacity="0.5"/>
+  </g>
+</svg>

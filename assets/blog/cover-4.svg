@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Étude de cas hôtellerie à Bamako">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0D1606"/><stop offset="0.55" stop-color="#16240A"/><stop offset="1" stop-color="#080C05"/>
+    </linearGradient>
+    <linearGradient id="o4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow4" cx="0.68" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.26"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g4)"/>
+  <g fill="#FFAA00" opacity="0.13">
+    <circle cx="60" cy="40" r="1.4"/><circle cx="140" cy="90" r="1.4"/><circle cx="230" cy="50" r="1.4"/><circle cx="480" cy="60" r="1.4"/><circle cx="560" cy="110" r="1.4"/><circle cx="650" cy="60" r="1.4"/><circle cx="80" cy="300" r="1.4"/><circle cx="660" cy="290" r="1.4"/><circle cx="300" cy="40" r="1.4"/>
+  </g>
+  <rect width="720" height="405" fill="url(#glow4)"/>
+  <!-- Façade d'hôtel -->
+  <g transform="translate(180 120)">
+    <rect x="0" y="0" width="220" height="240" rx="8" fill="#0F1A08" stroke="#FFAA00" stroke-width="3"/>
+    <!-- Fenêtres (certaines allumées) -->
+    <g fill="#FF6B00">
+      <rect x="20" y="24" width="40" height="30" rx="4" opacity="0.9"/>
+      <rect x="90" y="24" width="40" height="30" rx="4" opacity="0.3"/>
+      <rect x="160" y="24" width="40" height="30" rx="4" opacity="0.75"/>
+      <rect x="20" y="80" width="40" height="30" rx="4" opacity="0.3"/>
+      <rect x="90" y="80" width="40" height="30" rx="4" opacity="0.85"/>
+      <rect x="160" y="80" width="40" height="30" rx="4" opacity="0.35"/>
+      <rect x="20" y="136" width="40" height="30" rx="4" opacity="0.5"/>
+      <rect x="90" y="136" width="40" height="30" rx="4" opacity="0.3"/>
+      <rect x="160" y="136" width="40" height="30" rx="4" opacity="0.9"/>
+    </g>
+    <!-- Entrée -->
+    <rect x="70" y="196" width="80" height="44" rx="6" fill="none" stroke="#FFD9A8" stroke-width="2.5"/>
+    <path d="M110 196v44" stroke="#FFD9A8" stroke-width="2" opacity="0.7"/>
+    <rect x="62" y="184" width="96" height="8" rx="4" fill="url(#o4)"/>
+  </g>
+  <!-- Calendrier de réservation -->
+  <g transform="translate(520 190)">
+    <rect x="-70" y="-80" width="140" height="130" rx="14" fill="#0D1216" stroke="#FF6B00" stroke-width="3"/>
+    <rect x="-70" y="-80" width="140" height="34" rx="14" fill="url(#o4)"/>
+    <rect x="-70" y="-56" width="140" height="10" fill="url(#o4)"/>
+    <path d="M-40 -92v20M40 -92v20" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#E0E0E0" opacity="0.8">
+      <circle cx="-44" cy="-22" r="6"/><circle cx="-14" cy="-22" r="6"/><circle cx="16" cy="-22" r="6"/><circle cx="46" cy="-22" r="6"/>
+      <circle cx="-44" cy="8" r="6"/><circle cx="-14" cy="8" r="6"/><circle cx="46" cy="8" r="6"/>
+      <circle cx="-14" cy="38" r="6"/><circle cx="16" cy="38" r="6"/>
+    </g>
+    <circle cx="16" cy="8" r="9" fill="none" stroke="#FFAA00" stroke-width="3"/>
+    <path d="M12 8l3 3 5-6" stroke="#FFAA00" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Check ✓ volant -->
+  <g transform="translate(430 70)" opacity="0.9">
+    <circle cx="0" cy="0" r="26" fill="none" stroke="#FFAA00" stroke-width="3"/>
+    <path d="M-10 0l7 8 14-16" stroke="#FFAA00" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M0 385q60 -14 120 0t120 0 120 0 120 0 120 0 120 0" fill="none" stroke="#FFAA00" stroke-width="2" opacity="0.35"/>
+</svg>

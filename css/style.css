@@ -330,18 +330,22 @@ img {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+.logo-picture.logo-light,
 .logo-mark.logo-light {
   display: none !important;
 }
 
+.logo-picture.logo-dark,
 .logo-mark.logo-dark {
   display: block !important;
 }
 
+[data-theme="light"] .logo-picture.logo-dark,
 [data-theme="light"] .logo-mark.logo-dark {
   display: none !important;
 }
 
+[data-theme="light"] .logo-picture.logo-light,
 [data-theme="light"] .logo-mark.logo-light {
   display: block !important;
 }

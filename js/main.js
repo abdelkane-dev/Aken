@@ -631,8 +631,13 @@
       if (!mascotRaf && mascotVisible && !mascotReduceMotion) mascotRaf = requestAnimationFrame(mascotLoop);
     }
 
+    var mascotRectCache = null;
+    function refreshMascotRect() { mascotRectCache = mascotSvg.getBoundingClientRect(); }
+
     function mascotTrack(e) {
-      var rect = mascotSvg.getBoundingClientRect();
+      /* Rect mis en cache (pointerenter / scroll / resize) : zéro reflow forcé par mouvement */
+      if (!mascotRectCache) refreshMascotRect();
+      var rect = mascotRectCache;
       var cx = rect.left + rect.width / 2;
       var cy = rect.top + rect.height / 2;
       var dx = e.clientX - cx;
@@ -648,6 +653,7 @@
 
     if (!mascotReduceMotion) {
       if (mascotGraphic) {
+        mascotGraphic.addEventListener("pointerenter", refreshMascotRect);
         mascotGraphic.addEventListener("pointermove", mascotTrack);
         mascotGraphic.addEventListener("pointerleave", function () {
           mTargetX = 0;
@@ -657,6 +663,8 @@
       } else {
         window.addEventListener("pointermove", mascotTrack, { passive: true });
       }
+      window.addEventListener("scroll", function () { mascotRectCache = null; }, { passive: true });
+      window.addEventListener("resize", function () { mascotRectCache = null; });
 
       // Mobile / pointeur grossier : errance autonome toutes les 2,6 s
       if (!window.matchMedia("(hover: hover)").matches) {

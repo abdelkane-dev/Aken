@@ -132,7 +132,9 @@
       var btns = document.querySelectorAll("#lang-toggle, #drawer-lang-toggle");
       btns.forEach(function (b) {
         b.textContent = lang === "fr" ? "EN" : "FR";
-        b.setAttribute("aria-label", lang === "fr" ? "Switch to English" : "Passer en français");
+        /* Le nom accessible doit contenir le texte visible (audit label-content-name-mismatch) */
+        b.setAttribute("aria-label", lang === "fr" ? "Switch to English (EN)" : "Passer en français (FR)");
+        b.setAttribute("title", b.getAttribute("aria-label"));
       });
 
       // Update html lang
@@ -151,6 +153,7 @@
       var btns = document.querySelectorAll("#lang-toggle, #drawer-lang-toggle");
       btns.forEach(function (b) {
         b.textContent = currentLang === "fr" ? "EN" : "FR";
+        b.setAttribute("aria-label", currentLang === "fr" ? "Switch to English (EN)" : "Passer en français (FR)");
         b.addEventListener("click", function () {
           switchLang(currentLang === "fr" ? "en" : "fr");
         });

@@ -47,9 +47,7 @@
 </script>
 
 <!-- Polices -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/animations.css">
@@ -79,8 +77,8 @@
   <div class="wrap header-inner">
     <div class="header-left">
       <a href="#accueil" class="logo" aria-label="Aken - Retour en haut">
-        <img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark">
-        <img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light">
+        <picture class="logo-picture logo-dark"><source srcset="assets/logo.webp" type="image/webp"><img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark" width="1280" height="427"></picture>
+        <picture class="logo-picture logo-light"><source srcset="assets/logo-light.webp" type="image/webp"><img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light" width="1280" height="427"></picture>
       </a>
     </div>
 
@@ -124,8 +122,8 @@
 <nav class="main-nav mobile-drawer" id="main-nav" aria-label="Navigation mobile">
   <div class="nav-drawer-header">
     <a href="#accueil" class="logo" aria-label="Aken">
-      <img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark" style="height:32px;">
-      <img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light" style="height:32px;">
+      <picture class="logo-picture logo-dark"><source srcset="assets/logo.webp" type="image/webp"><img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark" width="1280" height="427" style="height:32px;"></picture>
+      <picture class="logo-picture logo-light"><source srcset="assets/logo-light.webp" type="image/webp"><img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light" width="1280" height="427" style="height:32px;"></picture>
     </a>
     <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">&times;</button>
   </div>

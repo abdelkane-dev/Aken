@@ -39,10 +39,11 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    // Headers anti-cache en développement local pour actualisation instantanée
+    // no-cache (et non no-store) : revalide à chaque requête en dev,
+    // mais reste stockable → préserve le cache HTTP et le back/forward cache
     res.writeHead(200, {
       'Content-Type': contentType,
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Cache-Control': 'no-cache',
       'Access-Control-Allow-Origin': '*'
     });
 

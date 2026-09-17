@@ -1,5 +1,5 @@
-// Aken — Service Worker v13.0 (logo adaptatif light/dark + icônes mascotte)
-const CACHE_NAME = 'aken-v13';
+// Aken — Service Worker v14.0 (polices auto-hébergées + logos WebP)
+const CACHE_NAME = 'aken-v14';
 
 const APP_SHELL = [
   '/',
@@ -16,6 +16,12 @@ const APP_SHELL = [
   '/offline.html',
   '/assets/logo.png',
   '/assets/logo-light.png',
+  '/assets/logo.webp',
+  '/assets/logo-light.webp',
+  '/assets/fonts/fonts.css',
+  '/assets/fonts/inter-latin.woff2',
+  '/assets/fonts/montserrat-latin.woff2',
+  '/assets/fonts/jetbrains-mono-latin.woff2',
   '/assets/mascot.svg',
   '/assets/pwa-192.png',
   '/assets/pwa-512.png',

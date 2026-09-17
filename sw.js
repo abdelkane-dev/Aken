@@ -1,5 +1,5 @@
-// Aken — Service Worker v10.0 (Refonte Aken 2.0 : identité dark premium)
-const CACHE_NAME = 'aken-v10';
+// Aken — Service Worker v11.0 (icônes PWA mascotte + chips flottantes)
+const CACHE_NAME = 'aken-v11';
 
 const APP_SHELL = [
   '/',
@@ -16,6 +16,11 @@ const APP_SHELL = [
   '/offline.html',
   '/assets/logo.png',
   '/assets/mascot.svg',
+  '/assets/pwa-192.png',
+  '/assets/pwa-512.png',
+  '/assets/pwa-maskable-512.png',
+  '/assets/apple-touch-icon.png',
+  '/assets/favicon.svg',
   '/assets/favoricon.png',
   '/assets/og-cover.png',
   '/lang/fr.json',

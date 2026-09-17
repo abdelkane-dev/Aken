@@ -1,31 +1,50 @@
 /* ==========================================================================
-   AKEN — ESPACE D'ADMINISTRATION
-   Design System : Dark Luxury, Teal / Mint accents, Space Grotesk & JetBrains Mono
+   AKEN — ESPACE D'ADMINISTRATION · Identité Aken 2.0
+   Noir profond #0A0A0A · Accents orange/ambre #FF6B00 → #FFAA00
+   Typo : Montserrat 800 (titres) + Inter (interface) + JetBrains Mono
+   Namespace --admin-* conservé pour compatibilité totale du back-office.
    ========================================================================== */
 
 :root {
-  --admin-bg: #07090f;
-  --admin-card: #0d121f;
-  --admin-card-hover: #121829;
-  --admin-sidebar: #090d18;
+  --admin-bg: #0A0A0A;
+  --admin-card: #141414;
+  --admin-card-hover: #1C1C1C;
+  --admin-sidebar: #0D0D0D;
   --admin-border: rgba(255, 255, 255, 0.08);
-  --admin-border-focus: rgba(0, 240, 255, 0.4);
-  --admin-text: #f0f4fc;
-  --admin-text-muted: #8a99b5;
-  --admin-text-dim: #546481;
-  --admin-teal: #00f0ff;
-  --admin-teal-glow: rgba(0, 240, 255, 0.18);
-  --admin-mint: #19e68c;
-  --admin-mint-glow: rgba(25, 230, 140, 0.15);
-  --admin-amber: #ffb800;
-  --admin-rose: #ff3b69;
+  --admin-border-focus: rgba(255, 107, 0, 0.45);
+  --admin-text: #F5F5F5;
+  --admin-text-muted: #B0B0B0;
+  --admin-text-dim: #6E6E6E;
+  --admin-teal: #FF6B00;
+  --admin-teal-glow: rgba(255, 107, 0, 0.18);
+  --admin-mint: #FFAA00;
+  --admin-mint-glow: rgba(255, 170, 0, 0.15);
+  --admin-amber: #FFAA00;
+  --admin-rose: #FF4D4D;
   --admin-purple: #9d4edd;
-  --admin-radius-sm: 8px;
-  --admin-radius: 12px;
-  --admin-radius-lg: 18px;
-  --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --admin-radius-sm: 12px;
+  --admin-radius: 16px;
+  --admin-radius-lg: 24px;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display-admin: 'Montserrat', var(--font-main);
   --font-mono: 'JetBrains Mono', monospace;
-  --admin-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  --admin-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  --grad-admin: linear-gradient(135deg, #FF6B00 0%, #FFAA00 100%);
+}
+
+/* Titres du back-office en Montserrat massif (ADN Aken 2.0) */
+h1, h2, h3, .admin-section-title, .topbar-title {
+  font-family: var(--font-display-admin);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Accent principal = dégradé Aken sur les éléments signature */
+.admin-btn-primary,
+.btn-admin-primary {
+  background: var(--grad-admin) !important;
+  border: none !important;
+  color: #FFFFFF !important;
 }
 
 * {
@@ -41,9 +60,9 @@ body.admin-body {
   min-height: 100vh;
   display: flex;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(25, 230, 140, 0.03) 0%, transparent 45%);
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(255, 107, 0, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(255, 170, 0, 0.04) 0%, transparent 45%);
 }
 
 /* ==========================================================================
@@ -52,7 +71,7 @@ body.admin-body {
 .admin-lockscreen {
   position: fixed;
   inset: 0;
-  background: rgba(7, 9, 15, 0.96);
+  background: rgba(10, 10, 10, 0.96);
   backdrop-filter: blur(20px);
   z-index: 99999;
   display: flex;
@@ -85,7 +104,7 @@ body.admin-body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--admin-teal), var(--admin-mint));
+  background: var(--grad-admin);
 }
 
 .lockscreen-logo {
@@ -95,12 +114,12 @@ body.admin-body {
   margin-bottom: 24px;
 }
 
-.lockscreen-logo img {
-  height: 52px;
+.lockscreen-mascot {
+  height: 72px;
   width: auto;
-  max-width: 220px;
   object-fit: contain;
-  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.4));
+  /* Pas de filtre : la mascotte garde sa couleur orange native */
+  filter: drop-shadow(0 0 20px rgba(255, 107, 0, 0.45));
 }
 
 .lockscreen-badge {
@@ -108,9 +127,9 @@ body.admin-body {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 4px 12px;
-  background: rgba(0, 240, 255, 0.1);
+  background: rgba(255, 107, 0, 0.1);
   color: var(--admin-teal);
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  border: 1px solid rgba(255, 107, 0, 0.25);
   border-radius: 999px;
   margin-bottom: 20px;
   letter-spacing: 0.06em;
@@ -181,8 +200,8 @@ body.admin-body {
 }
 
 .lockscreen-btn {
-  background: linear-gradient(135deg, var(--admin-teal) 0%, #00b4d8 100%);
-  color: #050811;
+  background: linear-gradient(135deg, var(--admin-teal) 0%, #FFAA00 100%);
+  color: #050505;
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
@@ -194,12 +213,12 @@ body.admin-body {
   justify-content: center;
   gap: 10px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 4px 18px rgba(255, 107, 0, 0.3);
 }
 
 .lockscreen-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.45);
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.45);
 }
 
 .lockscreen-error {
@@ -251,18 +270,33 @@ body.admin-body {
 .sidebar-brand-wrap {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
+}
+
+.sidebar-brand-wrap > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .sidebar-brand-wrap img,
 .sidebar-header img {
-  height: 36px;
+  height: 34px;
   width: auto;
-  max-width: 150px;
+  max-width: 34px;
   object-fit: contain;
   display: block;
-  filter: brightness(1) opacity(1);
+  /* Pas de filtre : orange reste orange */
+}
+
+.sidebar-brand-name {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
 .sidebar-header .brand-role {
@@ -318,8 +352,8 @@ body.admin-body {
 
 .nav-item.active {
   color: #fff;
-  background: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.25);
+  background: rgba(255, 107, 0, 0.08);
+  border-color: rgba(255, 107, 0, 0.25);
 }
 
 .nav-item svg {
@@ -364,7 +398,7 @@ body.admin-body {
   height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--admin-teal), var(--admin-mint));
-  color: #050811;
+  color: #050505;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -429,7 +463,7 @@ body.admin-body {
   align-items: center;
   justify-content: space-between;
   padding: 0 32px;
-  background: rgba(7, 9, 15, 0.8);
+  background: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -488,20 +522,20 @@ body.admin-body {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: linear-gradient(135deg, var(--admin-teal) 0%, #00b4d8 100%);
+  background: linear-gradient(135deg, var(--admin-teal) 0%, #FFAA00 100%);
   border: none;
   border-radius: var(--admin-radius-sm);
-  color: #050811;
+  color: #050505;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 240, 255, 0.25);
+  box-shadow: 0 2px 10px rgba(255, 107, 0, 0.25);
 }
 
 .btn-action-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(255, 107, 0, 0.4);
 }
 
 /* PAGES CONTAINER */
@@ -562,8 +596,8 @@ body.admin-body {
   margin-bottom: 6px;
 }
 
-.stat-icon-pill.teal { background: rgba(0, 240, 255, 0.12); color: var(--admin-teal); }
-.stat-icon-pill.mint { background: rgba(25, 230, 140, 0.12); color: var(--admin-mint); }
+.stat-icon-pill.teal { background: rgba(255, 107, 0, 0.12); color: var(--admin-teal); }
+.stat-icon-pill.mint { background: rgba(255, 170, 0, 0.12); color: var(--admin-mint); }
 .stat-icon-pill.amber { background: rgba(255, 184, 0, 0.12); color: var(--admin-amber); }
 .stat-icon-pill.purple { background: rgba(157, 78, 221, 0.12); color: var(--admin-purple); }
 
@@ -632,7 +666,7 @@ body.admin-body {
 
 .filter-chip.active {
   background: var(--admin-teal);
-  color: #050811;
+  color: #050505;
   border-color: var(--admin-teal);
   font-weight: 600;
 }
@@ -722,7 +756,7 @@ body.admin-body {
 }
 
 .lead-avatar.acompte {
-  background: rgba(25, 230, 140, 0.12);
+  background: rgba(255, 170, 0, 0.12);
   color: var(--admin-mint);
 }
 
@@ -754,8 +788,8 @@ body.admin-body {
   font-weight: 600;
 }
 
-.lead-badge.nouveau { background: rgba(0, 240, 255, 0.15); color: var(--admin-teal); }
-.lead-badge.acompte_recu { background: rgba(25, 230, 140, 0.15); color: var(--admin-mint); }
+.lead-badge.nouveau { background: rgba(255, 107, 0, 0.15); color: var(--admin-teal); }
+.lead-badge.acompte_recu { background: rgba(255, 170, 0, 0.15); color: var(--admin-mint); }
 .lead-badge.contacte { background: rgba(255, 184, 0, 0.15); color: var(--admin-amber); }
 .lead-badge.devis_envoye { background: rgba(157, 78, 221, 0.15); color: var(--admin-purple); }
 .lead-badge.archive { background: rgba(255, 255, 255, 0.08); color: var(--admin-text-dim); }
@@ -785,7 +819,7 @@ body.admin-body {
 
 .lead-message-snippet {
   font-size: 0.88rem;
-  color: #c4d1e8;
+  color: #B0B0B0;
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -829,7 +863,7 @@ body.admin-body {
 
 .btn-icon-action.mail:hover {
   background: var(--admin-teal);
-  color: #050811;
+  color: #050505;
   border-color: var(--admin-teal);
 }
 
@@ -851,7 +885,7 @@ body.admin-body {
 }
 
 .pipeline-col {
-  background: rgba(13, 18, 31, 0.6);
+  background: rgba(20, 20, 20, 0.6);
   border: 1px solid var(--admin-border);
   border-radius: var(--admin-radius);
   padding: 16px;
@@ -1016,7 +1050,7 @@ body.admin-body {
 .note-text {
   font-size: 0.88rem;
   line-height: 1.4;
-  color: #e0e8f5;
+  color: #E0E0E0;
   white-space: pre-wrap;
 }
 
@@ -1116,7 +1150,7 @@ body.admin-body {
 .key-code {
   font-family: var(--font-mono);
   color: var(--admin-teal);
-  background: rgba(0, 240, 255, 0.08);
+  background: rgba(255, 107, 0, 0.08);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -1247,7 +1281,7 @@ body.admin-body {
 
 .activity-item:first-child {
   border-left-color: var(--admin-teal);
-  background: rgba(0, 240, 255, 0.03);
+  background: rgba(255, 107, 0, 0.03);
 }
 
 .activity-icon {
@@ -1305,7 +1339,7 @@ body.admin-body {
 .cmd-result-hint { font-size:0.75rem; color:var(--admin-text-dim); font-family:var(--font-mono); }
 
 /* FAB QUICK ACTIONS */
-.fab-quick-actions { position:fixed; bottom:28px; right:28px; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--admin-teal), #00b4d8); color:#050811; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,240,255,0.35); z-index:9000; transition:all 0.25s ease; }
+.fab-quick-actions { position:fixed; bottom:28px; right:28px; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--admin-teal), #FFAA00); color:#050505; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,240,255,0.35); z-index:9000; transition:all 0.25s ease; }
 .fab-quick-actions:hover { transform:scale(1.1) rotate(90deg); box-shadow:0 8px 28px rgba(0,240,255,0.5); }
 
 /* NOTIFICATION BELL */
@@ -1351,14 +1385,14 @@ body.admin-body {
 select.form-control-admin,
 select.form-control-admin option,
 select.form-control-admin optgroup {
-  background: #1a1f2e;
-  color: #f0f4fc;
+  background: #1C1C1C;
+  color: #F5F5F5;
   border-color: var(--admin-border);
 }
 
 select.form-control-admin option {
-  background: #1a1f2e;
-  color: #f0f4fc;
+  background: #1C1C1C;
+  color: #F5F5F5;
   padding: 8px;
 }
 
@@ -1366,20 +1400,20 @@ select.form-control-admin option:hover,
 select.form-control-admin option:focus,
 select.form-control-admin option:active,
 select.form-control-admin option:checked {
-  background: rgba(0, 240, 255, 0.15);
-  color: #00f0ff;
+  background: rgba(255, 107, 0, 0.15);
+  color: #FF6B00;
 }
 
 select.form-control-admin:focus {
   border-color: var(--admin-teal);
-  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.15);
 }
 
 /* Firefox select fix */
 @-moz-document url-prefix() {
   select.form-control-admin option {
-    background-color: #1a1f2e;
-    color: #f0f4fc;
+    background-color: #1C1C1C;
+    color: #F5F5F5;
   }
 }
 
@@ -1858,7 +1892,7 @@ select.form-control-admin:focus {
 
 .template-use-btn:hover {
   background: var(--admin-teal);
-  color: #050811;
+  color: #050505;
   border-color: var(--admin-teal);
 }
 
@@ -2011,8 +2045,8 @@ select.form-control-admin:focus {
 }
 
 .csv-btn.teal {
-  background: linear-gradient(135deg, var(--admin-teal) 0%, #00b4d8 100%);
-  color: #050811;
+  background: linear-gradient(135deg, var(--admin-teal) 0%, #FFAA00 100%);
+  color: #050505;
   border: none;
 }
 
@@ -2160,7 +2194,7 @@ select.form-control-admin:focus {
   justify-content: center !important;
   border-radius: var(--admin-radius-sm) !important;
   background: linear-gradient(135deg, var(--admin-amber) 0%, #ff8c00 100%) !important;
-  color: #07090f !important;
+  color: #0A0A0A !important;
   font-weight: 700 !important;
   box-shadow: 0 2px 10px rgba(255, 184, 0, 0.25) !important;
   cursor: pointer !important;
@@ -2196,7 +2230,7 @@ select.form-control-admin:focus {
 
 .agenda-task-item:hover {
   background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(0, 240, 255, 0.3);
+  border-color: rgba(255, 107, 0, 0.3);
   transform: translateX(2px);
 }
 
@@ -2239,7 +2273,7 @@ select.form-control-admin:focus {
 
 .task-checkbox-custom.checked {
   background: var(--admin-teal);
-  color: #050811;
+  color: #050505;
 }
 
 .task-content {
@@ -2253,7 +2287,7 @@ select.form-control-admin:focus {
 .task-title {
   font-size: 0.92rem;
   font-weight: 500;
-  color: #f0f4fc;
+  color: #F5F5F5;
   line-height: 1.4;
   word-break: break-word;
 }
@@ -2289,14 +2323,14 @@ select.form-control-admin:focus {
 }
 
 .task-priority-badge.normale {
-  background: rgba(0, 240, 255, 0.12);
+  background: rgba(255, 107, 0, 0.12);
   color: var(--admin-teal);
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  border: 1px solid rgba(255, 107, 0, 0.25);
 }
 
 .task-project-tag {
   color: var(--admin-mint);
-  background: rgba(25, 230, 140, 0.08);
+  background: rgba(255, 170, 0, 0.08);
   padding: 2px 8px;
   border-radius: 4px;
   font-family: var(--font-mono);
@@ -2470,7 +2504,7 @@ select.form-control-admin:focus {
 }
 
 .client-card:hover {
-  border-color: rgba(0, 240, 255, 0.35);
+  border-color: rgba(255, 107, 0, 0.35);
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
@@ -2496,8 +2530,8 @@ select.form-control-admin:focus {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(25, 230, 140, 0.2));
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 170, 0, 0.2));
+  border: 1px solid rgba(255, 107, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2534,9 +2568,9 @@ select.form-control-admin:focus {
 }
 
 .client-status-pill.actif {
-  background: rgba(25, 230, 140, 0.12);
+  background: rgba(255, 170, 0, 0.12);
   color: var(--admin-mint);
-  border: 1px solid rgba(25, 230, 140, 0.3);
+  border: 1px solid rgba(255, 170, 0, 0.3);
 }
 
 .client-status-pill.prospect {
@@ -2633,10 +2667,10 @@ select.form-control-admin:focus {
   font-size: 0.68rem;
   font-family: var(--font-mono);
   color: var(--admin-mint);
-  background: rgba(25, 230, 140, 0.1);
+  background: rgba(255, 170, 0, 0.1);
   padding: 2px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(25, 230, 140, 0.25);
+  border: 1px solid rgba(255, 170, 0, 0.25);
 }
 
 .traffic-bars {
@@ -2675,7 +2709,7 @@ select.form-control-admin:focus {
 
 .diagnostics-box {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(25, 230, 140, 0.25);
+  border: 1px solid rgba(255, 170, 0, 0.25);
   border-radius: var(--admin-radius);
   padding: 14px 16px;
   display: flex;
@@ -2919,8 +2953,8 @@ select.form-control-admin:focus {
   justify-content: space-between;
   gap: 8px;
   padding: 10px 12px;
-  background: rgba(0, 240, 255, 0.06);
-  border: 1px solid rgba(0, 240, 255, 0.18);
+  background: rgba(255, 107, 0, 0.06);
+  border: 1px solid rgba(255, 107, 0, 0.18);
   border-radius: var(--admin-radius-sm);
   color: var(--admin-teal);
   font-size: 0.82rem;
@@ -2930,8 +2964,8 @@ select.form-control-admin:focus {
 }
 
 .sidebar-site-link:hover {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(255, 107, 0, 0.12);
+  border-color: rgba(255, 107, 0, 0.35);
   transform: translateX(2px);
 }
 

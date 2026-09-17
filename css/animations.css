@@ -91,14 +91,8 @@
   50% { border-color: transparent; }
 }
 
-/* ---------- GLASSMORPHISM CARDS ---------- */
-.glass-card {
-  background: color-mix(in srgb, var(--paper) 70%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
-  border-radius: var(--radius-lg);
-}
+/* ---------- GLASSMORPHISM CARDS ----------
+   (classe .glass-card retirée : non utilisée et coûteuse en GPU) */
 
 /* ---------- 3D TILT ON HOVER ---------- */
 .tilt-card {
@@ -364,8 +358,6 @@
     border-radius: var(--radius) !important;
     background: color-mix(in srgb, var(--surface) 70%, transparent) !important;
     border: 1px solid color-mix(in srgb, var(--border) 70%, transparent) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
   }
   .impact-number {
     font-size: 1.7rem !important;

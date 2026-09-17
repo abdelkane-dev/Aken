@@ -5,11 +5,31 @@
   "use strict";
 
   /* ═══════════════════════════════════════════
-     1. THÈME — Dark only (identité Aken 2.0)
+     1. THÈME CLAIR / SOMBRE (Aken 2.0)
+     Dark par défaut, préférence mémorisée
      ═══════════════════════════════════════════ */
   var root = document.documentElement;
-  root.setAttribute("data-theme", "dark");
-  localStorage.removeItem("aken-theme");
+  var toggleBtns = document.querySelectorAll("#theme-toggle, #drawer-theme-toggle");
+  var savedTheme = localStorage.getItem("aken-theme");
+  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  function updateThemeUI(theme) {
+    root.setAttribute("data-theme", theme);
+    toggleBtns.forEach(function (btn) {
+      btn.setAttribute("aria-label", theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre");
+      btn.title = theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre";
+    });
+  }
+
+  updateThemeUI(savedTheme || (prefersDark ? "dark" : "light"));
+
+  toggleBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      localStorage.setItem("aken-theme", next);
+      updateThemeUI(next);
+    });
+  });
 
   /* Header : fond plus opaque dès le moindre scroll */
   var headerEl = document.getElementById("entete") || document.querySelector(".site-header");
@@ -156,6 +176,19 @@
     if (countersAnimated) return;
     countersAnimated = true;
 
+    // Révéler les cartes avec effet d'apparition fluide
+    document.querySelectorAll(".impact-card").forEach(function (card) {
+      card.classList.add("is-visible");
+    });
+
+    // Remplir les barres de progression
+    document.querySelectorAll(".impact-bar-fill").forEach(function (bar) {
+      var pct = bar.getAttribute("data-pct") || "100";
+      setTimeout(function () {
+        bar.style.width = pct + "%";
+      }, 200);
+    });
+
     document.querySelectorAll(".impact-number").forEach(function (el) {
       var target = parseInt(el.getAttribute("data-target"), 10);
       if (isNaN(target)) return;
@@ -184,7 +217,7 @@
 
   // Intersection Observer pour les compteurs
   if ("IntersectionObserver" in window) {
-    var counterSection = document.querySelector(".impact-strip");
+    var counterSection = document.querySelector(".impact-section, .impact-strip");
     if (counterSection) {
       var counterObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -193,7 +226,7 @@
             counterObs.disconnect();
           }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.2 });
       counterObs.observe(counterSection);
     }
   } else {
@@ -485,7 +518,169 @@
   }
 
   /* ═══════════════════════════════════════════
-     13. VISITOR COUNTER (simulated)
+     13. CHIPS FLOTTANTES — découpe des paragraphes
+     Transforme les textes denses des cas d'usage en pills.
+     Progressif : si JS échoue, les paragraphes restent lisibles.
+     ═══════════════════════════════════════════ */
+  document.body.classList.add("chips-on");
+
+  var CHIP_MAX = 42; // au-delà, un chip textuel tronqué garderait une pill illisible
+
+  function buildCaseChips() {
+    // Rejouable : on purge les chips existantes avant reconstruction (changement de langue)
+    document.querySelectorAll(".chip-row").forEach(function (old) { old.remove(); });
+
+    document.querySelectorAll(".case-section").forEach(function (section) {
+      var p = section.querySelector("p");
+      if (!p) return;
+
+      var isResult = section.querySelector(".case-result") !== null;
+      var accentClass = isResult ? " chip--accent" : "";
+      var row = document.createElement("div");
+      row.className = "chip-row";
+
+      var words = (p.textContent || "").trim().split(/\s+/);
+      var current = [];
+      var index = 0;
+
+      function flush() {
+        if (!current.length) return;
+        var chip = document.createElement("span");
+        chip.className = "chip" + accentClass;
+        chip.style.setProperty("--chip-i", String(index));
+        chip.textContent = current.join(" ");
+        row.appendChild(chip);
+        index += 1;
+        current = [];
+      }
+
+      words.forEach(function (word) {
+        var candidate = current.concat(word).join(" ");
+        if (candidate.length > CHIP_MAX && current.length) {
+          flush();
+          current = [word];
+        } else {
+          current.push(word);
+        }
+      });
+      flush();
+
+      p.parentNode.insertBefore(row, p.nextSibling);
+    });
+  }
+
+  buildCaseChips();
+  // i18n traduit après le fetch du dictionnaire : on reconstruit à chaque changement de langue
+  window.addEventListener("langchange", buildCaseChips);
+
+  /* Numérotation des chips des listes (dérive en cascade) */
+  document
+    .querySelectorAll(".tag-row, .offer-list, .pricing-features, .tech-grid")
+    .forEach(function (list) {
+      Array.prototype.forEach.call(list.children, function (item, i) {
+        item.style.setProperty("--chip-i", String(i));
+      });
+    });
+
+  /* Options du calculateur : dérive en cascade sur les pills */
+  document
+    .querySelectorAll(".calc-options, .calc-options-grid")
+    .forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (option, i) {
+        var body = option.querySelector(".calc-option-body");
+        if (body) body.style.setProperty("--chip-i", String(i));
+      });
+    });
+
+  /* ═══════════════════════════════════════════
+     14. MASCOTTE PREMIUM — yeux suiveurs + tilt + hover
+     rAF unique, lerp lissé, errance douce sur mobile,
+     gel total hors viewport et sous prefers-reduced-motion.
+     ═══════════════════════════════════════════ */
+  var mascotSvg = document.querySelector(".hero-mascot");
+  if (mascotSvg) {
+    var mascotGraphic = mascotSvg.closest(".hero-graphic");
+    var mascotReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var MAX_PUPIL = 5; // px dans le viewBox (rayon pupille 5 → ne sort jamais de l'œil)
+    var MAX_TILT = 6;  // degrés
+    var mTargetX = 0, mTargetY = 0, mCurX = 0, mCurY = 0;
+    var mascotVisible = true;
+    var mascotRaf = null;
+
+    function mascotApply() {
+      mascotSvg.style.setProperty("--pupil-x", mCurX.toFixed(2) + "px");
+      mascotSvg.style.setProperty("--pupil-y", mCurY.toFixed(2) + "px");
+      mascotSvg.style.setProperty("--tilt-x", (-mCurY * (MAX_TILT / MAX_PUPIL)).toFixed(2) + "deg");
+      mascotSvg.style.setProperty("--tilt-y", (mCurX * (MAX_TILT / MAX_PUPIL)).toFixed(2) + "deg");
+    }
+
+    function mascotLoop() {
+      mascotRaf = null;
+      if (!mascotVisible) return;
+      var k = 0.08; // lissage
+      mCurX += (mTargetX - mCurX) * k;
+      mCurY += (mTargetY - mCurY) * k;
+      mascotApply();
+      if (Math.abs(mTargetX - mCurX) > 0.05 || Math.abs(mTargetY - mCurY) > 0.05) {
+        mascotRaf = requestAnimationFrame(mascotLoop);
+      }
+    }
+
+    function mascotKick() {
+      if (!mascotRaf && mascotVisible && !mascotReduceMotion) mascotRaf = requestAnimationFrame(mascotLoop);
+    }
+
+    function mascotTrack(e) {
+      var rect = mascotSvg.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var dx = e.clientX - cx;
+      var dy = e.clientY - cy;
+      var d = Math.hypot(dx, dy) || 1;
+      // Intensité décroissante avec la distance : vif à proximité, doux au loin
+      var influence = Math.max(0, 1 - d / (Math.max(rect.width, 4) * 2.2));
+      var k = influence * MAX_PUPIL;
+      mTargetX = (dx / d) * k;
+      mTargetY = (dy / d) * k;
+      mascotKick();
+    }
+
+    if (!mascotReduceMotion) {
+      if (mascotGraphic) {
+        mascotGraphic.addEventListener("pointermove", mascotTrack);
+        mascotGraphic.addEventListener("pointerleave", function () {
+          mTargetX = 0;
+          mTargetY = 0;
+          mascotKick();
+        });
+      } else {
+        window.addEventListener("pointermove", mascotTrack, { passive: true });
+      }
+
+      // Mobile / pointeur grossier : errance autonome toutes les 2,6 s
+      if (!window.matchMedia("(hover: hover)").matches) {
+        setInterval(function () {
+          if (document.hidden || !mascotVisible) return;
+          var a = Math.random() * Math.PI * 2;
+          mTargetX = Math.cos(a) * MAX_PUPIL * 0.55;
+          mTargetY = Math.sin(a) * MAX_PUPIL * 0.45;
+          mascotKick();
+        }, 2600);
+      }
+
+      // Gel du rAF quand la mascotte sort du viewport
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          mascotVisible = entries[0].isIntersecting;
+          if (mascotVisible) mascotKick();
+        }, { threshold: 0.05 }).observe(mascotSvg);
+      }
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     15. VISITEURS (compteur simulé)
      ═══════════════════════════════════════════ */
   var visitorCount = document.getElementById("visitor-count");
   if (visitorCount) {

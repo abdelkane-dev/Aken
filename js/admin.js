@@ -115,13 +115,13 @@
           datasets: [{
             label: "Revenus (FCFA)",
             data: revData,
-            borderColor: "#00f0ff",
+            borderColor: "#FF6B00",
             backgroundColor: "rgba(0,240,255,0.08)",
             fill: true,
             tension: 0.4,
             pointRadius: 4,
-            pointBackgroundColor: "#00f0ff",
-            pointBorderColor: "#07090f",
+            pointBackgroundColor: "#FF6B00",
+            pointBorderColor: "#0A0A0A",
             pointBorderWidth: 2,
             borderWidth: 2
           }]
@@ -131,8 +131,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 } } },
-            y: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 }, callback: function(v) { return (v/1000) + "k"; } } }
+            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#6E6E6E", font: { size: 11 } } },
+            y: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#6E6E6E", font: { size: 11 }, callback: function(v) { return (v/1000) + "k"; } } }
           }
         }
       });
@@ -159,7 +159,7 @@
           responsive: true,
           maintainAspectRatio: false,
           cutout: "65%",
-          plugins: { legend: { position: "bottom", labels: { color: "#8a99b5", padding: 12, font: { size: 11 } } } }
+          plugins: { legend: { position: "bottom", labels: { color: "#B0B0B0", padding: 12, font: { size: 11 } } } }
         }
       });
     }
@@ -194,8 +194,8 @@
           indexAxis: "y",
           plugins: { legend: { display: false } },
           scales: {
-            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#546481", font: { size: 11 }, stepSize: 1 } },
-            y: { grid: { display: false }, ticks: { color: "#8a99b5", font: { size: 11 } } }
+            x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#6E6E6E", font: { size: 11 }, stepSize: 1 } },
+            y: { grid: { display: false }, ticks: { color: "#B0B0B0", font: { size: 11 } } }
           }
         }
       });
@@ -1047,8 +1047,8 @@
       '<html><head><meta charset="utf-8"><title>Devis Aken ' + quoteRef + '</title>',
       '<style>',
       'body { font-family: "Helvetica Neue", Arial, sans-serif; padding: 40px; color: #111; max-width: 800px; margin: auto; }',
-      '.header { display: flex; justify-content: space-between; border-bottom: 2px solid #00f0ff; padding-bottom: 20px; margin-bottom: 30px; }',
-      '.logo-title { font-size: 26px; font-weight: bold; color: #07090f; }',
+      '.header { display: flex; justify-content: space-between; border-bottom: 2px solid #FF6B00; padding-bottom: 20px; margin-bottom: 30px; }',
+      '.logo-title { font-size: 26px; font-weight: bold; color: #0A0A0A; }',
       '.ref { font-family: monospace; font-size: 14px; color: #666; }',
       '.section { margin-bottom: 24px; }',
       '.table { width: 100%; border-collapse: collapse; margin-top: 15px; }',
@@ -1056,7 +1056,7 @@
       '.table th { background: #f4f6fb; }',
       '.totals { margin-top: 20px; float: right; width: 320px; }',
       '.totals div { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; }',
-      '.totals div.bold { font-weight: bold; font-size: 16px; border-bottom: 2px solid #00f0ff; }',
+      '.totals div.bold { font-weight: bold; font-size: 16px; border-bottom: 2px solid #FF6B00; }',
       '.footer { margin-top: 80px; font-size: 12px; color: #777; border-top: 1px solid #eee; padding-top: 15px; text-align: center; }',
       '</style></head><body>',
       '<div class="header">',

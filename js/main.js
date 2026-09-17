@@ -5,32 +5,19 @@
   "use strict";
 
   /* ═══════════════════════════════════════════
-     1. THÈME CLAIR / SOMBRE
+     1. THÈME — Dark only (identité Aken 2.0)
      ═══════════════════════════════════════════ */
   var root = document.documentElement;
-  var toggleBtns = document.querySelectorAll("#theme-toggle, #drawer-theme-toggle");
-  var saved = localStorage.getItem("aken-theme");
-  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  root.setAttribute("data-theme", "dark");
+  localStorage.removeItem("aken-theme");
 
-  function updateThemeUI(theme) {
-    root.setAttribute("data-theme", theme);
-    toggleBtns.forEach(function (btn) {
-      btn.setAttribute("aria-label", theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre");
-      btn.title = theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre";
-    });
-  }
-
-  var initialTheme = saved || (prefersDark ? "dark" : "light");
-  updateThemeUI(initialTheme);
-
-  toggleBtns.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-      var next = current === "dark" ? "light" : "dark";
-      localStorage.setItem("aken-theme", next);
-      updateThemeUI(next);
-    });
-  });
+  /* Header : fond plus opaque dès le moindre scroll */
+  var headerEl = document.getElementById("entete") || document.querySelector(".site-header");
+  window.addEventListener("scroll", function () {
+    if (!headerEl) return;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    headerEl.classList.toggle("scrolled", y > 8);
+  }, { passive: true });
 
   /* ═══════════════════════════════════════════
      2. MENU MOBILE — Tiroir latéral (Drawer)

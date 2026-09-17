@@ -1,5 +1,5 @@
-// Aken — Service Worker v9.0 (Updated logo & separate favoricon)
-const CACHE_NAME = 'aken-v9';
+// Aken — Service Worker v10.0 (Refonte Aken 2.0 : identité dark premium)
+const CACHE_NAME = 'aken-v10';
 
 const APP_SHELL = [
   '/',
@@ -15,6 +15,7 @@ const APP_SHELL = [
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
+  '/assets/mascot.svg',
   '/assets/favoricon.png',
   '/assets/og-cover.png',
   '/lang/fr.json',

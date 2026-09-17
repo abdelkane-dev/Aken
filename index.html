@@ -48,14 +48,14 @@
 <!-- Polices -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/animations.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" href="assets/favoricon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#26335C">
+<meta name="theme-color" content="#0A0A0A">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -100,9 +100,6 @@
     <div class="header-actions">
       <a href="#devis" class="btn btn-small btn-primary header-cta" data-aken-text="nav.cta_header">Demander un devis</a>
       <button id="lang-toggle" class="theme-toggle" aria-label="Switch language" style="font-weight:700;font-size:0.85rem;">EN</button>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème" title="Changer de thème">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-      </button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
       </button>
@@ -164,9 +161,6 @@
   <div class="nav-drawer-footer">
     <div class="nav-drawer-actions">
       <button id="drawer-lang-toggle" class="theme-toggle" aria-label="Switch language">EN</button>
-      <button id="drawer-theme-toggle" class="theme-toggle" aria-label="Changer de thème">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-      </button>
     </div>
     <a href="#devis" class="btn btn-small btn-primary" data-aken-text="nav.cta_header" style="width:100%;justify-content:center;">Demander un devis</a>
   </div>
@@ -180,6 +174,7 @@
 <section class="hero" id="accueil">
   <div class="wrap hero-inner">
     <div class="hero-text">
+      <p class="hero-tagline" data-aken-text="hero.tagline">Technology, evolved.</p>
       <p class="eyebrow" data-aken-text="hero.eyebrow">Bamako, Mali — Disponible pour projets &amp; opportunités</p>
       <h1 class="hero-title" data-aken-html="hero.title">Des solutions digitales <span class="accent">sur-mesure</span> pour développer votre activité et booster vos ventes.</h1>
       <p class="hero-lead" data-aken-text="hero.lead">
@@ -199,36 +194,10 @@
 
     <div class="particles-container"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div>
     <div class="hero-graphic" aria-hidden="true">
-      <svg id="signature-svg" viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g class="motif-lines" stroke="var(--ochre)" stroke-width="2">
-          <path d="M10 60 L50 20 L90 60 L50 100 Z"></path>
-          <path d="M10 140 L50 100 L90 140 L50 180 Z"></path>
-          <path d="M10 220 L50 180 L90 220 L50 260 Z"></path>
-          <path d="M10 300 L50 260 L90 300 L50 340 Z"></path>
-        </g>
-        <g class="motif-links" stroke="var(--teal)" stroke-width="2">
-          <line x1="90" y1="60" x2="220" y2="90"></line>
-          <line x1="90" y1="140" x2="220" y2="90"></line>
-          <line x1="90" y1="140" x2="220" y2="220"></line>
-          <line x1="90" y1="220" x2="220" y2="220"></line>
-          <line x1="90" y1="300" x2="220" y2="220"></line>
-          <line x1="220" y1="90" x2="360" y2="60"></line>
-          <line x1="220" y1="90" x2="360" y2="170"></line>
-          <line x1="220" y1="220" x2="360" y2="170"></line>
-          <line x1="220" y1="220" x2="360" y2="300"></line>
-          <line x1="360" y1="170" x2="480" y2="140"></line>
-          <line x1="360" y1="300" x2="480" y2="140"></line>
-          <line x1="360" y1="60" x2="480" y2="140"></line>
-        </g>
-        <g class="motif-nodes" fill="var(--indigo-node)">
-          <circle cx="220" cy="90" r="7"></circle>
-          <circle cx="220" cy="220" r="9"></circle>
-          <circle cx="360" cy="60" r="6"></circle>
-          <circle cx="360" cy="170" r="8"></circle>
-          <circle cx="360" cy="300" r="6"></circle>
-          <circle cx="480" cy="140" r="11"></circle>
-        </g>
-      </svg>
+      <div class="hero-glow"></div>
+      <div class="hero-orbit"></div>
+      <div class="hero-orbit hero-orbit-2"></div>
+      <img class="hero-mascot" src="assets/mascot.svg" alt="" width="380" height="380" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>

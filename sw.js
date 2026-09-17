@@ -1,5 +1,5 @@
-// Aken — Service Worker v15.0 (covers blog + page communauté)
-const CACHE_NAME = 'aken-v15';
+// Aken — Service Worker v16.0 (OG communauté, canaux activables, polish responsive)
+const CACHE_NAME = 'aken-v16';
 
 const APP_SHELL = [
   '/',

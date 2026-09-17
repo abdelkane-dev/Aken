@@ -755,6 +755,25 @@
   max-width: 460px;
 }
 
+/* Très petits écrans : le formulaire passe en pile, bouton pleine largeur */
+@media (max-width: 520px) {
+  .blog-newsletter-form {
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .blog-newsletter-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .blog-newsletter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .blog-newsletter-input {
   flex: 1;
   height: 50px;

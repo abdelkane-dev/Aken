@@ -15,9 +15,9 @@
   "hero": {
     "tagline": "Technology, evolved.",
     "eyebrow": "Bamako, Mali — Disponible pour projets & opportunités",
-    "title": "Des solutions digitales <span class=\"accent\">sur-mesure</span> pour développer votre activité et booster vos ventes.",
-    "title_accent": "sur-mesure",
-    "lead": "Besoin d'un site vitrine, d'une boutique en ligne pour vendre sur internet, d'une application mobile ou d'un outil pour automatiser votre gestion ? Aken conçoit des solutions simples, rapides et sécurisées, avec paiements Wave et Orange Money intégrés.",
+    "title": "Logiciel, <span class=\"accent\">données</span> &amp; cybersécurité : des solutions sur-mesure pour développer votre activité.",
+    "title_accent": "données",
+    "lead": "Sites vitrines, boutiques en ligne, applications, ingénierie des données, bases de données de tout type et de toute capacité, cybersécurité : Aken conçoit des solutions simples, rapides et sécurisées, avec paiements Wave et Orange Money intégrés.",
     "cta_primary": "Calculer mon devis gratuit →",
     "cta_secondary": "Voir nos réalisations"
   },
@@ -40,11 +40,11 @@
   },
   "apropos": {
     "eyebrow": "À propos",
-    "title": "Des solutions concrètes et rentables pour votre business"
+    "title": "Logiciel, données et sécurité : des solutions concrètes et rentables pour votre business"
   },
   "expertise": {
     "eyebrow": "Services",
-    "title": "Tout ce qu'il vous faut pour digitaliser et développer votre activité"
+    "title": "Logiciel, données & cybersécurité : tout ce qu'il vous faut pour digitaliser votre activité"
   },
   "offres": {
     "eyebrow": "Offres",
@@ -88,13 +88,13 @@
     "a4c2": "Cloud / VPS",
     "a4c3": "Sécurité",
     "adapt_title": "La stack ? Elle s'adapte à vous.",
-    "adapt_desc": "Web, mobile, data, cloud, sécurité ou IA : le choix des outils dépend de votre projet, de votre budget et de vos utilisateurs — jamais l'inverse. Chaque technologie du marché est un outil dans la boîte, pas une réponse toute faite.",
+    "adapt_desc": "Sites, applications, données, bases de données de tout type et de toute capacité, cybersécurité de tout domaine : tout dépend de votre projet, de votre budget et de vos utilisateurs — jamais l'inverse. Chaque technologie du marché est un outil dans la boîte, pas une réponse toute faite.",
     "d1": "Sites & boutiques web",
     "d2": "Applications mobiles",
     "d3": "Outils de gestion",
-    "d4": "Data & tableaux de bord",
+    "d4": "Bases de données & BI",
     "d5": "Hébergement & DevOps",
-    "d6": "Sécurité & sauvegardes",
+    "d6": "Cybersécurité",
     "cta": "Discutons de votre projet →"
   },
   "tarifs": {
@@ -121,7 +121,7 @@
     "eyebrow": "Ressource gratuite"
   },
   "footer": {
-    "copyright": "Aken — Solutions digitales sur-mesure pour votre entreprise. Bamako, Mali."
+    "copyright": "Aken — Ingénierie logicielle, données & cybersécurité au service de votre entreprise. Bamako, Mali."
   },
   "whatsapp": {
     "label": "Contactez-nous sur WhatsApp"

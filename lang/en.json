@@ -15,9 +15,9 @@
   "hero": {
     "tagline": "Technology, evolved.",
     "eyebrow": "Bamako, Mali — Available for projects & opportunities",
-    "title": "Custom digital solutions <span class=\"accent\">tailored to your business</span> to accelerate growth and boost sales.",
-    "title_accent": "custom",
-    "lead": "Need a showcase website, an online store to sell products, a mobile app, or tools to automate operations? Aken builds fast, secure solutions with direct Wave & Orange Money payment integrations.",
+    "title": "Software, <span class=\"accent\">data</span> &amp; cybersecurity: custom solutions to grow your business.",
+    "title_accent": "data",
+    "lead": "Showcase sites, online stores, apps, data engineering, databases of any type and scale, cybersecurity: Aken builds simple, fast and secure solutions, with Wave & Orange Money payments built in.",
     "cta_primary": "Calculate my free quote →",
     "cta_secondary": "See our work"
   },
@@ -40,11 +40,11 @@
   },
   "apropos": {
     "eyebrow": "About",
-    "title": "Practical, profitable digital solutions for your business"
+    "title": "Software, data and security: concrete, cost-effective solutions for your business"
   },
   "expertise": {
     "eyebrow": "Services",
-    "title": "Everything you need to digitize and scale your business"
+    "title": "Software, data & cybersecurity: everything you need to digitalize your business"
   },
   "offres": {
     "eyebrow": "Services",
@@ -88,13 +88,13 @@
     "a4c2": "Cloud / VPS",
     "a4c3": "Security",
     "adapt_title": "The stack? It adapts to you.",
-    "adapt_desc": "Web, mobile, data, cloud, security or AI: the tooling depends on your project, budget and users — never the other way around. Every technology on the market is a tool in the box, not a ready-made answer.",
+    "adapt_desc": "Sites, apps, data, databases of any type and scale, cybersecurity across every domain: everything depends on your project, budget and users — never the other way around. Every technology on the market is a tool in the box, not a ready-made answer.",
     "d1": "Websites & online stores",
     "d2": "Mobile applications",
     "d3": "Management tools",
-    "d4": "Data & dashboards",
+    "d4": "Databases & BI",
     "d5": "Hosting & DevOps",
-    "d6": "Security & backups",
+    "d6": "Cybersecurity",
     "cta": "Let's discuss your project →"
   },
   "tarifs": {
@@ -121,7 +121,7 @@
     "eyebrow": "Free Resource"
   },
   "footer": {
-    "copyright": "Aken — Custom digital solutions for your business. Bamako, Mali."
+    "copyright": "Aken — Software engineering, data & cybersecurity for your business. Bamako, Mali."
   },
   "whatsapp": {
     "label": "Contact us on WhatsApp"

@@ -447,7 +447,7 @@ Port 2222</code></pre>
       '        <div class="blog-author-avatar">AK</div>',
       '        <span>Par Abdel Kane (Aken)</span>',
       '      </div>',
-      '      <a href="#article-' + featured.id + '" class="btn btn-primary btn-small" data-read-id="' + featured.id + '">Lire l\'article complet →</a>',
+      '      <a href="articles/' + featured.slug + '.html" class="btn btn-primary btn-small">Lire l\'article complet →</a>',
       '    </div>',
       '  </div>',
       '</div>'
@@ -523,7 +523,7 @@ Port 2222</code></pre>
       html += '        <button class="blog-card-share-btn" data-share-id="' + article.id + '" title="Partager cet article" aria-label="Partager cet article">';
       html += '          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
       html += '        </button>';
-      html += '        <a href="#article-' + article.id + '" class="blog-card-read" data-read-id="' + article.id + '">';
+      html += '        <a href="articles/' + article.slug + '.html" class="blog-card-read">';
       html += '          <span>Lire</span>';
       html += '          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
       html += '        </a>';
@@ -681,7 +681,10 @@ Port 2222</code></pre>
 
   function openArticle(articleId) {
     var article = ARTICLES.find(function (a) { return a.id === parseInt(articleId, 10); });
-    if (!article) return;
+    if (!article) {
+      // Lien profond depuis une page article ou ancien hash : redirige vers la page dédiée
+      return;
+    }
 
     updateShareMeta(article);
 
@@ -730,7 +733,7 @@ Port 2222</code></pre>
     });
 
     // Liens de partage
-    var currentUrl = window.location.origin + window.location.pathname + "#article-" + article.id;
+    var currentUrl = "https://www.aken.dev/articles/" + article.slug + ".html";
     var shareTitle = encodeURIComponent(article.title + " — Blog Aken");
     var shareUrl = encodeURIComponent(currentUrl);
 
@@ -883,7 +886,7 @@ Port 2222</code></pre>
         var aid = shareBtn.getAttribute("data-share-id");
         var art = ARTICLES.find(function (a) { return a.id === parseInt(aid, 10); });
         if (art) {
-          var shareLink = window.location.origin + window.location.pathname + "#article-" + art.id;
+          var shareLink = "https://www.aken.dev/articles/" + art.slug + ".html";
           if (navigator.share) {
             navigator.share({ title: art.title, text: art.excerpt, url: shareLink });
           } else {
@@ -933,11 +936,13 @@ Port 2222</code></pre>
     renderFeaturedArticle();
     renderBlog();
 
-    // Vérifie si un hash est présent dans l'URL (#article-2)
+    // Ancien hash #article-N : redirection 301 côté client vers la page dédiée (SEO)
     if (window.location.hash && window.location.hash.indexOf("#article-") === 0) {
-      var hashId = window.location.hash.replace("#article-", "");
-      if (hashId) {
-        setTimeout(function () { openArticle(hashId); }, 300);
+      var hashId = parseInt(window.location.hash.replace("#article-", ""), 10);
+      var target = ARTICLES.find(function (a) { return a.id === hashId; });
+      if (target) {
+        window.location.replace("articles/" + target.slug + ".html");
+        return;
       }
     }
   }

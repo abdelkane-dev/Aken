@@ -244,6 +244,8 @@
     "app-web": 140000,
     "app-mobile": 220000,
     "systeme-data": 320000,
+    "donnees-bdd": 150000,
+    "cybersecurite": 120000,
     "audit": 45000
   };
 
@@ -256,6 +258,8 @@
     "api": 30000,
     "geoloc": 25000,
     "multilingue": 20000,
+    "bdd": 45000,
+    "securite": 40000,
     "ia": 50000
   };
 
@@ -265,6 +269,8 @@
     "app-web": "Boutique en ligne / Web App",
     "app-mobile": "Application mobile",
     "systeme-data": "Logiciel de gestion & sur-mesure",
+    "donnees-bdd": "Données & Base de données",
+    "cybersecurite": "Cybersécurité",
     "audit": "Audit & Conseil stratégique"
   };
 
@@ -276,6 +282,8 @@
     "api": "API intégrations tierces",
     "geoloc": "Géolocalisation & Cartes",
     "multilingue": "Multilingue",
+    "bdd": "Base de données / Migration",
+    "securite": "Sécurité renforcée / Audit",
     "ia": "IA & Automatisation"
   };
 

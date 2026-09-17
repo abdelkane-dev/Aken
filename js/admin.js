@@ -1095,7 +1095,7 @@
       '  Paiements acceptés par <strong>Wave</strong> et <strong>Orange Money</strong> au numéro : <strong>+223 93 78 99 16</strong> (Aken / Abdelkane).<br>',
       '  Démarrage des travaux dès réception de l\'acompte de ' + depositRate + '%.',
       '</div>',
-      '<div class="footer">Aken — Solutions digitales pour développer votre activité. Bamako, Mali.</div>',
+      '<div class="footer">Aken — Logiciel, données & cybersécurité au service de votre activité. Bamako, Mali.</div>',
       '<script>window.onload = function() { window.print(); };</script>',
       '</body></html>'
     ].join(""));

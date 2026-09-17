@@ -1,5 +1,5 @@
-// Aken — Service Worker v19.0 (section tech conversationnelle + fixes mobile)
-const CACHE_NAME = 'aken-v19';
+// Aken — Service Worker v20.0 (12 pages articles SEO + sitemap)
+const CACHE_NAME = 'aken-v21';
 
 const APP_SHELL = [
   '/',
@@ -15,10 +15,26 @@ const APP_SHELL = [
   '/js/communaute.js',
   '/css/communaute.css',
   '/communaute.html',
+  '/articles/automatiser-business-mali.html',
+  '/articles/paiement-mobile-mali.html',
+  '/articles/app-connexion-lente.html',
+  '/articles/papier-vers-logiciel.html',
+  '/articles/cloud-vs-vps-mali.html',
+  '/articles/securiser-donnees-mali.html',
+  '/articles/pwa-vs-app-native.html',
+  '/articles/ingenierie-donnees-excel.html',
+  '/articles/devenir-freelance-tech-mali.html',
+  '/articles/securiser-vps-mali.html',
+  '/articles/boutique-en-ligne-mali.html',
+  '/articles/design-premium-sombre.html',
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
   '/assets/logo-light.png',
+  '/assets/logo-240.webp',
+  '/assets/logo-320.webp',
+  '/assets/logo-light-240.webp',
+  '/assets/logo-light-320.webp',
   '/assets/logo.webp',
   '/assets/logo-light.webp',
   '/assets/fonts/fonts.css',

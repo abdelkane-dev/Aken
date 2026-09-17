@@ -11,6 +11,12 @@
     <priority>0.8</priority>
   </url>
 <url><loc>https://www.aken.dev/articles/automatiser-business-mali.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://www.aken.dev/communaute.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.aken.dev/articles/choisir-base-donnees-pme.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://www.aken.dev/articles/structurer-donnees-pme.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://www.aken.dev/articles/securiser-boutique-commercant-mali.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://www.aken.dev/articles/fraude-mobile-money-commercant.html</loc><lastmod>2026-09-15</lastmod></url>
+  <url><loc>https://www.aken.dev/articles/automatiser-business-mali.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://www.aken.dev/articles/paiement-mobile-mali.html</loc><lastmod>2026-08-15</lastmod></url>
   <url><loc>https://www.aken.dev/articles/app-connexion-lente.html</loc><lastmod>2026-08-10</lastmod></url>
   <url><loc>https://www.aken.dev/articles/papier-vers-logiciel.html</loc><lastmod>2026-08-05</lastmod></url>
@@ -22,5 +28,4 @@
   <url><loc>https://www.aken.dev/articles/securiser-vps-mali.html</loc><lastmod>2026-09-05</lastmod></url>
   <url><loc>https://www.aken.dev/articles/boutique-en-ligne-mali.html</loc><lastmod>2026-09-10</lastmod></url>
   <url><loc>https://www.aken.dev/articles/design-premium-sombre.html</loc><lastmod>2026-09-15</lastmod></url>
-  <url><loc>https://www.aken.dev/communaute.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>

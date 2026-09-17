@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Choisir la bonne base de données pour votre PME">
+  <defs>
+    <linearGradient id="g13" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B0E1A"/><stop offset="0.55" stop-color="#12172B"/><stop offset="1" stop-color="#070810"/>
+    </linearGradient>
+    <linearGradient id="o13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF6B00"/>
+    </linearGradient>
+    <radialGradient id="glow13" cx="0.78" cy="0.18" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.35"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g13)"/>
+  <rect width="720" height="405" fill="url(#glow13)"/>
+  <g fill="#FFFFFF" opacity="0.07">
+    <circle cx="60" cy="60" r="1.5"/><circle cx="106" cy="60" r="1.5"/><circle cx="152" cy="60" r="1.5"/><circle cx="60" cy="106" r="1.5"/><circle cx="106" cy="106" r="1.5"/><circle cx="152" cy="106" r="1.5"/><circle cx="60" cy="152" r="1.5"/><circle cx="106" cy="152" r="1.5"/><circle cx="152" cy="152" r="1.5"/>
+  </g>
+  <!-- Trois cylindres BDD -->
+  <g stroke-linecap="round" fill="none">
+    <ellipse cx="180" cy="150" rx="70" ry="22" stroke="url(#o13)" stroke-width="3"/>
+    <path d="M110 150v90c0 12 31 22 70 22s70-10 70-22v-90" stroke="url(#o13)" stroke-width="3"/>
+    <path d="M110 195c0 12 31 22 70 22s70-10 70-22" stroke="#FFAA00" stroke-width="2" opacity="0.55"/>
+    <ellipse cx="420" cy="170" rx="55" ry="17" stroke="#FFFFFF" stroke-width="2.5" opacity="0.85"/>
+    <path d="M365 170v72c0 9 25 17 55 17s55-8 55-17v-72" stroke="#FFFFFF" stroke-width="2.5" opacity="0.85"/>
+    <ellipse cx="600" cy="186" rx="44" ry="14" stroke="#FFFFFF" stroke-width="2" opacity="0.55"/>
+    <path d="M556 186v58c0 7 20 14 44 14s44-7 44-14v-58" stroke="#FFFFFF" stroke-width="2" opacity="0.55"/>
+  </g>
+  <!-- Bars de capacité -->
+  <g>
+    <rect x="130" y="286" width="240" height="8" rx="4" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="130" y="286" width="196" height="8" rx="4" fill="url(#o13)"/>
+    <rect x="130" y="306" width="240" height="8" rx="4" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="130" y="306" width="120" height="8" rx="4" fill="#FFAA00" opacity="0.85"/>
+  </g>
+  <!-- Onde signature -->
+  <path d="M0 385 C 90 365 150 395 240 383 S 420 368 510 386 660 396 720 380" stroke="#FF6B00" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <path d="M0 394 C 110 380 200 400 320 390 S 520 380 620 392 690 398 720 390" stroke="#FFAA00" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

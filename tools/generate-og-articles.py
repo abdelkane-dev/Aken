@@ -38,6 +38,10 @@ TITLES = {
     10: ("Sécuriser un VPS en 10 étapes", "INFRASTRUCTURE"),
     11: ("Lancer votre boutique en ligne", "ENTREPRENEURS"),
     12: ("Le design sombre qui convertit", "TECHNIQUE"),
+    13: ("Quelle base de données pour votre PME ?", "DATA & IA"),
+    14: ("Structurer vos données PME", "DATA & IA"),
+    15: ("Cybersécurité pour commerçants", "SÉCURITÉ"),
+    16: ("Arnaques mobile money : le protocole", "SÉCURITÉ"),
 }
 
 

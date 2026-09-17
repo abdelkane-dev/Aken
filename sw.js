@@ -1,5 +1,5 @@
 // Aken — Service Worker v20.0 (12 pages articles SEO + sitemap)
-const CACHE_NAME = 'aken-v21';
+const CACHE_NAME = 'aken-v22';
 
 const APP_SHELL = [
   '/',
@@ -27,6 +27,10 @@ const APP_SHELL = [
   '/articles/securiser-vps-mali.html',
   '/articles/boutique-en-ligne-mali.html',
   '/articles/design-premium-sombre.html',
+  '/articles/choisir-base-donnees-pme.html',
+  '/articles/structurer-donnees-pme.html',
+  '/articles/securiser-boutique-commercant-mali.html',
+  '/articles/fraude-mobile-money-commercant.html',
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
@@ -63,6 +67,10 @@ const APP_SHELL = [
   '/assets/blog/cover-10.svg',
   '/assets/blog/cover-11.svg',
   '/assets/blog/cover-12.svg',
+  '/assets/blog/cover-13.svg',
+  '/assets/blog/cover-14.svg',
+  '/assets/blog/cover-15.svg',
+  '/assets/blog/cover-16.svg',
   '/assets/og/og-article-1.png',
   '/assets/og/og-article-2.png',
   '/assets/og/og-article-3.png',
@@ -75,6 +83,10 @@ const APP_SHELL = [
   '/assets/og/og-article-10.png',
   '/assets/og/og-article-11.png',
   '/assets/og/og-article-12.png',
+  '/assets/og/og-article-13.png',
+  '/assets/og/og-article-14.png',
+  '/assets/og/og-article-15.png',
+  '/assets/og/og-article-16.png',
   '/lang/fr.json',
   '/lang/en.json'
 ];

@@ -20,6 +20,162 @@
   // Base des 8 Articles complets
   var ARTICLES = [
     {
+      id: 13,
+      slug: "choisir-base-donnees-pme",
+      title: "Quelle base de données pour votre PME ? Le guide pratique (SQL, NoSQL, cloud)",
+      excerpt: "PostgreSQL, MySQL, MongoDB, Firebase : comment choisir la base de données adaptée à la taille, au budget et aux objectifs de votre PME — sans jargon inutile.",
+      category: "Data & IA",
+      date: "2026-09-17",
+      readTime: 9,
+      icon: "barChart",
+      cover: "assets/blog/cover-13.svg",
+      ogImage: "assets/og/og-article-13.png",
+      tags: ["#BaseDeDonnées", "#PME", "#PostgreSQL", "#Cloud"],
+      content: `
+        <h2>Pourquoi cette question se pose soudain</h2>
+        <p>Votre entreprise grandit, vos fichiers Excel saturent, deux employés modifient la même fiche client en même temps et s'écrasent mutuellement. Le moment est venu de passer à une vraie base de données. Mais laquelle ? Le choix dépend de <strong>trois facteurs simples</strong> : le volume de données, le type d'informations et les compétences disponibles.</p>
+
+        <h2>SQL ou NoSQL : la vraie question</h2>
+        <p><strong>Choisissez SQL (PostgreSQL, MySQL)</strong> si vos données sont structurées et liées entre elles : clients, commandes, produits, factures. C'est le cas de 90% des PME. La base garantit la cohérence : impossible d'enregistrer une facture pour un client inexistant.</p>
+        <p><strong>Choisissez NoSQL (MongoDB, Firebase)</strong> si vos données sont souples et évolvent vite : profils utilisateurs aux champs variables, contenus riches, données de capteurs. La flexibilité prime sur la rigidité.</p>
+
+        <h2>Les scénarios typiques au Mali</h2>
+        <ul>
+          <li><strong>Boutique ou commerce :</strong> PostgreSQL sur un VPS à 5-10 000 FCFA/mois — suffisant pour des centaines de milliers de lignes.</li>
+          <li><strong>Application mobile avec comptes clients :</strong> Firebase ou Supabase pour démarrer vite, avec synchronisation automatique.</li>
+          <li><strong>Rapports et analyses de ventes :</strong> SQL reste imbattable pour agréger des chiffres par période, produit ou vendeur.</li>
+        </ul>
+
+        <blockquote>« La meilleure base de données n'est pas la plus moderne : c'est celle que votre équipe sait maintenir et que votre budget sait sauvegarder. »</blockquote>
+
+        <h2>Les trois pièges à éviter</h2>
+        <ol>
+          <li><strong>Choisir une techno avant de modéliser les données.</strong> Le modèle d'abord, l'outil ensuite.</li>
+          <li><strong>Oublier les sauvegardes testées.</strong> Une sauvegarde jamais restaurée n'est pas une sauvegarde.</li>
+          <li><strong>Se surdimensionner.</strong> Un VPS bien configuré tient largement une PME de 50 employés ; inutile de payer du cloud enterprise.</li>
+        </ol>
+
+        <h2>Comment Aken vous accompagne</h2>
+        <p>Nous analysons votre volume actuel et votre croissance prévue, modélisons vos données métier, installons la base adaptée, migrons vos fichiers existants sans perte et formons votre équipe. La maintenance et les sauvegardes surveillées sont incluses.</p>
+      `
+    },
+    {
+      id: 14,
+      slug: "structurer-donnees-pme",
+      title: "Vos données en désordre ? La méthode pour les structurer et en tirer des décisions",
+      excerpt: "Fichiers dispersés, chiffres contradictoires, décisions à l'aveugle : la méthode concrète pour transformer le chaos de vos fichiers en une base fiable qui pilote votre croissance.",
+      category: "Data & IA",
+      date: "2026-09-16",
+      readTime: 8,
+      icon: "barChart",
+      cover: "assets/blog/cover-14.svg",
+      ogImage: "assets/og/og-article-14.png",
+      tags: ["#Data", "#Organisation", "#BI", "#Excel"],
+      content: `
+        <h2>Le symptôme que tout dirigeant connaît</h2>
+        <p>« Combien on a vendu ce mois-ci ? » La question semble simple. Pourtant, il faut ouvrir quatre fichiers, recouper deux carnets et encore appeler le magasin pour une réponse fiable. Ce n'est pas un problème de travail : c'est un problème de <strong>structure des données</strong>.</p>
+
+        <h2>Étape 1 : l'inventaire de l'existant</h2>
+        <p>Listez toutes les sources : fichiers Excel de chaque service, carnets papier, reçus Wave et Orange Money, notes de voix. Pour chacune, identifiez qui la remplit, à quelle fréquence et sous quel format. Ce cartographie révèle souvent les <strong>doublons et contradictions</strong> qui empoisonnent vos chiffres.</p>
+
+        <h2>Étape 2 : le modèle de données</h2>
+        <p>Avant tout logiciel, définissez vos entités et leurs relations : un <strong>client</strong> passe des <strong>commandes</strong> qui contiennent des <strong>produits</strong>, payées en une ou plusieurs <strong>transactions</strong>. Ce schéma simple évite 80% des problèmes futurs : sans lui, chaque fichier Excel devient une île isolée.</p>
+
+        <h2>Étape 3 : la migration sans perte</h2>
+        <ul>
+          <li><strong>Export et nettoyage :</strong> dédoublonnage, correction des formats (dates, numéros de téléphone, noms).</li>
+          <li><strong>Import par lots testés :</strong> on vérifie un échantillon avant de tout charger.</li>
+          <li><strong>Période de double saisie :</strong> deux semaines où l'ancien et le nouveau système tournent en parallèle, puis validation finale.</li>
+        </ul>
+
+        <blockquote>« Une donnée qu'on ne peut pas faire confiance est pire qu'une donnée manquante : elle fait prendre de mauvaises décisions en toute confiance. »</blockquote>
+
+        <h2>Étape 4 : des tableaux de bord qui parlent</h2>
+        <p>Une base propre alimente automatiquement des indicateurs clairs : ventes du jour par vendeur, top produits, taux de recouvrement, marge par catégorie. Le dirigeant décide sur des chiffres à jour, pas sur des impressions.</p>
+
+        <h2>Par où commencer ?</h2>
+        <p>Choisissez <strong>un seul processus douloureux</strong> (souvent les ventes ou le stock), structurez-le de bout en bout, mesurez le gain, puis étendez. Aken vous accompagne de l'audit initial à la formation de vos équipes — avec des sauvegardes testées dès le premier jour.</p>
+      `
+    },
+    {
+      id: 15,
+      slug: "securiser-boutique-commercant-mali",
+      title: "Cybersécurité pour commerçants : protéger votre boutique en ligne au Mali sans expert interne",
+      excerpt: "Phishing, mots de passe faibles, absence de sauvegardes : les 7 protections essentielles pour sécuriser votre commerce et vos paiements Wave/Orange Money, sans embaucher d'informaticien.",
+      category: "Sécurité",
+      date: "2026-09-16",
+      readTime: 8,
+      icon: "lock",
+      cover: "assets/blog/cover-15.svg",
+      ogImage: "assets/og/og-article-15.png",
+      tags: ["#Cybersécurité", "#Commerce", "#Wave", "#OrangeMoney"],
+      content: `
+        <h2>Votre boutique est une cible — même petite</h2>
+        <p>Les fraudeurs ne visent pas que les grandes entreprises. Un commerce avec une page de vente, un numéro Wave et une messagerie suffit : les attaques sont <strong>automatisées</strong> et balayent des milliers de numéros. La bonne nouvelle : 80% des attaques courantes échouent face à des protections de base bien appliquées.</p>
+
+        <h2>Les 7 protections essentielles</h2>
+        <ol>
+          <li><strong>Double authentification (2FA) partout</strong> : messagerie, page opérateur, réseaux sociaux. Un mot de passe volé ne suffit plus à ouvrir vos comptes.</li>
+          <li><strong>Un mot de passe unique par service</strong>, stocké dans un gestionnaire (Bitwarden, gratuit). Jamais le même pour la messagerie et la page Facebook.</li>
+          <li><strong>Sauvegardes automatiques testées</strong> : photos de produits, fichier clients, historique de ventes. Une copie hors de l'appareil, restaurée une fois pour vérifier qu'elle marche.</li>
+          <li><strong>Mise à jour automatique du téléphone et des applications</strong> : la plupart des piratages exploitent des failles déjà corrigées.</li>
+          <li><strong> Vigilance sur les fausses notifications :</strong> un SMS « votre compte Wave sera bloqué » avec un lien est une arnaque. Vérifiez toujours dans l'application officielle, jamais via le lien reçu.</li>
+          <li><strong>Un appareil propre pour les paiements :</strong> pas de applications piratées sur le téléphone qui reçoit l'argent.</li>
+          <li><strong>Former chaque employé</strong> qui touche au téléphone professionnel : 30 minutes suffisent pour reconnaître les pièges courants.</li>
+        </ol>
+
+        <blockquote>« La sécurité n'est pas une dépense : c'est l'assurance que des mois de travail ne s'évaporent pas en une nuit. »</blockquote>
+
+        <h2>Que faire en cas d'incident ?</h2>
+        <p>Changez immédiatement les mots de passe depuis un autre appareil, alertez votre opérateur mobile money, prévenez vos clients si la page de vente a été compromise, et documentez ce qui s'est passé. Aken intervient en urgence pour l'analyse, le nettoyage et la remise en service sécurisée.</p>
+
+        <h2>L'audit sécurité Aken</h2>
+        <p>En une demi-journée, nous vérifions vos accès, appareils, sauvegardes et habitudes d'équipe. Vous repartez avec un plan clair : ce qui est déjà bien, ce qui doit être corrigé d'urgence, ce qui peut attendre — chiffré, priorisé, sans jargon.</p>
+      `
+    },
+    {
+      id: 16,
+      slug: "fraude-mobile-money-commercant",
+      title: "Arnaques mobile money : reconnaître et stopper une tentative de fraude Wave/Orange Money",
+      excerpt: "Faux SMS de blocage, faux appels opérateur, fausses alertes de paiement : les schémas de fraude qui circulent au Mali et le protocole simple pour ne jamais mordre à l'hameçon.",
+      category: "Sécurité",
+      date: "2026-09-15",
+      readTime: 6,
+      icon: "lock",
+      cover: "assets/blog/cover-16.svg",
+      ogImage: "assets/og/og-article-16.png",
+      tags: ["#Fraude", "#MobileMoney", "#Sécurité", "#Commerce"],
+      content: `
+        <h2>Comment fonctionne une arnaque mobile money</h2>
+        <p>Le schéma est toujours le même : créer l'urgence, simuler une autorité, obtenir une action. Un SMS annonce que votre compte sera bloqué. Un appel se fait passer pour le service client Wave. Un faux avis de paiement vous pousse à livrer une marchandise avant vérification. L'objectif : votre code secret, un transfert, ou une livraison non payée.</p>
+
+        <h2>Les 5 signaux d'alerte</h2>
+        <ul>
+          <li><strong>L'urgence artificielle :</strong> « agissez dans l'heure ». Aucun opérateur ne bloque un compte en quelques heures sans passage en agence.</li>
+          <li><strong>Le lien reçu par SMS ou WhatsApp :</strong> les opérateurs ne demandent jamais de saisir votre code via un lien.</li>
+          <li><strong>La demande de votre code secret :</strong> même « pour vérification », même par un pseudo-agent. Jamais, à personne.</li>
+          <li><strong>L'avis de paiement avant confirmation :</strong> vérifiez toujours dans votre application que l'argent est <em>dans</em> le solde, pas juste « envoyé ».</li>
+          <li><strong>Le numéro inconnu qui en sait trop :</strong> votre nom et votre activité se trouvent facilement ; ce n'est pas une preuve de légitimité.</li>
+        </ul>
+
+        <blockquote>« Le réflexe qui sauve : raccrocher, fermer le message, ouvrir l'application officielle et vérifier par vous-même. »</blockquote>
+
+        <h2>Le protocole en 4 temps pour votre équipe</h2>
+        <ol>
+          <li><strong>Ne jamais répondre</strong> ni cliquer : pas de « STOP », pas d'appel du numéro affiché.</li>
+          <li><strong>Vérifier dans l'application officielle</strong> ou en agence, par vos propres moyens.</li>
+          <li><strong>Signaler au vrai service client</strong> (numéro au dos de votre carte ou en agence) et transférer le SMS frauduleux.</li>
+          <li><strong>Prévenir toute l'équipe</strong> : une arnaque qui échoue sur vous reviendra sur un collègue.</li>
+        </ol>
+
+        <h2>Protéger aussi vos clients</h2>
+        <p>Affichez sur votre page de vente : « Nous ne demandons jamais votre code secret. Paiement confirmé uniquement dans l'application. » Vous protégez vos clients et votre réputation — les fraudeurs usurpent souvent l'identité des commerçants populaires.</p>
+
+        <h2>La formation Aken</h2>
+        <p>30 minutes en face à face ou en visio pour votre équipe : scénarios réels locaux, exercices pratiques et une fiche mémo à coller à la caisse. Le coût d'une formation est ridicule comparé à un seul transfert frauduleux.</p>
+      `
+    },
+    {
       id: 1,
       slug: "automatiser-business-mali",
       title: "Comment automatiser et digitaliser votre entreprise au Mali avec des solutions sur-mesure",

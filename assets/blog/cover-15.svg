@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Protéger la boutique en ligne : sécurité du commerçant">
+  <defs>
+    <linearGradient id="g15" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#160A08"/><stop offset="0.55" stop-color="#241009"/><stop offset="1" stop-color="#0C0503"/>
+    </linearGradient>
+    <linearGradient id="o15" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF6B00"/>
+    </linearGradient>
+    <radialGradient id="glow15" cx="0.7" cy="0.3" r="0.65">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.4"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g15)"/>
+  <rect width="720" height="405" fill="url(#glow15)"/>
+  <!-- Bouclier principal -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M420 84l120 44v96c0 66-52 106-120 132-68-26-120-66-120-132v-96z" stroke="url(#o15)" stroke-width="4"/>
+    <path d="M420 116l92 34v74c0 52-40 84-92 106-52-22-92-54-92-106v-74z" stroke="#FFAA00" stroke-width="1.5" opacity="0.35"/>
+    <!-- Cadenas dans le bouclier -->
+    <rect x="392" y="196" width="56" height="44" rx="8" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M402 196v-14a18 18 0 0 1 36 0v14" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="420" cy="216" r="5" fill="url(#o15)"/>
+    <line x1="420" y1="221" x2="420" y2="230" stroke="#FFFFFF" stroke-width="3"/>
+  </g>
+  <!-- Menaces bloquées à gauche -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.45" stroke-linecap="round">
+    <path d="M96 140l24 24m0-24l-24 24"/>
+    <circle cx="120" cy="216" r="16"/><line x1="120" y1="208" x2="120" y2="218"/><circle cx="120" cy="227" r="1.6"/>
+    <path d="M84 300c8-14 24-14 32 0m-16-22v6"/><circle cx="100" cy="272" r="10"/>
+  </g>
+  <!-- Rayons de blocage -->
+  <g stroke="#FF6B00" stroke-width="2" opacity="0.5" stroke-linecap="round">
+    <line x1="238" y1="180" x2="288" y2="192"/>
+    <line x1="244" y1="240" x2="288" y2="234"/>
+    <line x1="230" y1="298" x2="284" y2="282"/>
+  </g>
+  <!-- Vitrine protégée à droite -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.75" stroke-linejoin="round">
+    <rect x="592" y="150" width="84" height="96" rx="6"/>
+    <path d="M600 178h68M600 206h68M600 234h68" opacity="0.5"/>
+    <circle cx="634" cy="130" r="10"/><path d="M620 150c4-8 24-8 28 0"/>
+  </g>
+  <!-- Onde signature -->
+  <path d="M0 385 C 90 365 150 395 240 383 S 420 368 510 386 660 396 720 380" stroke="#FF6B00" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <path d="M0 394 C 110 380 200 400 320 390 S 520 380 620 392 690 398 720 390" stroke="#FFAA00" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

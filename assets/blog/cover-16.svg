@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Reconnaître et stopper une tentative de fraude sur mobile money">
+  <defs>
+    <linearGradient id="g16" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F0A1C"/><stop offset="0.55" stop-color="#1A1130"/><stop offset="1" stop-color="#080512"/>
+    </linearGradient>
+    <linearGradient id="o16" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF6B00"/>
+    </linearGradient>
+    <radialGradient id="glow16" cx="0.3" cy="0.25" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.32"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g16)"/>
+  <rect width="720" height="405" fill="url(#glow16)"/>
+  <!-- Smartphone SMS frauduleux -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+    <rect x="120" y="96" width="128" height="228" rx="18"/>
+    <line x1="164" y1="112" x2="204" y2="112" stroke-width="2"/>
+    <rect x="136" y="140" width="96" height="46" rx="8" stroke="#FF6B00" stroke-width="2"/>
+    <line x1="146" y1="156" x2="222" y2="156" stroke="#FF6B00" stroke-width="1.5" opacity="0.7"/>
+    <line x1="146" y1="170" x2="200" y2="170" stroke="#FF6B00" stroke-width="1.5" opacity="0.7"/>
+    <rect x="136" y="200" width="96" height="34" rx="8" opacity="0.5"/>
+    <line x1="146" y1="217" x2="210" y2="217" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  <!-- alerte -->
+  <g stroke-linecap="round">
+    <path d="M330 120l38 66h-76z" fill="none" stroke="url(#o16)" stroke-width="3" stroke-linejoin="round"/>
+    <line x1="330" y1="146" x2="330" y2="166" stroke="#FFAA00" stroke-width="3"/>
+    <circle cx="330" cy="176" r="2.2" fill="#FFAA00"/>
+  </g>
+  <!-- check final protégé -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="500" cy="200" r="74" stroke="url(#o16)" stroke-width="3.5"/>
+    <path d="M466 202l24 24 46-50" stroke="#FFFFFF" stroke-width="4"/>
+    <path d="M546 138c22 14 34 36 34 62" stroke="#FFAA00" stroke-width="1.5" opacity="0.4"/>
+  </g>
+  <!-- FCFA bloqués -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.55">
+    <circle cx="628" cy="112" r="18"/><text x="628" y="118" text-anchor="middle" fill="#FFAA00" stroke="none" font-family="Arial" font-size="13" font-weight="bold">F</text>
+    <circle cx="662" cy="150" r="12" opacity="0.7"/><text x="662" y="155" text-anchor="middle" fill="#FFFFFF" stroke="none" font-family="Arial" font-size="10" opacity="0.8">F</text>
+  </g>
+  <!-- Onde signature -->
+  <path d="M0 385 C 90 365 150 395 240 383 S 420 368 510 386 660 396 720 380" stroke="#FF6B00" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <path d="M0 394 C 110 380 200 400 320 390 S 520 380 620 392 690 398 720 390" stroke="#FFAA00" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

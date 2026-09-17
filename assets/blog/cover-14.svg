@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Structurer les données d'une PME : du fichier dispersé à la base organisée">
+  <defs>
+    <linearGradient id="g14" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07130F"/><stop offset="0.55" stop-color="#0C2018"/><stop offset="1" stop-color="#050C09"/>
+    </linearGradient>
+    <linearGradient id="o14" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF6B00"/>
+    </linearGradient>
+    <radialGradient id="glow14" cx="0.22" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.3"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g14)"/>
+  <rect width="720" height="405" fill="url(#glow14)"/>
+  <!-- Fichiers dispersés à gauche -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.5" stroke-linejoin="round">
+    <path transform="translate(96,88) rotate(-9)" d="M0 0h44v34l-10 10H0z"/><line x1="92" y1="126" x2="120" y2="126" stroke-width="1.5"/>
+    <path transform="translate(150,190) rotate(7)" d="M0 0h38v30l-9 9H0z"/><line x1="152" y1="216" x2="172" y2="216" stroke-width="1.5"/>
+    <path transform="translate(84,268) rotate(-4)" d="M0 0h40v32l-9 9H0z"/>
+  </g>
+  <!-- Flux vers base centrale -->
+  <g stroke="url(#o14)" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M190 130 C 260 130 280 176 330 196"/>
+    <path d="M220 216 C 270 216 290 208 330 204"/>
+    <path d="M176 292 C 250 292 280 236 330 214"/>
+  </g>
+  <path d="M322 208l10 4-9 6" fill="url(#o14)"/>
+  <!-- Base centrale -->
+  <g fill="none" stroke-linecap="round">
+    <ellipse cx="432" cy="200" rx="86" ry="26" stroke="url(#o14)" stroke-width="3.5"/>
+    <path d="M346 200v96c0 14 39 26 86 26s86-12 86-26v-96" stroke="url(#o14)" stroke-width="3.5"/>
+    <path d="M346 232c0 14 39 26 86 26s86-12 86-26" stroke="#FFAA00" stroke-width="2" opacity="0.6"/>
+    <path d="M346 264c0 14 39 26 86 26s86-12 86-26" stroke="#FFAA00" stroke-width="2" opacity="0.35"/>
+  </g>
+  <!-- Tables organisées à droite -->
+  <g stroke="#FFFFFF" stroke-width="1.8" fill="none" opacity="0.8" stroke-linejoin="round">
+    <rect x="576" y="120" width="80" height="20" rx="4"/><line x1="576" y1="150" x2="656" y2="150"/><line x1="576" y1="170" x2="656" y2="170"/><line x1="616" y1="120" x2="616" y2="190"/>
+    <rect x="576" y="220" width="80" height="20" rx="4"/><line x1="576" y1="250" x2="656" y2="250"/><line x1="576" y1="270" x2="656" y2="270"/><line x1="616" y1="220" x2="616" y2="290"/>
+  </g>
+  <path d="M518 190 C 545 185 552 150 576 140" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M518 214 C 545 220 552 250 576 258" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Onde signature -->
+  <path d="M0 385 C 90 365 150 395 240 383 S 420 368 510 386 660 396 720 380" stroke="#FF6B00" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <path d="M0 394 C 110 380 200 400 320 390 S 520 380 620 392 690 398 720 390" stroke="#FFAA00" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

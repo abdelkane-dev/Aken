@@ -241,7 +241,7 @@ Dans [`js/admin.js`](js/admin.js), modifiez la variable `ADMIN_PIN` pour défini
 
 - 🌐 **Portfolio en ligne** : [abdelkane-dev.github.io/Aken](https://abdelkane-dev.github.io/Aken/)
 - 💼 **GitHub** : [@abdelkane-dev](https://github.com/abdelkane-dev)
-- 💬 **WhatsApp Pro** : [+223 XX XX XX XX](https://wa.me/22370000000)
+- 💬 **WhatsApp Pro** : [+223 93 78 99 16](https://wa.me/22393789916)
 - 📧 **E-mail Pro** : `contact@aken.dev` / `abdelkane.dev@gmail.com`
 
 ---

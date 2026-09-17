@@ -680,7 +680,118 @@
   }
 
   /* ═══════════════════════════════════════════
-     15. VISITEURS (compteur simulé)
+     15. MICRO-INTERACTIONS — sons + haptique
+     Sons synthétisés en WebAudio (zéro asset audio),
+     haptique navigator.vibrate (Android, silencieux ailleurs).
+     AudioContext créé au premier geste (politique autoplay).
+     Tick de survol throttlé, desktop uniquement ;
+     sons de survol désactivés sous prefers-reduced-motion.
+     ═══════════════════════════════════════════ */
+  var fxReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fxCanHover = window.matchMedia("(hover: hover)").matches;
+
+  var audioCtx = null;
+  function ensureAudio() {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    if (!audioCtx) audioCtx = new Ctx();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+  }
+  document.addEventListener("pointerdown", ensureAudio, { capture: true, passive: true });
+  document.addEventListener("keydown", ensureAudio, { capture: true, passive: true });
+
+  /* Préférence sonore mémorisée ("aken-sound" = "off" pour couper) */
+  var fxMuted = false;
+  try { fxMuted = localStorage.getItem("aken-sound") === "off"; } catch (e) { /* stockage indisponible */ }
+
+  function updateSoundUI() {
+    soundToggleBtns.forEach(function (btn) {
+      btn.classList.toggle("is-muted", fxMuted);
+      btn.setAttribute("aria-pressed", fxMuted ? "true" : "false");
+      btn.setAttribute("aria-label", fxMuted ? "Activer les sons de l'interface" : "Couper les sons de l'interface");
+      btn.title = fxMuted ? "Activer les sons" : "Couper les sons";
+    });
+  }
+
+  function fxTone(fromHz, toHz, duration, peak, type) {
+    if (fxMuted || !audioCtx || document.hidden) return;
+    if (audioCtx.state !== "running") {
+      ensureAudio();
+      if (audioCtx.state !== "running") return;
+    }
+    var t = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = type || "sine";
+    osc.frequency.setValueAtTime(fromHz, t);
+    osc.frequency.exponentialRampToValueAtTime(toHz, t + duration);
+    gain.gain.setValueAtTime(peak, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(t);
+    osc.stop(t + duration + 0.02);
+  }
+
+  function fxBuzz(pattern) {
+    if (fxMuted) return;
+    if (navigator.vibrate) {
+      try { navigator.vibrate(pattern); } catch (e) { /* non supporté */ }
+    }
+  }
+
+  /* Vocabulaire sonore : tap discret, confirmation double note, toggle grave */
+  function fxTap() { fxTone(520, 700, 0.07, 0.05, "sine"); fxBuzz(8); }
+  function fxConfirm() {
+    fxTone(480, 720, 0.12, 0.06, "triangle");
+    setTimeout(function () { fxTone(640, 960, 0.1, 0.045, "sine"); }, 70);
+    fxBuzz([10, 30, 14]);
+  }
+  function fxToggle() { fxTone(300, 170, 0.08, 0.05, "sine"); fxBuzz(12); }
+
+  function fxIsPrimary(el) {
+    if (!el.classList) return false;
+    if (el.classList.contains("btn-primary") || el.classList.contains("btn-cta") || el.classList.contains("header-cta")) return true;
+    if (el.getAttribute && el.getAttribute("type") === "submit") return true;
+    return false;
+  }
+
+  /* Délégation globale : couvre aussi les chips construites dynamiquement */
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("button, a, .chip, .calc-option, .calc-option-body");
+    if (!el) return;
+    if (el.classList.contains("sound-toggle")) return; /* géré par son propre handler */
+    if (el.closest(".calc-option")) { fxConfirm(); return; }
+    if (el.classList.contains("theme-toggle")) { fxToggle(); return; }
+    if (fxIsPrimary(el)) fxConfirm(); else fxTap();
+  });
+
+  /* Boutons son : bascule + persistance + feedback à la réactivation */
+  var soundToggleBtns = document.querySelectorAll("#sound-toggle, #drawer-sound-toggle");
+  updateSoundUI();
+  soundToggleBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      fxMuted = !fxMuted;
+      try { localStorage.setItem("aken-sound", fxMuted ? "off" : "on"); } catch (e) { /* stockage indisponible */ }
+      updateSoundUI();
+      fxBuzz(12);
+      if (!fxMuted) fxConfirm(); /* accusation de réception audible */
+    });
+  });
+
+  /* Tick discret au survol — desktop uniquement, throttlé à 140 ms */
+  if (fxCanHover && !fxReduceMotion) {
+    var lastHoverTick = 0;
+    document.addEventListener("pointerover", function (e) {
+      if (document.hidden || performance.now() - lastHoverTick < 140) return;
+      var el = e.target.closest("a, button, .chip, .calc-option");
+      if (!el || (e.relatedTarget && el.contains(e.relatedTarget))) return;
+      lastHoverTick = performance.now();
+      fxTone(880, 900, 0.03, 0.015, "sine");
+    }, { passive: true });
+  }
+
+  /* ═══════════════════════════════════════════
+     16. VISITEURS (compteur simulé)
      ═══════════════════════════════════════════ */
   var visitorCount = document.getElementById("visitor-count");
   if (visitorCount) {

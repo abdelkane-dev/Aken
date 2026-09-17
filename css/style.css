@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    AKEN 2.0 — "Technology, Evolved." — Design System Dark Premium
    Noir profond #0A0A0A · Dégradé orange/ambre #FF6B00 → #FFAA00
    Typo : Montserrat 800 (titres) + Inter (corps) · Grille 8pt
@@ -157,6 +157,14 @@
 [data-theme="light"] .theme-toggle .icon-sun { display: block; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
+/* Icônes du bouton son (mute/unmute) */
+.sound-toggle .icon-sound-off { display: none; }
+.sound-toggle.is-muted .icon-sound-off { display: block; }
+.sound-toggle.is-muted .icon-sound-on { display: none; }
+.sound-toggle.is-muted {
+  opacity: 0.55;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -308,6 +316,47 @@ img {
   opacity: 0.96;
 }
 
+.logo-mark {
+  height: 38px;
+  width: auto;
+  max-width: 140px;
+  border-radius: 0 !important;
+  object-fit: contain;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: block;
+  /* Jamais de filtre sur la mascotte : l'orange reste orange en tout thème */
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.logo-mark.logo-light {
+  display: none !important;
+}
+
+.logo-mark.logo-dark {
+  display: block !important;
+}
+
+[data-theme="light"] .logo-mark.logo-dark {
+  display: none !important;
+}
+
+[data-theme="light"] .logo-mark.logo-light {
+  display: block !important;
+}
+
+.logo:hover .logo-mark {
+  filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.45));
+}
+
+@media (max-width: 768px) {
+  .logo-mark {
+    height: 32px;
+    max-width: 118px;
+  }
+}
+
 .logo-mascot {
   height: 38px;
   width: auto;
@@ -318,7 +367,6 @@ img {
   border: none !important;
   box-shadow: none !important;
   display: block;
-  /* Jamais de filtre : l'orange reste orange en tout thème */
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
@@ -331,20 +379,6 @@ img {
   line-height: 1;
   transition: color 0.3s ease;
   user-select: none;
-}
-
-.logo:hover .logo-mascot {
-  filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.55));
-}
-
-@media (max-width: 768px) {
-  .logo-mascot {
-    height: 30px;
-    max-width: 30px;
-  }
-  .logo-wordmark {
-    font-size: 1.15rem;
-  }
 }
 
 .logo-word {

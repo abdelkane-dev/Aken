@@ -1,5 +1,5 @@
-// Aken — Service Worker v11.0 (icônes PWA mascotte + chips flottantes)
-const CACHE_NAME = 'aken-v11';
+// Aken — Service Worker v13.0 (logo adaptatif light/dark + icônes mascotte)
+const CACHE_NAME = 'aken-v13';
 
 const APP_SHELL = [
   '/',
@@ -15,6 +15,7 @@ const APP_SHELL = [
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
+  '/assets/logo-light.png',
   '/assets/mascot.svg',
   '/assets/pwa-192.png',
   '/assets/pwa-512.png',

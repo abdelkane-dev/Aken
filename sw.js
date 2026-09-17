@@ -1,5 +1,5 @@
-// Aken — Service Worker v16.0 (OG communauté, canaux activables, polish responsive)
-const CACHE_NAME = 'aken-v16';
+// Aken — Service Worker v19.0 (section tech conversationnelle + fixes mobile)
+const CACHE_NAME = 'aken-v19';
 
 const APP_SHELL = [
   '/',
@@ -34,6 +34,7 @@ const APP_SHELL = [
   '/assets/favoricon.png',
   '/assets/og-cover.png',
   '/assets/og-communaute.png',
+  '/assets/og-blog.png',
   '/assets/blog/cover-1.svg',
   '/assets/blog/cover-2.svg',
   '/assets/blog/cover-3.svg',
@@ -42,6 +43,22 @@ const APP_SHELL = [
   '/assets/blog/cover-6.svg',
   '/assets/blog/cover-7.svg',
   '/assets/blog/cover-8.svg',
+  '/assets/blog/cover-9.svg',
+  '/assets/blog/cover-10.svg',
+  '/assets/blog/cover-11.svg',
+  '/assets/blog/cover-12.svg',
+  '/assets/og/og-article-1.png',
+  '/assets/og/og-article-2.png',
+  '/assets/og/og-article-3.png',
+  '/assets/og/og-article-4.png',
+  '/assets/og/og-article-5.png',
+  '/assets/og/og-article-6.png',
+  '/assets/og/og-article-7.png',
+  '/assets/og/og-article-8.png',
+  '/assets/og/og-article-9.png',
+  '/assets/og/og-article-10.png',
+  '/assets/og/og-article-11.png',
+  '/assets/og/og-article-12.png',
   '/lang/fr.json',
   '/lang/en.json'
 ];

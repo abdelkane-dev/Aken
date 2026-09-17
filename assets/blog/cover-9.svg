@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" role="img" aria-label="Freelance tech : contrats et revenus">
+  <defs>
+    <linearGradient id="g9" x1="0" y1="0" x2="720" y2="405" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#140D03"/><stop offset="0.55" stop-color="#241804"/><stop offset="1" stop-color="#0C0903"/>
+    </linearGradient>
+    <linearGradient id="o9" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFAA00"/><stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow9" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#FF6B00" stop-opacity="0.26"/><stop offset="1" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g9)"/>
+  <g fill="#FFAA00" opacity="0.13">
+    <circle cx="50" cy="60" r="1.4"/><circle cx="140" cy="40" r="1.4"/><circle cx="250" cy="90" r="1.4"/><circle cx="470" cy="50" r="1.4"/><circle cx="570" cy="100" r="1.4"/><circle cx="660" cy="60" r="1.4"/><circle cx="80" cy="310" r="1.4"/><circle cx="640" cy="320" r="1.4"/>
+  </g>
+  <rect width="720" height="405" fill="url(#glow9)"/>
+  <!-- Poignée de main stylisée -->
+  <g transform="translate(250 190)" stroke="#FFAA00" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-70 20l40-38 34 8 30-12 36 40"/>
+    <path d="M-30-18l24 24M6-22l24 26M40-22l22 24"/>
+    <path d="M-70 20l30 30c14 12 34 12 46 0l30-28"/>
+  </g>
+  <!-- Pièces empilées -->
+  <g transform="translate(520 290)">
+    <ellipse cx="0" cy="34" rx="56" ry="14" fill="#FF6B00" opacity="0.25"/>
+    <g fill="url(#o9)" stroke="#FFD9A8" stroke-width="2">
+      <ellipse cx="0" cy="24" rx="44" ry="12"/>
+      <ellipse cx="6" cy="8" rx="44" ry="12"/>
+      <ellipse cx="0" cy="-8" rx="44" ry="12"/>
+    </g>
+    <path d="M0 -22v36M-10 -14c0-5 20-5 20 0s-20 6-20 11 20 5 20 0" stroke="#0A0A0A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Contrat signé -->
+  <g transform="translate(150 300)" stroke="#E0E0E0" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round">
+    <rect x="-52" y="-64" width="104" height="128" rx="8"/>
+    <path d="M-34 -40h68M-34 -22h68M-34 -4h44" opacity="0.7"/>
+    <path d="M-30 40c8-14 16-2 22-8s12 4 20-6" stroke="#FFAA00" stroke-width="3"/>
+  </g>
+  <path d="M0 385q60 -14 120 0t120 0 120 0 120 0 120 0 120 0" fill="none" stroke="#FFAA00" stroke-width="2" opacity="0.35"/>
+</svg>

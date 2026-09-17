@@ -29,6 +29,7 @@
       readTime: 6,
       icon: "rocket",
       cover: "assets/blog/cover-1.svg",
+      ogImage: "assets/og/og-article-1.png",
       featured: true,
       tags: ["#Automatisation", "#PME", "#Mali", "#Productivité"],
       content: `
@@ -60,6 +61,7 @@
       readTime: 8,
       icon: "creditCard",
       cover: "assets/blog/cover-2.svg",
+      ogImage: "assets/og/og-article-2.png",
       tags: ["#Wave", "#OrangeMoney", "#Fintech", "#APIs"],
       content: `
         <h2>L'omniprésence du Mobile Money en Afrique de l'Ouest</h2>
@@ -92,6 +94,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 7,
       icon: "satellite",
       cover: "assets/blog/cover-3.svg",
+      ogImage: "assets/og/og-article-3.png",
       tags: ["#Performance", "#Offline", "#ServiceWorker", "#WebP"],
       content: `
         <h2>La réalité du réseau : concevoir Mobile-First & Offline-Ready</h2>
@@ -116,6 +119,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 5,
       icon: "building",
       cover: "assets/blog/cover-4.svg",
+      ogImage: "assets/og/og-article-4.png",
       tags: ["#CaseStudy", "#Hotellerie", "#Django", "#PostgreSQL"],
       content: `
         <h2>La situation initiale</h2>
@@ -142,6 +146,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 6,
       icon: "cloud2",
       cover: "assets/blog/cover-5.svg",
+      ogImage: "assets/og/og-article-5.png",
       tags: ["#DevOps", "#VPS", "#Cloud", "#Docker"],
       content: `
         <h2>Comprendre les coûts réels de l'hébergement</h2>
@@ -161,6 +166,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 7,
       icon: "lock",
       cover: "assets/blog/cover-6.svg",
+      ogImage: "assets/og/og-article-6.png",
       tags: ["#Securite", "#2FA", "#Chiffrement", "#Sauvegarde"],
       content: `
         <h2>Les risques réels pour les entreprises locales</h2>
@@ -186,6 +192,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 5,
       icon: "phone",
       cover: "assets/blog/cover-7.svg",
+      ogImage: "assets/og/og-article-7.png",
       tags: ["#PWA", "#Mobile", "#WebApps", "#Android"],
       content: `
         <h2>Qu'est-ce qu'une PWA (Progressive Web App) ?</h2>
@@ -205,6 +212,7 @@ function verifySignature(payload, signature, secret) {
       readTime: 8,
       icon: "barChart",
       cover: "assets/blog/cover-8.svg",
+      ogImage: "assets/og/og-article-8.png",
       tags: ["#Data", "#Analytics", "#BusinessIntelligence", "#SQL"],
       content: `
         <h2>La limite d'Excel dans la croissance d'une entreprise</h2>
@@ -212,6 +220,140 @@ function verifySignature(payload, signature, secret) {
 
         <h2>La transition vers une base de données centralisée</h2>
         <p>En migrant vos fichiers vers une base relationnelle (PostgreSQL / MySQL) avec des pipelines automatisés, vous obtenez des tableaux de bord en temps réel, fiables et consultables sur smartphone à tout moment.</p>
+      `
+    },
+    {
+      id: 9,
+      slug: "devenir-freelance-tech-mali",
+      title: "Devenir freelance tech au Mali : trouver ses premiers clients et se payer correctement",
+      excerpt: "Positionnement, tarification en FCFA, contrats, acomptes et moyens de paiement : le guide pragmatique pour vivre du développement web et mobile au Mali sans brader son travail.",
+      category: "Entrepreneurs",
+      date: "2026-09-01",
+      readTime: 9,
+      icon: "rocket",
+      cover: "assets/blog/cover-9.svg",
+      ogImage: "assets/og/og-article-9.png",
+      tags: ["#Freelance", "#Tarification", "#Contrats", "#Carrière"],
+      content: `
+        <h2>Choisir un positionnement rentable</h2>
+        <p>« Développeur web » est un positionnement perdu d'avance. « Spécialiste des boutiques en ligne avec paiement Wave et Orange Money pour commerçants de Bamako » est un positionnement qui vend. Plus votre promesse est concrète, moins le client négocie.</p>
+
+        <h2>Tarifier sans se brader</h2>
+        <ul>
+          <li><strong>Projet, jamais heures :</strong> le client achète un résultat (un site, une app, une automatisation), pas votre temps.</li>
+          <li><strong>Trois formules :</strong> proposer Essentiel / Confort / Premium cadre la discussion et augmente le panier moyen.</li>
+          <li><strong>Acompte systématique :</strong> 50 % au démarrage, solde à la livraison. Sans exception.</li>
+        </ul>
+
+        <h2>Contrats et paiements locaux</h2>
+        <p>Un contrat simple de deux pages (périmètre, délais, révisions incluses, propriété du code) évite 90 % des litiges. Côté encaissement, Wave et Orange Money marchand offrent traçabilité et reçu automatique — bien plus propre que les transferts informels.</p>
+
+        <blockquote>« Le jour où vous refusez un projet mal cadré, vous arrêtez de courir après les clients et c'est le début de la rentabilité. »</blockquote>
+
+        <h2>Trouver les premiers clients</h2>
+        <p>Bouche-à-oreille structuré (demander deux recommandations à chaque mission livrée), portfolio en ligne avec études de cas chiffrées, et présence dans les communautés tech locales. La preuve sociale vaut mille prospectus.</p>
+      `
+    },
+    {
+      id: 10,
+      slug: "securiser-vps-mali",
+      title: "Sécuriser un VPS en 10 étapes : le guide complet pour héberger vos apps au Mali",
+      excerpt: "SSH par clé, firewall, fail2ban, HTTPS automatique, mises à jour et sauvegardes chiffrées : le checklist de durcissement d'un serveur Linux avant de mettre votre application en production.",
+      category: "Infrastructure",
+      date: "2026-09-05",
+      readTime: 10,
+      icon: "cloud2",
+      cover: "assets/blog/cover-10.svg",
+      ogImage: "assets/og/og-article-10.png",
+      tags: ["#VPS", "#Linux", "#Securite", "#DevOps"],
+      content: `
+        <h2>Pourquoi un VPS neuf est une porte ouverte</h2>
+        <p>Un serveur fraîchement installé scanne des centaines de tentatives de connexion par heure. Avant d'y déployer quoi que ce soit, dix étapes de durcissement s'imposent.</p>
+
+        <h2>La checklist des 10 étapes</h2>
+        <ol>
+          <li>Créer un utilisateur non-root et désactiver la connexion root directe.</li>
+          <li>Passer SSH exclusivement par clés (désactiver les mots de passe).</li>
+          <li>Installer fail2ban pour bannir automatiquement les attaques par force brute.</li>
+          <li>Configurer UFW : n'ouvrir que 80, 443 et votre port SSH personnalisé.</li>
+          <li>Activer les mises à jour de sécurité automatiques (unattended-upgrades).</li>
+          <li>Installer Nginx + certificat Let's Encrypt renouvelé automatiquement.</li>
+          <li>Isoler l'application (Docker ou utilisateur dédié) pour limiter les dégâts.</li>
+          <li>Chiffrer les sauvegardes et les envoyer hors site (règle 3-2-1).</li>
+          <li>Surveiller les logs et les ressources (Netdata ou vnstat au minimum).</li>
+          <li>Tester une restauration complète : une sauvegarde jamais testée n'existe pas.</li>
+        </ol>
+
+        <pre><code># Exemple : durcissement SSH dans /etc/ssh/sshd_config
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+Port 2222</code></pre>
+
+        <h2>Coût de revient</h2>
+        <p>Un VPS 2 vCPU / 4 Go chez un hébergeur européen coûte 5 à 15 €/mois et héberge confortablement plusieurs petites applications — à condition d'appliquer cette checklist avant la mise en ligne.</p>
+      `
+    },
+    {
+      id: 11,
+      slug: "boutique-en-ligne-mali",
+      title: "Lancer une boutique en ligne au Mali : du catalogue au paiement mobile money",
+      excerpt: "Catalogue, panier, livraison à Bamako et encaissement Wave/Orange Money : l'architecture complète d'un e-commerce local qui convertit, sans carte bancaire ni store à télécharger.",
+      category: "Entrepreneurs",
+      date: "2026-09-10",
+      readTime: 8,
+      icon: "creditCard",
+      cover: "assets/blog/cover-11.svg",
+      ogImage: "assets/og/og-article-11.png",
+      tags: ["#Ecommerce", "#Wave", "#OrangeMoney", "#Vente"],
+      content: `
+        <h2>L'e-commerce malien n'est pas une copie d'Amazon</h2>
+        <p>Vos clients n'ont pas de carte bancaire, commandent par WhatsApp et veulent payer en mobile money. Une boutique qui réussit au Mali embrasse ces réalités au lieu de les subir.</p>
+
+        <h2>L'architecture qui convertit</h2>
+        <ul>
+          <li><strong>Catalogue léger et offline-friendly :</strong> une PWA de moins de 1 Mo, consultable même en 3G instable.</li>
+          <li><strong>Commande en 3 écrans maximum :</strong> produit → panier → paiement. Chaque étape supplémentaire divise les conversions.</li>
+          <li><strong>Paiement Wave / Orange Money intégré :</strong> redirection native + validation serveur du webhook, jamais côté navigateur.</li>
+          <li><strong>Livraison cadrée :</strong> zones tarifées Bamako / régions, confirmation WhatsApp automatique.</li>
+        </ul>
+
+        <h2>Les détails qui font vendre</h2>
+        <p>Photos de produits soignées sur fond propre, prix affichés en FCFA sans surprise, bouton « Commander sur WhatsApp » en secours pour les hésitants, et preuve sociale (avis clients) sur chaque page produit.</p>
+
+        <h2>Chiffrer le retour</h2>
+        <p>Avec un panier moyen de 15 000 FCFA et une boutique qui convertit à 2 %, chaque 1 000 visites mensuelles représentent environ 300 000 FCFA de chiffre d'affaires — l'investissement initial se rembourse en quelques mois pour la plupart des commerces.</p>
+      `
+    },
+    {
+      id: 12,
+      slug: "design-premium-sombre",
+      title: "Design d'interface premium : pourquoi le mode sombre convertit (et comment le réussir)",
+      excerpt: "Hiérarchie visuelle, contrastes AAA, accents lumineux et micro-interactions : les règles de conception des interfaces sombres qui inspirent confiance et augmentent l'engagement.",
+      category: "Technique",
+      date: "2026-09-15",
+      readTime: 7,
+      icon: "phone",
+      cover: "assets/blog/cover-12.svg",
+      ogImage: "assets/og/og-article-12.png",
+      tags: ["#Design", "#UI", "#DarkMode", "#UX"],
+      content: `
+        <h2>Le sombre n'est pas « noir + texte blanc »</h2>
+        <p>Une interface sombre premium repose sur des gris profonds hiérarchisés (#0A0A0A, #141414, #1C1C1C), jamais sur du noir absolu pour les surfaces. Le blanc pur pique les yeux en corps de texte : on préfère #E0E0E0 pour le contenu et le blanc réservé aux titres.</p>
+
+        <h2>Les 5 règles d'une UI sombre réussie</h2>
+        <ol>
+          <li><strong>Une couleur d'accent unique</strong> (orange électrique, vert néon) portant tous les appels à l'action — le reste reste neutre.</li>
+          <li><strong>Contrastes AAA sur le texte</strong> : au moins 7:1 pour le corps, 4.5:1 minimum pour les textes secondaires.</li>
+          <li><strong>Profondeur par la lumière</strong> : les éléments flottants gagnent une lueur subtile (glow) plutôt qu'une ombre grise.</li>
+          <li><strong>Frontières lumineuses</strong> : des bordures rgba(255,255,255,0.08 à 0.15) structurent les cartes sans surcharger.</li>
+          <li><strong>Micro-interactions discrètes</strong> : transitions de 150 à 300 ms, retour tactile léger, jamais d'animation qui retarde la lecture.</li>
+        </ol>
+
+        <blockquote>« Un mode sombre réussi se remarque à peine : l'œil glisse, le contenu rayonne, la marque reste en fond. »</blockquote>
+
+        <h2>Et le mode clair ?</h2>
+        <p>Proposer les deux thèmes via des tokens CSS (variables) coûte peu et couvre toutes les préférences : le sombre pour l'identité, le clair pour la lisibilité en plein soleil — un enjeu réel sous nos latitudes. Le passage doit être instantané, sans flash blanc au chargement (meta color-scheme + script bloquant en tête de page).</p>
       `
     }
   ];
@@ -490,9 +632,58 @@ function verifySignature(payload, signature, secret) {
     return modal;
   }
 
+  /* SEO : meta OG/Twitter dynamiques + JSON-LD BlogPosting à l'ouverture d'un article */
+  function updateShareMeta(article) {
+    var abs = function (p) { return "https://www.aken.dev/" + p; };
+    var setMeta = function (attr, key, content) {
+      var el = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+      if (el) el.setAttribute("content", content);
+    };
+    var img = abs(article.ogImage || article.cover);
+    var url = abs("blog.html#article-" + article.id);
+
+    setMeta("property", "og:title", article.title + " — Blog Aken");
+    setMeta("property", "og:description", article.excerpt);
+    setMeta("property", "og:url", url);
+    setMeta("property", "og:image", img);
+    setMeta("property", "og:image:alt", "Illustration : " + article.title);
+    setMeta("name", "twitter:title", article.title);
+    setMeta("name", "twitter:description", article.excerpt);
+    setMeta("name", "twitter:image", img);
+
+    var old = document.getElementById("aken-article-jsonld");
+    if (old) old.remove();
+    var ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.id = "aken-article-jsonld";
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": article.title,
+      "description": article.excerpt,
+      "image": img,
+      "datePublished": article.date,
+      "dateModified": article.date,
+      "inLanguage": "fr-FR",
+      "author": { "@type": "Person", "name": "Abdel Kane", "url": abs("") },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Aken",
+        "url": abs(""),
+        "logo": { "@type": "ImageObject", "url": abs("assets/logo.png") }
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": url },
+      "articleSection": article.category,
+      "keywords": (article.tags || []).join(", ")
+    });
+    document.head.appendChild(ld);
+  }
+
   function openArticle(articleId) {
     var article = ARTICLES.find(function (a) { return a.id === parseInt(articleId, 10); });
     if (!article) return;
+
+    updateShareMeta(article);
 
     if (window.AkenAudio && typeof window.AkenAudio.play === "function") {
       window.AkenAudio.play("click");

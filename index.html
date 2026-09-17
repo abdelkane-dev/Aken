@@ -92,6 +92,7 @@
         <a href="#tarifs" data-aken-text="nav.tarifs">Tarifs</a>
         <a href="#projets" data-aken-text="nav.projets">Projets</a>
         <a href="blog.html" data-aken-text="nav.blog">Blog</a>
+        <a href="communaute.html" data-aken-text="nav.communaute">Communauté</a>
         <a href="#temoignages" data-aken-text="nav.temoignages">Avis clients</a>
         <a href="#faq" data-aken-text="nav.faq">FAQ</a>
       </div>
@@ -157,6 +158,10 @@
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       <span data-aken-text="nav.blog">Blog</span>
     </a>
+    <a href="communaute.html">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span data-aken-text="nav.communaute">Communauté</span>
+    </a>
     <a href="#temoignages">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
       <span data-aken-text="nav.temoignages">Avis clients</span>
@@ -206,6 +211,7 @@
         <span>Applications web &amp; mobiles</span>
         <span>Automatisation &amp; Gestion</span>
         <span>Paiements Wave &amp; Orange Money</span>
+        <a href="communaute.html" class="hero-tag-comm" aria-label="Rejoindre la communauté Aken">👥 Rejoindre la communauté</a>
       </div>
     </div>
 
@@ -905,6 +911,21 @@
         </footer>
       </blockquote>
     </div>
+
+    <!-- CTA Communauté -->
+    <a href="communaute.html" class="comm-cta-card reveal-up delay-3" aria-label="Rejoindre la communauté Aken">
+      <div class="comm-cta-avatars" aria-hidden="true">
+        <span class="comm-cta-avatar">MK</span>
+        <span class="comm-cta-avatar">FD</span>
+        <span class="comm-cta-avatar">IS</span>
+        <span class="comm-cta-avatar">+</span>
+      </div>
+      <div class="comm-cta-text">
+        <strong>Rejoignez la communauté Aken</strong>
+        <span>+100K membres · WhatsApp, GitHub &amp; bientôt Telegram, Discord…</span>
+      </div>
+      <span class="comm-cta-arrow" aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
@@ -1091,6 +1112,7 @@
   <div class="wrap footer-inner">
     <p>© <span id="year"></span> <span data-aken-text="footer.copyright">Aken — Solutions digitales sur-mesure pour votre entreprise. Bamako, Mali.</span></p>
     <div class="footer-social" aria-label="Réseaux sociaux">
+      <a href="communaute.html" class="footer-comm-link" data-aken-text="nav.communaute">Communauté</a>
       <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
       </a>
@@ -1102,8 +1124,12 @@
   </div>
 </footer>
 
-<!-- Boutons Flottants (Devis + WhatsApp) -->
+<!-- Boutons Flottants (Communauté + Devis + WhatsApp) -->
 <div class="floating-actions" id="floating-actions">
+  <a href="communaute.html" class="float-btn comm-float" aria-label="Espace communauté" title="Communauté">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="float-tooltip">Communauté</span>
+  </a>
   <a href="#devis" class="float-btn devis-float" aria-label="Demander un devis" id="devis-float" title="Demander un devis">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>

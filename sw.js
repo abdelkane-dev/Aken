@@ -1,5 +1,5 @@
-// Aken — Service Worker v14.0 (polices auto-hébergées + logos WebP)
-const CACHE_NAME = 'aken-v14';
+// Aken — Service Worker v15.0 (covers blog + page communauté)
+const CACHE_NAME = 'aken-v15';
 
 const APP_SHELL = [
   '/',
@@ -12,6 +12,9 @@ const APP_SHELL = [
   '/js/payment.js',
   '/js/sw-register.js',
   '/js/blog.js',
+  '/js/communaute.js',
+  '/css/communaute.css',
+  '/communaute.html',
   '/manifest.json',
   '/offline.html',
   '/assets/logo.png',
@@ -30,6 +33,14 @@ const APP_SHELL = [
   '/assets/favicon.svg',
   '/assets/favoricon.png',
   '/assets/og-cover.png',
+  '/assets/blog/cover-1.svg',
+  '/assets/blog/cover-2.svg',
+  '/assets/blog/cover-3.svg',
+  '/assets/blog/cover-4.svg',
+  '/assets/blog/cover-5.svg',
+  '/assets/blog/cover-6.svg',
+  '/assets/blog/cover-7.svg',
+  '/assets/blog/cover-8.svg',
   '/lang/fr.json',
   '/lang/en.json'
 ];

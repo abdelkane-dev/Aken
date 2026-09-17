@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<title>Communauté — Aken | Rejoignez l'aventure Technology, Evolved</title>
+<meta name="description" content="Rejoignez la communauté Aken : +100K membres passionnés de technologie. Groupes WhatsApp, GitHub open-source, et bientôt Telegram, Discord, X, Instagram, LinkedIn et YouTube.">
+<meta property="og:title" content="Communauté — Aken">
+<meta property="og:description" content="Une communauté qui avance ensemble : échanges, partages, progresses. +100K membres, +50K échanges, 100% passionnés.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-cover.png">
+<link rel="canonical" href="https://www.aken.dev/communaute.html">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/communaute.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" href="assets/favoricon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aken">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+<body class="communaute-page">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<!-- Barre de progression de lecture de la page -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Lueur ambiante en arrière-plan -->
+<div class="comm-ambient-mesh" aria-hidden="true"></div>
+
+<header class="site-header" id="entete">
+  <div class="wrap header-inner">
+    <div class="header-left">
+      <a href="index.html" class="logo" aria-label="Aken - Retour à l'accueil">
+        <picture class="logo-picture logo-dark"><source srcset="assets/logo.webp" type="image/webp"><img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark" width="1280" height="427"></picture>
+        <picture class="logo-picture logo-light"><source srcset="assets/logo-light.webp" type="image/webp"><img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light" width="1280" height="427"></picture>
+      </a>
+    </div>
+
+    <!-- Navigation Desktop (écrans > 992px) -->
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      <div class="nav-links-list">
+        <a href="index.html#apropos" data-aken-text="nav.apropos">À propos</a>
+        <a href="index.html#expertise" data-aken-text="nav.expertise">Services</a>
+        <a href="index.html#offres" data-aken-text="nav.offres">Offres</a>
+        <a href="index.html#projets" data-aken-text="nav.projets">Projets</a>
+        <a href="blog.html" data-aken-text="nav.blog">Blog</a>
+        <a href="communaute.html" class="active" data-aken-text="nav.communaute" style="color: var(--accent); font-weight: 700;">Communauté</a>
+        <a href="index.html#faq" data-aken-text="nav.faq">FAQ</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="index.html#devis" class="btn btn-small btn-primary header-cta" data-aken-text="nav.cta_header">Demander un devis</a>
+      <button id="lang-toggle" class="theme-toggle" aria-label="Switch language" style="font-weight:700;font-size:0.85rem;">EN</button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Basculer thème clair / sombre" title="Thème clair / sombre">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <button id="sound-toggle" class="theme-toggle sound-toggle" aria-label="Couper ou activer les sons" title="Sons de l'interface">
+        <svg class="icon-sound-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>
+        <svg class="icon-sound-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="m16 9 6 6M22 9l-6 6"></path></svg>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Tiroir latéral mobile -->
+<div class="nav-drawer-backdrop" id="nav-backdrop"></div>
+<nav class="main-nav mobile-drawer" id="main-nav" aria-label="Navigation mobile">
+  <div class="nav-drawer-header">
+    <a href="index.html" class="logo" aria-label="Aken">
+      <picture class="logo-picture logo-dark"><source srcset="assets/logo.webp" type="image/webp"><img src="assets/logo.png" alt="Aken" class="logo-mark logo-dark" width="1280" height="427" style="height:32px;"></picture>
+      <picture class="logo-picture logo-light"><source srcset="assets/logo-light.webp" type="image/webp"><img src="assets/logo-light.png" alt="Aken" class="logo-mark logo-light" width="1280" height="427" style="height:32px;"></picture>
+    </a>
+    <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">&times;</button>
+  </div>
+
+  <div class="nav-links-list">
+    <a href="index.html#accueil">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-aken-text="nav.accueil">Accueil</span>
+    </a>
+    <a href="index.html#expertise">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span data-aken-text="nav.expertise">Services</span>
+    </a>
+    <a href="blog.html">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span data-aken-text="nav.blog">Blog</span>
+    </a>
+    <a href="communaute.html" class="active">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span data-aken-text="nav.communaute" style="color: var(--accent); font-weight: 700;">Communauté</span>
+    </a>
+    <a href="index.html#projets">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span data-aken-text="nav.projets">Projets</span>
+    </a>
+    <a href="index.html#faq">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+      <span data-aken-text="nav.faq">FAQ</span>
+    </a>
+  </div>
+
+  <div class="nav-drawer-footer">
+    <div class="nav-drawer-actions">
+      <button id="drawer-sound-toggle" class="theme-toggle sound-toggle" aria-label="Couper ou activer les sons" title="Sons de l'interface">
+        <svg class="icon-sound-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>
+        <svg class="icon-sound-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="m16 9 6 6M22 9l-6 6"></path></svg>
+      </button>
+      <button id="drawer-lang-toggle" class="theme-toggle" aria-label="Switch language">EN</button>
+      <button id="drawer-theme-toggle" class="theme-toggle" aria-label="Basculer thème clair / sombre" title="Thème clair / sombre">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+    </div>
+    <a href="index.html#devis" class="btn btn-small btn-primary" data-aken-text="nav.cta_header" style="width:100%;justify-content:center;">Demander un devis</a>
+  </div>
+</nav>
+
+<main id="contenu">
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO COMMUNAUTÉ
+       ═══════════════════════════════════════════════════════ -->
+  <section class="comm-hero">
+    <div class="wrap comm-hero-inner">
+      <div class="comm-hero-text">
+        <div class="comm-breadcrumb">
+          <a href="index.html">Accueil</a>
+          <span class="comm-breadcrumb-sep">/</span>
+          <span class="comm-breadcrumb-current" data-aken-text="communaute.breadcrumb">Communauté</span>
+        </div>
+
+        <div class="blog-badge-pulse">
+          <span class="pulse-dot"></span>
+          <span data-aken-text="communaute.badge">Espace membres — Ouvert à tous</span>
+        </div>
+
+        <h1 class="comm-hero-title" data-aken-html="communaute.title">
+          Une communauté qui avance <span class="accent-gradient">ensemble.</span>
+        </h1>
+
+        <p class="comm-hero-tagline" data-aken-text="communaute.tagline">Rejoignez l'aventure.</p>
+
+        <p class="comm-hero-lead" data-aken-text="communaute.lead">
+          Échanges, partages, progresses. Rejoignez une communauté passionnée, active et bienveillante : développeurs, entrepreneurs et curieux de technologie qui se entraident au quotidien.
+        </p>
+
+        <div class="comm-hero-cta">
+          <a href="#canaux" class="btn btn-primary" data-aken-text="communaute.cta_join">Rejoindre les canaux →</a>
+          <a href="index.html#devis" class="btn btn-outline" data-aken-text="communaute.cta_project">Lancer un projet</a>
+        </div>
+      </div>
+
+      <!-- Orbite d'avatars + mascotte centrale -->
+      <div class="comm-orbit-stage" id="comm-orbit-stage" aria-label="Membres de la communauté en orbite">
+        <div class="comm-orbit-ring comm-orbit-ring-1" aria-hidden="true"></div>
+        <div class="comm-orbit-ring comm-orbit-ring-2" aria-hidden="true"></div>
+        <div class="comm-orbit-avatar" style="--angle: 0deg;" data-name="Moussa K."><span>MK</span></div>
+        <div class="comm-orbit-avatar" style="--angle: 60deg;" data-name="Fatoumata D."><span>FD</span></div>
+        <div class="comm-orbit-avatar" style="--angle: 120deg;" data-name="Ibrahim S."><span>IS</span></div>
+        <div class="comm-orbit-avatar" style="--angle: 180deg;" data-name="Awa T."><span>AT</span></div>
+        <div class="comm-orbit-avatar" style="--angle: 240deg;" data-name="Cheikh B."><span>CB</span></div>
+        <div class="comm-orbit-avatar" style="--angle: 300deg;" data-name="Rokia D."><span>RD</span></div>
+        <div class="comm-orbit-core">
+          <div class="comm-core-glow"></div>
+          <svg class="comm-mascot" viewBox="0 0 240 240" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mascotte Aken">
+            <defs>
+              <linearGradient id="mascotCommGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#FFAA00"/>
+                <stop offset="0.55" stop-color="#FF6B00"/>
+                <stop offset="1" stop-color="#FF3D00"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="49" cy="55" rx="17" ry="16" fill="url(#mascotCommGrad)"/>
+            <ellipse cx="191" cy="55" rx="17" ry="16" fill="url(#mascotCommGrad)"/>
+            <path d="M120 32c-51 0-84 32-84 76 0 16 5 28 14 36 6 5 14 8 24 9 14 1 30-4 46-4s32 5 46 4c10-1 18-4 24-9 9-8 14-20 14-36 0-44-33-76-84-76Z" fill="url(#mascotCommGrad)"/>
+            <ellipse cx="87" cy="108" rx="16" ry="18" fill="#0A0A0A"/>
+            <circle cx="87" cy="108" r="5" fill="#FFAA00" opacity="0.95"/>
+            <circle cx="91" cy="101" r="2.2" fill="#FFFFFF" opacity="0.9"/>
+            <ellipse cx="153" cy="108" rx="16" ry="18" fill="#0A0A0A"/>
+            <circle cx="153" cy="108" r="5" fill="#FFAA00" opacity="0.95"/>
+            <circle cx="157" cy="101" r="2.2" fill="#FFFFFF" opacity="0.9"/>
+            <path d="M50 150c22 10 45 14 70 14s48-4 70-14c-4 12-13 21-25 26-13 6-29 9-45 9s-32-3-45-9c-12-5-21-14-25-26Z" fill="#0A0A0A"/>
+            <ellipse cx="64" cy="206" rx="21" ry="20" fill="url(#mascotCommGrad)"/>
+            <ellipse cx="176" cy="206" rx="21" ry="20" fill="url(#mascotCommGrad)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="wrap">
+      <div class="comm-stats-row" id="comm-stats">
+        <div class="comm-stat">
+          <span class="comm-stat-value" data-count="100" data-suffix="K+">0</span>
+          <span class="comm-stat-label" data-aken-text="communaute.stat_members">membres</span>
+        </div>
+        <div class="comm-stat-sep" aria-hidden="true"></div>
+        <div class="comm-stat">
+          <span class="comm-stat-value" data-count="50" data-suffix="K+">0</span>
+          <span class="comm-stat-label" data-aken-text="communaute.stat_exchanges">échanges</span>
+        </div>
+        <div class="comm-stat-sep" aria-hidden="true"></div>
+        <div class="comm-stat">
+          <span class="comm-stat-value" data-count="100" data-suffix="%">0</span>
+          <span class="comm-stat-label" data-aken-text="communaute.stat_passionate">passionnés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CANAUX DE LA COMMUNAUTÉ
+       ═══════════════════════════════════════════════════════ -->
+  <section class="comm-channels-section" id="canaux">
+    <div class="wrap">
+      <div class="section-heading" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <p class="eyebrow" data-aken-text="communaute.channels_eyebrow">Rejoignez-nous</p>
+        <h2 data-aken-text="communaute.channels_title">Choisissez votre canal</h2>
+        <p class="comm-channels-lead" data-aken-text="communaute.channels_lead">Chaque espace a son ambiance : entraide technique, veille, projets ou discussions libres. Choisissez le vôtre — ou tous.</p>
+      </div>
+
+      <div class="comm-channels-grid">
+
+        <!-- WhatsApp (lien réel) -->
+        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" data-channel="WhatsApp">
+          <div class="comm-channel-icon comm-icon-whatsapp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>WhatsApp <span class="comm-live-dot" aria-hidden="true"></span></h3>
+            <p data-aken-text="communaute.ch_wa_desc">Le canal le plus réactif : entraide quotidienne, annonces et discussions en direct.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- GitHub (lien réel) -->
+        <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" data-channel="GitHub">
+          <div class="comm-channel-icon comm-icon-github">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>GitHub <span class="comm-live-dot" aria-hidden="true"></span></h3>
+            <p data-aken-text="communaute.ch_gh_desc">Code open-source, contributions et projets publiés par la communauté Aken.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <!-- Telegram (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Telegram">
+          <div class="comm-channel-icon comm-icon-telegram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>Telegram <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_tg_desc">Canaux d'annonces et groupes de discussion par thème, sans limite de taille.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <!-- Discord (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Discord">
+          <div class="comm-channel-icon comm-icon-discord">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M8.5 17c-3 0-4.5-1.5-4.5-1.5.3-4 1.3-7.4 2.6-9.2C8 5.5 9.5 5 9.5 5l.6 1.2a12 12 0 0 1 3.8 0L14.5 5s1.5.5 2.9 1.3c1.3 1.8 2.3 5.2 2.6 9.2 0 0-1.5 1.5-4.5 1.5l-.9-1.4c.8-.3 1.6-.8 1.6-.8-1.9.9-4.3.9-6.4 0 0 0 .8.5 1.6.8z"/><circle cx="9.5" cy="12" r="1" fill="currentColor"/><circle cx="14.5" cy="12" r="1" fill="currentColor"/></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>Discord <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_dc_desc">Salons vocaux, entraide en temps réel et événements communautaires.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <!-- X / Twitter (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="X">
+          <div class="comm-channel-icon comm-icon-x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M4 4l16 16M20 4L4 20"></path></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>X / Twitter <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_x_desc">Veille technologique, threads techniques et annonces en 280 caractères.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <!-- Instagram (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Instagram">
+          <div class="comm-channel-icon comm-icon-instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>Instagram <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_ig_desc">Les coulisses des projets, la vie du studio et les highlights communauté.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <!-- LinkedIn (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="LinkedIn">
+          <div class="comm-channel-icon comm-icon-linkedin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2.5 2.5 0 0 1 5 0v4"/><circle cx="12" cy="10" r="0.5" fill="currentColor"/></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>LinkedIn <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_li_desc">Réseau professionnel : opportunités, retours d'expérience et recrutement.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <!-- YouTube (bientôt) -->
+        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="YouTube">
+          <div class="comm-channel-icon comm-icon-youtube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="comm-channel-body">
+            <h3>YouTube <span class="comm-soon-badge" data-aken-text="communaute.soon">Bientôt</span></h3>
+            <p data-aken-text="communaute.ch_yt_desc">Tutoriels vidéo, démos de projets et lives techniques de la communauté.</p>
+          </div>
+          <span class="comm-channel-arrow" aria-hidden="true">→</span>
+        </button>
+
+      </div>
+
+      <p class="comm-channels-note" data-aken-text="communaute.channels_note">💡 Les espaces « Bientôt » sont en préparation — suivez WhatsApp pour être prévenu de leur ouverture.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHARTE DE LA COMMUNAUTÉ
+       ═══════════════════════════════════════════════════════ -->
+  <section class="comm-charter-section" id="charte">
+    <div class="wrap">
+      <div class="section-heading" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <p class="eyebrow" data-aken-text="communaute.charter_eyebrow">Notre état d'esprit</p>
+        <h2 data-aken-text="communaute.charter_title">La charte de la communauté</h2>
+      </div>
+      <div class="comm-charter-grid">
+        <div class="comm-charter-card">
+          <div class="comm-charter-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </div>
+          <h3 data-aken-text="communaute.c1_title">Bienveillance d'abord</h3>
+          <p data-aken-text="communaute.c1_desc">Aucune question n'est trop simple. On a tous débuté un jour — on se répond avec respect et patience.</p>
+        </div>
+        <div class="comm-charter-card">
+          <div class="comm-charter-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 data-aken-text="communaute.c2_title">Partager sans retenir</h3>
+          <p data-aken-text="communaute.c2_desc">Code, astuces, retours d'échec comme de réussite : la connaissance circule librement pour faire grandir tout le monde.</p>
+        </div>
+        <div class="comm-charter-card">
+          <div class="comm-charter-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"/></svg>
+          </div>
+          <h3 data-aken-text="communaute.c3_title">Entraide concrète</h3>
+          <p data-aken-text="communaute.c3_desc">Des réponses actionnables, adaptées au contexte local : réseau intermittent, mobile money, budgets maîtrisés.</p>
+        </div>
+        <div class="comm-charter-card">
+          <div class="comm-charter-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 data-aken-text="communaute.c4_title">Zéro spam, 100% passion</h3>
+          <p data-aken-text="communaute.c4_desc">Pas de publicité sauvage ni de arnaques : uniquement des échanges utiles et de la veille de qualité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NEWSLETTER (lead magnet partagé avec le blog)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="comm-newsletter-section">
+    <div class="wrap">
+      <div class="blog-newsletter-card">
+        <div class="blog-newsletter-text">
+          <div class="blog-badge-pulse" style="margin-bottom:12px;">
+            <span class="pulse-dot"></span>
+            <span data-aken-text="communaute.newsletter_badge">Veille Technologique Gratuite</span>
+          </div>
+          <h3 data-aken-text="communaute.newsletter_title">Recevez nos analyses &amp; guides d'ingénierie</h3>
+          <p data-aken-text="communaute.newsletter_desc">Pas de spam. Des retours d'expérience concrets et des conseils pragmatiques pour la communauté.</p>
+        </div>
+        <form class="blog-newsletter-form" id="comm-newsletter-form">
+          <input type="email" id="comm-newsletter-email" class="blog-newsletter-input" placeholder="Votre adresse e-mail pro..." required>
+          <button type="submit" class="blog-newsletter-btn">
+            <span data-aken-text="communaute.newsletter_btn">S'inscrire</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span id="year"></span> <span data-aken-text="footer.copyright">Aken — Solutions digitales, création de sites web &amp; applications mobiles. Bamako, Mali.</span></p>
+    <div class="footer-social" aria-label="Réseaux sociaux">
+      <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+      </a>
+      <a href="https://wa.me/22393789916" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+      </a>
+      <a href="communaute.html" class="footer-comm-link" data-aken-text="nav.communaute">Communauté</a>
+    </div>
+    <a href="index.html" class="back-to-top">← Retour au site</a>
+  </div>
+</footer>
+
+<!-- Boutons Flottants (Devis + WhatsApp + Communauté) -->
+<div class="floating-actions" id="floating-actions">
+  <a href="communaute.html" class="float-btn comm-float" aria-label="Espace communauté" title="Communauté">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="float-tooltip">Communauté</span>
+  </a>
+  <a href="index.html#devis" class="float-btn devis-float" aria-label="Demander un devis" id="devis-float" title="Demander un devis">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span class="float-tooltip">Devis</span>
+  </a>
+  <a href="https://wa.me/22393789916" class="float-btn whatsapp-float" target="_blank" rel="noopener" aria-label="Me contacter sur WhatsApp" id="whatsapp-float" title="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+    <span class="float-tooltip">WhatsApp</span>
+  </a>
+</div>
+
+<!-- Conteneur Toast Notifications -->
+<div id="comm-toast-container" class="blog-toast-container"></div>
+
+<script src="js/main.js" defer></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/communaute.js" defer></script>
+<script src="js/sw-register.js" defer></script>
+</body>
+</html>

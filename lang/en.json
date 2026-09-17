@@ -9,7 +9,8 @@
     "blog": "Blog",
     "temoignages": "Reviews",
     "faq": "FAQ",
-    "cta_header": "Get a free quote"
+    "cta_header": "Get a free quote",
+    "communaute": "Community"
   },
   "hero": {
     "tagline": "Technology, evolved.",
@@ -98,5 +99,44 @@
   "sticky": {
     "devis": "Get a Quote",
     "whatsapp": "WhatsApp"
+  },
+  "communaute": {
+    "breadcrumb": "Community",
+    "badge": "Member space — Open to all",
+    "title": "A community that moves <span class=\"accent-gradient\">together.</span>",
+    "tagline": "Join the journey.",
+    "lead": "Exchanges, sharing, growing. Join a passionate, active and welcoming community: developers, entrepreneurs and tech enthusiasts helping each other every day.",
+    "cta_join": "Join the channels →",
+    "cta_project": "Start a project",
+    "stat_members": "members",
+    "stat_exchanges": "exchanges",
+    "stat_passionate": "passionate",
+    "channels_eyebrow": "Join us",
+    "channels_title": "Pick your channel",
+    "channels_lead": "Each space has its own vibe: tech support, watch, projects or free chat. Pick yours — or all of them.",
+    "ch_wa_desc": "Our most reactive channel: daily support, announcements and live discussions.",
+    "ch_gh_desc": "Open-source code, contributions and projects published by the Aken community.",
+    "ch_tg_desc": "Announcement channels and topic-based groups, with no size limit.",
+    "ch_dc_desc": "Voice rooms, real-time support and community events.",
+    "ch_x_desc": "Tech watch, technical threads and 280-character announcements.",
+    "ch_ig_desc": "Behind the scenes, studio life and community highlights.",
+    "ch_li_desc": "Professional network: opportunities, lessons learned and hiring.",
+    "ch_yt_desc": "Video tutorials, project demos and community tech lives.",
+    "soon": "Soon",
+    "channels_note": "💡 'Coming soon' spaces are being prepared — follow WhatsApp to be notified when they open.",
+    "charter_eyebrow": "Our mindset",
+    "charter_title": "The community charter",
+    "c1_title": "Kindness first",
+    "c1_desc": "No question is too simple. We all started somewhere — we answer with respect and patience.",
+    "c2_title": "Share freely",
+    "c2_desc": "Code, tips, failures and wins: knowledge flows freely to help everyone grow.",
+    "c3_title": "Hands-on support",
+    "c3_desc": "Actionable answers, tailored to the local context: intermittent networks, mobile money, controlled budgets.",
+    "c4_title": "Zero spam, 100% passion",
+    "c4_desc": "No wild advertising or scams: only useful exchanges and quality watch.",
+    "newsletter_badge": "Free Tech Watch",
+    "newsletter_title": "Get our analyses & engineering guides",
+    "newsletter_desc": "No spam. Concrete lessons learned and pragmatic advice for the community.",
+    "newsletter_btn": "Subscribe"
   }
 }

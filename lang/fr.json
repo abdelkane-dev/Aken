@@ -9,7 +9,8 @@
     "blog": "Blog",
     "temoignages": "Avis",
     "faq": "FAQ",
-    "cta_header": "Demander un devis gratuit"
+    "cta_header": "Demander un devis gratuit",
+    "communaute": "Communauté"
   },
   "hero": {
     "tagline": "Technology, evolved.",
@@ -98,5 +99,44 @@
   "sticky": {
     "devis": "Demander un devis",
     "whatsapp": "WhatsApp"
+  },
+  "communaute": {
+    "breadcrumb": "Communauté",
+    "badge": "Espace membres — Ouvert à tous",
+    "title": "Une communauté qui avance <span class=\"accent-gradient\">ensemble.</span>",
+    "tagline": "Rejoignez l'aventure.",
+    "lead": "Échanges, partages, progresses. Rejoignez une communauté passionnée, active et bienveillante : développeurs, entrepreneurs et curieux de technologie qui s'entraident au quotidien.",
+    "cta_join": "Rejoindre les canaux →",
+    "cta_project": "Lancer un projet",
+    "stat_members": "membres",
+    "stat_exchanges": "échanges",
+    "stat_passionate": "passionnés",
+    "channels_eyebrow": "Rejoignez-nous",
+    "channels_title": "Choisissez votre canal",
+    "channels_lead": "Chaque espace a son ambiance : entraide technique, veille, projets ou discussions libres. Choisissez le vôtre — ou tous.",
+    "ch_wa_desc": "Le canal le plus réactif : entraide quotidienne, annonces et discussions en direct.",
+    "ch_gh_desc": "Code open-source, contributions et projets publiés par la communauté Aken.",
+    "ch_tg_desc": "Canaux d'annonces et groupes de discussion par thème, sans limite de taille.",
+    "ch_dc_desc": "Salons vocaux, entraide en temps réel et événements communautaires.",
+    "ch_x_desc": "Veille technologique, threads techniques et annonces en 280 caractères.",
+    "ch_ig_desc": "Les coulisses des projets, la vie du studio et les highlights communauté.",
+    "ch_li_desc": "Réseau professionnel : opportunités, retours d'expérience et recrutement.",
+    "ch_yt_desc": "Tutoriels vidéo, démos de projets et lives techniques de la communauté.",
+    "soon": "Bientôt",
+    "channels_note": "💡 Les espaces « Bientôt » sont en préparation — suivez WhatsApp pour être prévenu de leur ouverture.",
+    "charter_eyebrow": "Notre état d'esprit",
+    "charter_title": "La charte de la communauté",
+    "c1_title": "Bienveillance d'abord",
+    "c1_desc": "Aucune question n'est trop simple. On a tous débuté un jour — on se répond avec respect et patience.",
+    "c2_title": "Partager sans retenir",
+    "c2_desc": "Code, astuces, retours d'échec comme de réussite : la connaissance circule librement pour faire grandir tout le monde.",
+    "c3_title": "Entraide concrète",
+    "c3_desc": "Des réponses actionnables, adaptées au contexte local : réseau intermittent, mobile money, budgets maîtrisés.",
+    "c4_title": "Zéro spam, 100% passion",
+    "c4_desc": "Pas de publicité sauvage ni d'arnaques : uniquement des échanges utiles et de la veille de qualité.",
+    "newsletter_badge": "Veille Technologique Gratuite",
+    "newsletter_title": "Recevez nos analyses & guides d'ingénierie",
+    "newsletter_desc": "Pas de spam. Des retours d'expérience concrets et des conseils pragmatiques pour la communauté.",
+    "newsletter_btn": "S'inscrire"
   }
 }

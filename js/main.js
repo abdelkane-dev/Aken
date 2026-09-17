@@ -786,6 +786,9 @@
     });
   });
 
+  /* API publique minimale pour les pages secondaires (communauté, blog) */
+  window.AkenFX = { tap: fxTap, confirm: fxConfirm, toggle: fxToggle };
+
   /* Tick discret au survol — desktop uniquement, throttlé à 140 ms */
   if (fxCanHover && !fxReduceMotion) {
     var lastHoverTick = 0;

@@ -171,16 +171,82 @@
         </div>
       </div>
 
-      <!-- Orbite d'avatars + mascotte centrale -->
-      <div class="comm-orbit-stage" id="comm-orbit-stage" aria-label="Membres de la communauté en orbite">
+      <!-- Orbite des 8 canaux communautaires + mascotte centrale -->
+      <div class="comm-orbit-stage" id="comm-orbit-stage" aria-label="Canaux de la communauté Aken en orbite">
         <div class="comm-orbit-ring comm-orbit-ring-1" aria-hidden="true"></div>
         <div class="comm-orbit-ring comm-orbit-ring-2" aria-hidden="true"></div>
-        <div class="comm-orbit-avatar" style="--angle: 0deg;" data-name="Moussa K."><span>MK</span></div>
-        <div class="comm-orbit-avatar" style="--angle: 60deg;" data-name="Fatoumata D."><span>FD</span></div>
-        <div class="comm-orbit-avatar" style="--angle: 120deg;" data-name="Ibrahim S."><span>IS</span></div>
-        <div class="comm-orbit-avatar" style="--angle: 180deg;" data-name="Awa T."><span>AT</span></div>
-        <div class="comm-orbit-avatar" style="--angle: 240deg;" data-name="Cheikh B."><span>CB</span></div>
-        <div class="comm-orbit-avatar" style="--angle: 300deg;" data-name="Rokia D."><span>RD</span></div>
+
+        <!-- 1. WhatsApp (Canal Actif) -->
+        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-orbit-node comm-orbit-wa is-live" style="--angle: 0deg; --brand: #25D366;" data-channel="WhatsApp" data-target="#ch-wa" aria-label="Rejoindre WhatsApp (Actif)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
+            <span class="comm-orbit-dot" title="Canal actif"></span>
+          </div>
+          <span class="comm-orbit-name">WhatsApp</span>
+        </a>
+
+        <!-- 2. GitHub (Canal Actif) -->
+        <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-orbit-node comm-orbit-gh is-live" style="--angle: 45deg; --brand: #F0F6FC;" data-channel="GitHub" data-target="#ch-gh" aria-label="Explorer GitHub (Actif)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+            <span class="comm-orbit-dot" title="Canal actif"></span>
+          </div>
+          <span class="comm-orbit-name">GitHub</span>
+        </a>
+
+        <!-- 3. Discord (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-dc is-soon" style="--angle: 90deg; --brand: #5865F2;" data-channel="Discord" data-target="#ch-dc" data-url="" aria-label="Canal Discord (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M8.5 17c-3 0-4.5-1.5-4.5-1.5.3-4 1.3-7.4 2.6-9.2C8 5.5 9.5 5 9.5 5l.6 1.2a12 12 0 0 1 3.8 0L14.5 5s1.5.5 2.9 1.3c1.3 1.8 2.3 5.2 2.6 9.2 0 0-1.5 1.5-4.5 1.5l-.9-1.4c.8-.3 1.6-.8 1.6-.8-1.9.9-4.3.9-6.4 0 0 0 .8.5 1.6.8z"/><circle cx="9.5" cy="12" r="1" fill="currentColor"/><circle cx="14.5" cy="12" r="1" fill="currentColor"/></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">Discord</span>
+        </button>
+
+        <!-- 4. Telegram (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-tg is-soon" style="--angle: 135deg; --brand: #229ED9;" data-channel="Telegram" data-target="#ch-tg" data-url="" aria-label="Canal Telegram (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">Telegram</span>
+        </button>
+
+        <!-- 5. X / Twitter (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-x is-soon" style="--angle: 180deg; --brand: #FFFFFF;" data-channel="X / Twitter" data-target="#ch-x" data-url="" aria-label="Compte X / Twitter (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M4 4l16 16M20 4L4 20"></path></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">X (Twitter)</span>
+        </button>
+
+        <!-- 6. Instagram (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-ig is-soon" style="--angle: 225deg; --brand: #E1306C;" data-channel="Instagram" data-target="#ch-ig" data-url="" aria-label="Compte Instagram (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">Instagram</span>
+        </button>
+
+        <!-- 7. LinkedIn (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-li is-soon" style="--angle: 270deg; --brand: #0A66C2;" data-channel="LinkedIn" data-target="#ch-li" data-url="" aria-label="Page LinkedIn (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2.5 2.5 0 0 1 5 0v4"/><circle cx="12" cy="10" r="0.5" fill="currentColor"/></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">LinkedIn</span>
+        </button>
+
+        <!-- 8. YouTube (Bientôt) -->
+        <button type="button" class="comm-orbit-node comm-orbit-yt is-soon" style="--angle: 315deg; --brand: #FF0000;" data-channel="YouTube" data-target="#ch-yt" data-url="" aria-label="Chaîne YouTube (Bientôt)">
+          <div class="comm-orbit-icon-wrap">
+            <svg class="comm-orbit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+            <span class="comm-orbit-soon-pill">Bientôt</span>
+          </div>
+          <span class="comm-orbit-name">YouTube</span>
+        </button>
         <div class="comm-orbit-core">
           <div class="comm-core-glow"></div>
           <svg class="comm-mascot" viewBox="0 0 240 240" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mascotte Aken">
@@ -243,7 +309,7 @@
       <div class="comm-channels-grid">
 
         <!-- WhatsApp (lien réel) -->
-        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" data-channel="WhatsApp">
+        <a href="https://wa.me/22393789916" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" id="ch-wa" data-channel="WhatsApp">
           <div class="comm-channel-icon comm-icon-whatsapp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M21 11.5a8.5 8.5 0 1 1-4.1-7.3L21 3l-1.2 4a8.46 8.46 0 0 1 1.2 4.5z"></path></svg>
           </div>
@@ -255,7 +321,7 @@
         </a>
 
         <!-- GitHub (lien réel) -->
-        <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" data-channel="GitHub">
+        <a href="https://github.com/abdelkane-dev" target="_blank" rel="noopener" class="comm-channel-card comm-channel-live" id="ch-gh" data-channel="GitHub">
           <div class="comm-channel-icon comm-icon-github">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
           </div>
@@ -267,7 +333,7 @@
         </a>
 
         <!-- Telegram — REMPLACER data-url par le lien d'invitation réel, ex: "https://t.me/aken_community" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Telegram" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-tg" data-channel="Telegram" data-url="">
           <div class="comm-channel-icon comm-icon-telegram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg>
           </div>
@@ -279,7 +345,7 @@
         </button>
 
         <!-- Discord — REMPLACER data-url par le lien d'invitation réel, ex: "https://discord.gg/xxxxxxx" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Discord" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-dc" data-channel="Discord" data-url="">
           <div class="comm-channel-icon comm-icon-discord">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><path d="M8.5 17c-3 0-4.5-1.5-4.5-1.5.3-4 1.3-7.4 2.6-9.2C8 5.5 9.5 5 9.5 5l.6 1.2a12 12 0 0 1 3.8 0L14.5 5s1.5.5 2.9 1.3c1.3 1.8 2.3 5.2 2.6 9.2 0 0-1.5 1.5-4.5 1.5l-.9-1.4c.8-.3 1.6-.8 1.6-.8-1.9.9-4.3.9-6.4 0 0 0 .8.5 1.6.8z"/><circle cx="9.5" cy="12" r="1" fill="currentColor"/><circle cx="14.5" cy="12" r="1" fill="currentColor"/></svg>
           </div>
@@ -291,7 +357,7 @@
         </button>
 
         <!-- X / Twitter — REMPLACER data-url par l'URL du profil réel, ex: "https://x.com/aken_dev" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="X" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-x" data-channel="X" data-url="">
           <div class="comm-channel-icon comm-icon-x">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M4 4l16 16M20 4L4 20"></path></svg>
           </div>
@@ -303,7 +369,7 @@
         </button>
 
         <!-- Instagram — REMPLACER data-url par l'URL du profil réel, ex: "https://instagram.com/aken.dev" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="Instagram" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-ig" data-channel="Instagram" data-url="">
           <div class="comm-channel-icon comm-icon-instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
           </div>
@@ -315,7 +381,7 @@
         </button>
 
         <!-- LinkedIn — REMPLACER data-url par l'URL du profil réel, ex: "https://linkedin.com/company/aken" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="LinkedIn" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-li" data-channel="LinkedIn" data-url="">
           <div class="comm-channel-icon comm-icon-linkedin">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2.5 2.5 0 0 1 5 0v4"/><circle cx="12" cy="10" r="0.5" fill="currentColor"/></svg>
           </div>
@@ -327,7 +393,7 @@
         </button>
 
         <!-- YouTube — REMPLACER data-url par l'URL de la chaîne réelle, ex: "https://youtube.com/@aken_dev" -->
-        <button type="button" class="comm-channel-card comm-channel-soon" data-channel="YouTube" data-url="">
+        <button type="button" class="comm-channel-card comm-channel-soon" id="ch-yt" data-channel="YouTube" data-url="">
           <div class="comm-channel-icon comm-icon-youtube">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
           </div>

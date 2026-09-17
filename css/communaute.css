@@ -160,11 +160,11 @@
   gap: 14px;
 }
 
-/* ---------- ORBITE D'AVATARS ---------- */
+/* ---------- ORBITE DES CANAUX COMMUNAUTAIRES ---------- */
 .comm-orbit-stage {
   position: relative;
-  width: 340px;
-  height: 340px;
+  width: 390px;
+  height: 390px;
   margin: 0 auto;
 }
 
@@ -176,15 +176,15 @@
 }
 
 .comm-orbit-ring-1 {
-  inset: 12px;
-  animation: commOrbitSpin 40s linear infinite;
+  inset: 16px;
+  animation: commOrbitSpin 50s linear infinite;
 }
 
 .comm-orbit-ring-2 {
-  inset: 52px;
+  inset: 60px;
   border-style: dotted;
-  opacity: 0.6;
-  animation: commOrbitSpin 60s linear infinite reverse;
+  opacity: 0.55;
+  animation: commOrbitSpin 75s linear infinite reverse;
 }
 
 @keyframes commOrbitSpin {
@@ -192,70 +192,162 @@
   to { transform: rotate(360deg); }
 }
 
-.comm-orbit-avatar {
+/* Nœud interactif cliquable (logo + nom) */
+.comm-orbit-node {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 56px;
-  height: 56px;
-  margin: -28px 0 0 -28px;
+  width: 68px;
+  margin: -34px 0 0 -34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 3;
+  transform: rotate(var(--angle)) translateX(156px) rotate(calc(-1 * var(--angle)));
+  animation: commNodeBob 5.5s ease-in-out infinite alternate;
+  animation-delay: calc(var(--angle) / 45deg * 0.4s);
+  transition: transform var(--dur-normal) cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0.2s ease;
+  user-select: none;
+}
+
+.comm-orbit-node:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+@keyframes commNodeBob {
+  from { margin-top: -38px; }
+  to { margin-top: -30px; }
+}
+
+/* Pastille icône du canal */
+.comm-orbit-icon-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+  border: 2px solid color-mix(in srgb, var(--brand, var(--accent)) 60%, transparent);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55), 0 0 14px color-mix(in srgb, var(--brand, var(--accent)) 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1C1C1C 0%, #2A2A2A 100%);
-  border: 2px solid rgba(255, 107, 0, 0.45);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(255, 107, 0, 0.12);
-  z-index: 3;
-  transform: rotate(var(--angle)) translateX(142px) rotate(calc(-1 * var(--angle)));
-  animation: commAvatarBob 5.2s ease-in-out infinite alternate;
-  animation-delay: calc(var(--angle) / 60deg * 0.45s);
-  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.comm-orbit-avatar:hover {
-  border-color: var(--accent);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 22px rgba(255, 107, 0, 0.35);
-  z-index: 5;
+.comm-orbit-icon {
+  color: var(--brand, var(--accent));
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--brand, var(--accent)) 40%, transparent));
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.comm-orbit-avatar span {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.95rem;
-  background: var(--grad-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@keyframes commAvatarBob {
-  from { margin-top: -32px; }
-  to { margin-top: -24px; }
-}
-
-/* Tooltip nom au survol */
-.comm-orbit-avatar::after {
-  content: attr(data-name);
+/* Point vert actif sur les canaux live */
+.comm-orbit-dot {
   position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 1px;
+  right: 1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #25D366;
+  border: 2px solid #0A0A0A;
+  box-shadow: 0 0 8px #25D366;
+  animation: commLivePulse 2s infinite;
+}
+
+/* Tag "Bientôt" compact pour les canaux à venir */
+.comm-orbit-soon-pill {
+  position: absolute;
+  top: -6px;
+  right: -8px;
   font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #FFAA00;
+  background: rgba(255, 170, 0, 0.18);
+  border: 1px solid rgba(255, 170, 0, 0.45);
+  padding: 1px 5px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Nom du canal sous l'icône */
+.comm-orbit-name {
+  margin-top: 5px;
+  font-family: var(--font-display);
   font-size: 0.7rem;
+  font-weight: 700;
   color: var(--text-heading);
-  background: var(--bg-elev);
-  border: 1px solid var(--border);
-  padding: 3px 10px;
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid color-mix(in srgb, var(--brand, var(--border)) 35%, transparent);
+  padding: 2px 7px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-fast);
-  z-index: 6;
+  letter-spacing: 0.01em;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
 }
 
-.comm-orbit-avatar:hover::after { opacity: 1; }
+/* Interactions au survol */
+.comm-orbit-node:hover {
+  z-index: 10;
+}
+
+.comm-orbit-node:hover .comm-orbit-icon-wrap {
+  transform: scale(1.18);
+  border-color: var(--brand, var(--accent));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 24px color-mix(in srgb, var(--brand, var(--accent)) 65%, transparent);
+  background: linear-gradient(135deg, #242424 0%, #181818 100%);
+}
+
+.comm-orbit-node:hover .comm-orbit-icon {
+  transform: scale(1.08);
+  filter: drop-shadow(0 2px 10px var(--brand, var(--accent)));
+}
+
+.comm-orbit-node:hover .comm-orbit-name {
+  color: #FFFFFF;
+  border-color: var(--brand, var(--accent));
+  background: color-mix(in srgb, var(--brand, var(--accent)) 30%, #0A0A0A);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 12px color-mix(in srgb, var(--brand, var(--accent)) 40%, transparent);
+}
+
+.comm-orbit-node:active .comm-orbit-icon-wrap {
+  transform: scale(0.94);
+}
+
+/* Effet de flash / mise en surbrillance quand un canal est cliqué depuis l'orbite */
+.comm-card-highlight {
+  animation: commCardFlash 2s ease-out;
+}
+
+@keyframes commCardFlash {
+  0% {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+  }
+  70% {
+    outline: 2px solid rgba(255, 107, 0, 0.4);
+    outline-offset: 2px;
+  }
+  100% {
+    outline: none;
+    box-shadow: none;
+    transform: none;
+  }
+}
 
 /* Cœur central : mascotte */
 .comm-orbit-core {
@@ -297,33 +389,40 @@
 }
 
 @media (max-width: 992px) {
-  .comm-orbit-stage { width: 280px; height: 280px; }
-  .comm-orbit-avatar {
-    width: 46px;
-    height: 46px;
-    margin: -23px 0 0 -23px;
-    font-size: 0.8rem;
-    transform: rotate(var(--angle)) translateX(116px) rotate(calc(-1 * var(--angle)));
+  .comm-orbit-stage { width: 330px; height: 330px; }
+  .comm-orbit-node {
+    width: 58px;
+    margin: -29px 0 0 -29px;
+    transform: rotate(var(--angle)) translateX(130px) rotate(calc(-1 * var(--angle)));
   }
-  .comm-orbit-avatar span { font-size: 0.82rem; }
+  .comm-orbit-icon-wrap { width: 42px; height: 42px; }
+  .comm-orbit-icon { width: 19px; height: 19px; }
+  .comm-orbit-name { font-size: 0.64rem; padding: 1px 6px; }
+  .comm-orbit-ring-1 { inset: 12px; }
+  .comm-orbit-ring-2 { inset: 50px; }
   .comm-orbit-core { width: 140px; height: 140px; }
   .comm-mascot { width: 120px; height: 120px; }
 }
 
 @media (max-width: 480px) {
-  .comm-orbit-stage { width: 240px; height: 240px; }
-  .comm-orbit-avatar {
-    width: 40px;
-    height: 40px;
-    margin: -20px 0 0 -20px;
-    transform: rotate(var(--angle)) translateX(100px) rotate(calc(-1 * var(--angle)));
+  .comm-orbit-stage { width: 275px; height: 275px; }
+  .comm-orbit-node {
+    width: 50px;
+    margin: -25px 0 0 -25px;
+    transform: rotate(var(--angle)) translateX(108px) rotate(calc(-1 * var(--angle)));
   }
+  .comm-orbit-icon-wrap { width: 36px; height: 36px; }
+  .comm-orbit-icon { width: 16px; height: 16px; }
+  .comm-orbit-name { font-size: 0.58rem; padding: 1px 5px; margin-top: 3px; }
+  .comm-orbit-soon-pill { display: none; }
   .comm-orbit-ring-1 { inset: 8px; }
   .comm-orbit-ring-2 { inset: 44px; }
+  .comm-orbit-core { width: 110px; height: 110px; }
+  .comm-mascot { width: 95px; height: 95px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .comm-orbit-ring-1, .comm-orbit-ring-2, .comm-orbit-avatar,
+  .comm-orbit-ring-1, .comm-orbit-ring-2, .comm-orbit-node,
   .comm-mascot, .comm-core-glow, .pulse-dot { animation: none; }
 }
 
@@ -723,30 +822,172 @@
   to { opacity: 0; transform: translateY(10px) scale(0.96); }
 }
 
-/* ---------- THÈME CLAIR ---------- */
+/* ---------- THÈME CLAIR COMMUNAUTÉ ---------- */
 [data-theme="light"] .comm-ambient-mesh::before {
-  background: radial-gradient(circle, rgba(255, 107, 0, 0.14) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 60%);
 }
 
 [data-theme="light"] .comm-ambient-mesh::after {
-  background: radial-gradient(circle, rgba(255, 170, 0, 0.1) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 170, 0, 0.08) 0%, transparent 60%);
 }
 
-[data-theme="light"] .comm-orbit-avatar {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFF3E8 100%);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 0 12px rgba(255, 107, 0, 0.1);
+[data-theme="light"] .comm-orbit-ring {
+  border-color: rgba(230, 92, 0, 0.28);
 }
 
-[data-theme="light"] .blog-newsletter-card {
-  background: linear-gradient(135deg, #FFF6EE 0%, #FFEDE0 100%);
-  box-shadow: 0 16px 40px rgba(255, 107, 0, 0.1);
+/* Nœuds de canaux en thème clair */
+[data-theme="light"] .comm-orbit-gh {
+  --brand: #181717 !important;
 }
 
-[data-theme="light"] .comm-channel-card:hover,
+[data-theme="light"] .comm-orbit-x {
+  --brand: #0F1419 !important;
+}
+
+[data-theme="light"] .comm-orbit-icon-wrap {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F3EF 100%);
+  border-color: color-mix(in srgb, var(--brand, var(--accent)) 65%, rgba(0, 0, 0, 0.18));
+  box-shadow: 0 4px 14px rgba(23, 19, 14, 0.08), 0 0 12px color-mix(in srgb, var(--brand, var(--accent)) 20%, transparent);
+}
+
+[data-theme="light"] .comm-orbit-dot {
+  border-color: #FFFFFF;
+}
+
+[data-theme="light"] .comm-orbit-name {
+  background: rgba(255, 255, 255, 0.94);
+  color: #17130E;
+  border-color: color-mix(in srgb, var(--brand, var(--accent)) 40%, rgba(23, 19, 14, 0.15));
+  box-shadow: 0 3px 10px rgba(23, 19, 14, 0.08);
+}
+
+[data-theme="light"] .comm-orbit-node:hover .comm-orbit-icon-wrap {
+  background: #FFFFFF;
+  border-color: var(--brand, var(--accent));
+  box-shadow: 0 8px 24px rgba(23, 19, 14, 0.14), 0 0 22px color-mix(in srgb, var(--brand, var(--accent)) 55%, transparent);
+}
+
+[data-theme="light"] .comm-orbit-node:hover .comm-orbit-name {
+  background: #17130E;
+  color: #FFFFFF;
+  border-color: #17130E;
+  box-shadow: 0 4px 14px rgba(23, 19, 14, 0.18);
+}
+
+[data-theme="light"] .comm-core-glow {
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.22) 0%, rgba(255, 170, 0, 0.08) 45%, transparent 70%);
+}
+
+/* Stats en mode clair */
+[data-theme="light"] .comm-stats-row {
+  background: #FFFFFF;
+  border-color: rgba(23, 19, 14, 0.1);
+  box-shadow: 0 8px 24px rgba(23, 19, 14, 0.06);
+}
+
+[data-theme="light"] .comm-stat-label {
+  color: #5C564C;
+}
+
+[data-theme="light"] .comm-stat-sep {
+  background: linear-gradient(180deg, transparent, rgba(230, 92, 0, 0.35), transparent);
+}
+
+/* Cartes canaux & charte en mode clair */
+[data-theme="light"] .comm-channel-card {
+  background: #FFFFFF;
+  border-color: rgba(23, 19, 14, 0.09);
+  box-shadow: 0 6px 20px rgba(23, 19, 14, 0.05);
+}
+
+[data-theme="light"] .comm-channel-card:hover {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(23, 19, 14, 0.09), 0 0 24px rgba(255, 107, 0, 0.12);
+}
+
+[data-theme="light"] .comm-channel-body h3 {
+  color: #17130E;
+}
+
+[data-theme="light"] .comm-channel-body p {
+  color: #5C564C;
+}
+
+[data-theme="light"] .comm-icon-github {
+  background: rgba(0, 0, 0, 0.05);
+  color: #181717;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .comm-icon-x {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0F1419;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .comm-charter-card {
+  background: #FFFFFF;
+  border-color: rgba(23, 19, 14, 0.09);
+  box-shadow: 0 6px 20px rgba(23, 19, 14, 0.05);
+}
+
 [data-theme="light"] .comm-charter-card:hover {
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.1), 0 0 26px rgba(255, 107, 0, 0.12);
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(23, 19, 14, 0.09), 0 0 24px rgba(255, 107, 0, 0.12);
+}
+
+[data-theme="light"] .comm-charter-card h3 {
+  color: #17130E;
+}
+
+[data-theme="light"] .comm-charter-card p {
+  color: #5C564C;
+}
+
+/* Newsletter en mode clair */
+[data-theme="light"] .comm-newsletter-section .blog-newsletter-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF5EB 100%);
+  border-color: rgba(255, 107, 0, 0.25);
+  box-shadow: 0 16px 40px rgba(255, 107, 0, 0.08);
+}
+
+[data-theme="light"] .comm-newsletter-section .blog-newsletter-text h3 {
+  color: #17130E;
+}
+
+[data-theme="light"] .comm-newsletter-section .blog-newsletter-text p {
+  color: #5C564C;
+}
+
+[data-theme="light"] .comm-newsletter-section .blog-newsletter-input {
+  background: #FFFFFF;
+  color: #17130E;
+  border-color: rgba(23, 19, 14, 0.15);
+}
+
+[data-theme="light"] .comm-newsletter-section .blog-newsletter-input::placeholder {
+  color: #8A8478;
+}
+
+/* Boutons flottants en mode clair */
+[data-theme="light"] .comm-float {
+  background: #FFFFFF;
+  color: var(--accent);
+  border-color: rgba(255, 107, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(23, 19, 14, 0.12), 0 0 16px rgba(255, 107, 0, 0.18);
+}
+
+[data-theme="light"] .comm-float:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.38);
 }
 
 [data-theme="light"] .blog-toast {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 107, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  color: #17130E;
+  border-color: rgba(255, 107, 0, 0.3);
+  box-shadow: 0 12px 32px rgba(23, 19, 14, 0.12), 0 0 20px rgba(255, 107, 0, 0.1);
 }

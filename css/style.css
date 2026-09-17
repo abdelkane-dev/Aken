@@ -483,7 +483,7 @@ body.nav-open .nav-drawer-backdrop,
 }
 
 .theme-toggle:hover {
-  border-color: var(--teal);
+  border-color: var(--accent);
   transform: rotate(20deg);
 }
 
@@ -4353,6 +4353,26 @@ body.chips-on .case-section p {
   font-size: 0.94rem;
 }
 
+/* ═══ Header : resserrement entre 993px et 1320px (nav longue + CTA + toggles) ═══ */
+@media (min-width: 993px) and (max-width: 1320px) {
+  .desktop-nav .nav-links-list {
+    gap: 14px;
+  }
+
+  .desktop-nav a {
+    font-size: 0.85rem;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-cta {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}
+
 /* ═════════════════════════════════════════════════════════
    COMPOSANTS COMMUNAUTÉ PARTAGÉS (points d'entrée sur toutes pages)
    ═════════════════════════════════════════════════════════ */
@@ -4501,3 +4521,36 @@ body.chips-on .case-section p {
 [data-theme="light"] .comm-cta-card {
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.06) 0%, rgba(255, 170, 0, 0.03) 100%);
 }
+
+/* Carte CTA communauté : adaptation très petits écrans */
+@media (max-width: 480px) {
+  .comm-cta-card {
+    flex-wrap: wrap;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .comm-cta-arrow {
+    display: none;
+  }
+
+  .comm-cta-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 0.72rem;
+  }
+}
+
+[data-theme="light"] .comm-float {
+  background: #FFFFFF;
+  color: var(--accent);
+  border-color: rgba(255, 107, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(23, 19, 14, 0.12), 0 0 16px rgba(255, 107, 0, 0.18);
+}
+
+[data-theme="light"] .comm-float:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.38);
+}
+
